@@ -1,6 +1,6 @@
 /*	$NetBSD$	*/
 
-/* Id: isakmp.c,v 1.34.2.1 2005/02/23 13:38:51 manubsd Exp */
+/* Id: isakmp.c,v 1.34.2.2 2005/03/13 17:31:55 vanhu Exp */
 
 /*
  * Copyright (C) 1995, 1996, 1997, and 1998 WIDE Project.
@@ -1348,7 +1348,7 @@ isakmp_parsewoh(np0, gen, len)
 
 		p->type = np;
 		p->len = ntohs(gen->len);
-		if (p->len == 0 || p->len > tlen) {
+		if (p->len < sizeof(struct isakmp_gen) || p->len > tlen) {
 			plog(LLV_DEBUG, LOCATION, NULL,
 				"invalid length of payload\n");
 			vfree(result);
