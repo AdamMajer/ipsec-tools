@@ -77,7 +77,7 @@
 #include "backupsa.h"
 #include "vendorid.h"
 
-#include "../../package_version.h"
+#include "package_version.h"
 
 int f_local = 0;	/* local test mode.  behave like a wall. */
 int vflag = 1;		/* for print-isakmp.c */
