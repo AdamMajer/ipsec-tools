@@ -1,3 +1,5 @@
+/*	$NetBSD$	*/
+
 /*	$KAME: logger.c,v 1.9 2002/09/03 14:37:03 itojun Exp $	*/
 
 /*

@@ -1,3 +1,5 @@
+/*	$NetBSD$	*/
+
 #ifndef __GLIBC_BUGS_H__
 #define __GLIBC_BUGS_H__ 1
 

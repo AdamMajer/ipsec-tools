@@ -1,3 +1,5 @@
+/*	$NetBSD$	*/
+
 /*	$KAME: sha2.h,v 1.2 2001/08/08 22:09:27 sakane Exp $	*/
 
 /*

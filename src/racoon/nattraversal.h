@@ -1,3 +1,5 @@
+/*	$NetBSD$	*/
+
 /*
  * Copyright (C) 2004 SuSE Linux AG, Nuernberg, Germany.
  * Contributed by: Michal Ludvig <mludvig@suse.cz>, SUSE Labs

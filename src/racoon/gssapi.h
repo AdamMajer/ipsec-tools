@@ -1,4 +1,6 @@
-/* $Id$ */
+/*	$NetBSD$	*/
+
+/* Id: gssapi.h,v 1.5 2005/02/11 06:59:01 manubsd Exp */
 
 /*
  * Copyright 2000 Wasabi Systems, Inc.

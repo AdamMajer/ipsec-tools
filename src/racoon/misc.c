@@ -1,3 +1,5 @@
+/*	$NetBSD$	*/
+
 /*	$KAME: misc.c,v 1.23 2001/08/16 14:37:29 itojun Exp $	*/
 
 /*

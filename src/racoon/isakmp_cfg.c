@@ -1,4 +1,6 @@
-/* $Id$ */
+/*	$NetBSD$	*/
+
+/* Id: isakmp_cfg.c,v 1.26 2005/02/10 02:02:56 manubsd Exp */
 
 /*
  * Copyright (C) 2004 Emmanuel Dreyfus

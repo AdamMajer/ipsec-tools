@@ -1,4 +1,6 @@
-/* $Id$ */
+/*	$NetBSD$	*/
+
+/* Id: cfparse.y,v 1.37 2005/02/11 06:59:01 manubsd Exp */
 
 %{
 /*

@@ -1,3 +1,5 @@
+/*	$NetBSD$	*/
+
 /*	$KAME: token.l,v 1.44 2003/10/21 07:20:58 itojun Exp $	*/
 
 /*

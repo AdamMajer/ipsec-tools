@@ -1,3 +1,5 @@
+/*	$NetBSD$	*/
+
 /*	$KAME: pfkey.c,v 1.47 2003/10/02 19:52:12 itojun Exp $	*/
 
 /*

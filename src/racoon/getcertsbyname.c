@@ -1,3 +1,5 @@
+/*	$NetBSD$	*/
+
 /*	$KAME: getcertsbyname.c,v 1.7 2001/11/16 04:12:59 sakane Exp $	*/
 
 /*

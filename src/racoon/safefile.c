@@ -1,3 +1,5 @@
+/*	$NetBSD$	*/
+
 /*	$KAME: safefile.c,v 1.5 2001/03/05 19:54:06 thorpej Exp $	*/
 
 /*

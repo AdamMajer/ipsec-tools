@@ -1,4 +1,6 @@
-/* $Id$ */
+/*	$NetBSD$	*/
+
+/* Id: prsa_tok.l,v 1.2 2004/07/12 20:43:51 ludvigm Exp */
 
 %{
 /*

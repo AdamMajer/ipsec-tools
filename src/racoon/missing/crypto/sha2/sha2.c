@@ -1,4 +1,6 @@
-/* $Id$ */
+/*	$NetBSD$	*/
+
+/* Id: sha2.c,v 1.6 2004/09/21 14:35:25 ludvigm Exp */
 
 /*
  * sha2.c

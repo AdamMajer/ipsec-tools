@@ -1,3 +1,5 @@
+/*	$NetBSD$	*/
+
 /*	$KAME: localconf.c,v 1.33 2001/08/09 07:32:19 sakane Exp $	*/
 
 /*

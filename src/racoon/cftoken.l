@@ -1,4 +1,6 @@
-/* $Id$ */
+/*	$NetBSD$	*/
+
+/* Id: cftoken.l,v 1.31 2005/02/11 06:59:01 manubsd Exp */
 
 %{
 /*

@@ -1,3 +1,5 @@
+/*	$NetBSD$	*/
+
 /*	$KAME: policy_parse.y,v 1.21 2003/12/12 08:01:26 itojun Exp $	*/
 
 /*

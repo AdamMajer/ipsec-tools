@@ -1,3 +1,5 @@
+/*	$NetBSD$	*/
+
 /*	$KAME: dnssec.c,v 1.2 2001/08/05 18:46:07 itojun Exp $	*/
 
 /*

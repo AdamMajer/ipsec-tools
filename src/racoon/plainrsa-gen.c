@@ -1,4 +1,6 @@
-/* $Id$ */
+/*	$NetBSD$	*/
+
+/* Id: plainrsa-gen.c,v 1.4.8.1 2005/02/18 10:23:10 manubsd Exp */
 /*
  * Copyright (C) 2004 SuSE Linux AG, Nuernberg, Germany.
  * Contributed by: Michal Ludvig <mludvig@suse.cz>, SUSE Labs
@@ -57,7 +59,7 @@
 #include "plog.h"
 #include "crypto_openssl.h"
 
-#include "../../package_version.h"
+#include "package_version.h"
 
 void
 usage (char *argv0)

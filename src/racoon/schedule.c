@@ -1,3 +1,5 @@
+/*	$NetBSD$	*/
+
 /*	$KAME: schedule.c,v 1.19 2001/11/05 10:53:19 sakane Exp $	*/
 
 /*

@@ -1,4 +1,6 @@
-/* $Id$ */
+/*	$NetBSD$	*/
+
+/* Id: throttle.c,v 1.2 2004/11/30 07:40:13 manubsd Exp */
 
 /*
  * Copyright (C) 2004 Emmanuel Dreyfus

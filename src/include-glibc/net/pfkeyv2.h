@@ -1,3 +1,5 @@
+/*	$NetBSD$	*/
+
 #ifndef __NET_PFKEYV2_H_
 #define __NET_PFKEYV2_H_ 1
 

@@ -1,3 +1,5 @@
+/*	$NetBSD$	*/
+
 /*	$KAME: session.c,v 1.32 2003/09/24 02:01:17 jinmei Exp $	*/
 
 /*

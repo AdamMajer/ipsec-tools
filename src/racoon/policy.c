@@ -1,3 +1,5 @@
+/*	$NetBSD$	*/
+
 /*	$KAME: policy.c,v 1.46 2001/11/16 04:08:10 sakane Exp $	*/
 
 /*

@@ -1,3 +1,5 @@
+/*	$NetBSD$	*/
+
 /*	$KAME: str2val.c,v 1.11 2001/08/16 14:37:29 itojun Exp $	*/
 
 /*

@@ -1,4 +1,6 @@
-/* $Id$ */
+/*	$NetBSD$	*/
+
+/* Id: safefile.h,v 1.4 2004/07/12 18:32:12 ludvigm Exp */
 
 /*
  * Copyright (C) 2000 WIDE Project.
