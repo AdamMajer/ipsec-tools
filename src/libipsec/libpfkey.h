@@ -136,7 +136,7 @@ int pfkey_check __P((caddr_t *));
 #define IPPROTO_IPCOMP IPPROTO_COMP
 #endif
 
-static inline u_int8_t
+static __inline u_int8_t
 sysdep_sa_len (const struct sockaddr *sa)
 {
 #ifdef __linux__
