@@ -162,6 +162,7 @@ int isakmp_cfg_putport(struct ph1handle *, unsigned int);
 
 #ifdef HAVE_LIBRADIUS
 struct rad_handle;
+extern struct rad_handle *radius_acct_state;
 int isakmp_cfg_radius_common(struct rad_handle *, int); 
 #endif
 
