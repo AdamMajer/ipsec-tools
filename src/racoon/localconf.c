@@ -104,6 +104,7 @@ setdefault()
 {
 	lcconf->uid = 0;
 	lcconf->gid = 0;
+	lcconf->chroot = NULL;
 	lcconf->autograbaddr = 1;
 	lcconf->port_isakmp = PORT_ISAKMP;
 	lcconf->port_isakmp_natt = PORT_ISAKMP_NATT;

@@ -1,6 +1,6 @@
 /*	$NetBSD$	*/
 
-/* Id: localconf.h,v 1.9 2005/02/11 06:59:01 manubsd Exp */
+/* Id: localconf.h,v 1.9.2.1 2005/02/24 18:31:56 manubsd Exp */
 
 /*
  * Copyright (C) 1995, 1996, 1997, and 1998 WIDE Project.
@@ -69,6 +69,7 @@ struct localconf {
 
 	uid_t uid;
 	gid_t gid;
+	char *chroot;			/* chroot path */
 	u_int16_t port_isakmp;		/* port for isakmp as default */
 	u_int16_t port_isakmp_natt;	/* port for NAT-T use */
 	u_int16_t port_admin;		/* port for admin */

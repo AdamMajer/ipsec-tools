@@ -1,6 +1,6 @@
 /*	$NetBSD$	*/
 
-/* Id: libpfkey.h,v 1.8 2005/01/07 14:22:31 manubsd Exp */
+/* Id: libpfkey.h,v 1.8.2.1 2005/02/24 13:33:54 manubsd Exp */
 
 /*
  * Copyright (C) 1995, 1996, 1997, and 1998 WIDE Project.
@@ -138,7 +138,7 @@ int pfkey_check __P((caddr_t *));
 #define IPPROTO_IPCOMP IPPROTO_COMP
 #endif
 
-static inline u_int8_t
+static __inline u_int8_t
 sysdep_sa_len (const struct sockaddr *sa)
 {
 #ifdef __linux__
