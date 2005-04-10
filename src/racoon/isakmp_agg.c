@@ -1,4 +1,6 @@
-/* $Id$ */
+/*	$NetBSD$	*/
+
+/* Id: isakmp_agg.c,v 1.20 2005/01/29 16:34:25 vanhu Exp */
 
 /*
  * Copyright (C) 1995, 1996, 1997, and 1998 WIDE Project.
@@ -299,6 +301,12 @@ end:
 #ifdef ENABLE_NATT
 	for (i = 0; i < MAX_NATT_VID_COUNT && vid_natt[i] != NULL; i++)
 		vfree(vid_natt[i]);
+#endif
+#ifdef ENABLE_HYBRID
+	if (vid_xauth != NULL)
+		vfree(vid_xauth);
+	if (vid_unity != NULL)
+		vfree(vid_unity);
 #endif
 #ifdef ENABLE_DPD
 	if (vid_dpd != NULL)

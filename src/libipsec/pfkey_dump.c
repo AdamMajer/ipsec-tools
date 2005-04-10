@@ -1,3 +1,5 @@
+/*	$NetBSD$	*/
+
 /*	$KAME: pfkey_dump.c,v 1.45 2003/09/08 10:14:56 itojun Exp $	*/
 
 /*
@@ -128,6 +130,8 @@ static char *str_satype[] = {
 	"ripv2",
 	"mip",
 	"ipcomp",
+	"policy",
+	"tcp",
 };
 
 static char *str_mode[] = {
@@ -150,6 +154,9 @@ static struct val2str str_alg_auth[] = {
 	{ SADB_X_AALG_MD5, "md5", },
 	{ SADB_X_AALG_SHA, "sha", },
 	{ SADB_X_AALG_NULL, "null", },
+#ifdef SADB_X_AALG_TCP_MD5
+	{ SADB_X_AALG_TCP_MD5, "tcp-md5", },
+#endif
 #ifdef SADB_X_AALG_SHA2_256
 	{ SADB_X_AALG_SHA2_256, "hmac-sha2-256", },
 #endif
