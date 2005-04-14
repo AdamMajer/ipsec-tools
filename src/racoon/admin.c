@@ -1,4 +1,6 @@
-/* $Id$ */
+/*	$NetBSD$	*/
+
+/* Id: admin.c,v 1.17 2005/01/02 08:39:09 manubsd Exp */
 
 /*
  * Copyright (C) 1995, 1996, 1997, and 1998 WIDE Project.
@@ -319,7 +321,7 @@ admin_process(so2, combuf)
 		}
 
 		plog(LLV_INFO, LOCATION, NULL, 
-		    "Flushing all SA for peer %s\n", rem);
+		    "Flushing all SAs for peer %s\n", rem);
 
 		while ((iph1 = getph1bydstaddr(dst)) != NULL) {
 			if ((loc = strdup(saddrwop2str(iph1->local))) == NULL) {
