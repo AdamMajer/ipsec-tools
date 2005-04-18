@@ -1,4 +1,6 @@
-/* $Id$ */
+/*	$NetBSD$	*/
+
+/* Id: ipsec_doi.c,v 1.26.2.1 2005/02/17 13:19:18 vanhu Exp */
 
 /*
  * Copyright (C) 1995, 1996, 1997, and 1998 WIDE Project.
@@ -389,14 +391,16 @@ get_ph1approvalx(p, proposal, sap, check_level)
 		    tsap->encklen == s->encklen)
 			switch(check_level){
 			case PROP_CHECK_OBEY:
-				s->lifetime=tsap->lifetime;
+				if (s->rmconf && s->rmconf->remote->sa_family != AF_UNSPEC)
+					s->lifetime=tsap->lifetime;
 				goto found;
 				break;
 			case PROP_CHECK_STRICT:
 			case PROP_CHECK_CLAIM:
 				if (tsap->lifetime > s->lifetime) 
 					continue ;
-				s->lifetime=tsap->lifetime;
+				if (s->rmconf && s->rmconf->remote->sa_family != AF_UNSPEC)
+					s->lifetime=tsap->lifetime;
 				goto found;
 				break;
 			case PROP_CHECK_EXACT:
@@ -650,7 +654,7 @@ t2isakmpsa(trns, sa)
 			case IPSECDOI_ATTR_SA_LD_TYPE_KB:
 				sa->lifebyte = ipsecdoi_set_ld(val);
 				vfree(val);
-				if (sa->lifetime == 0) {
+				if (sa->lifebyte == 0) {
 					plog(LLV_ERROR, LOCATION, NULL,
 						"invalid life duration.\n");
 					goto err;
