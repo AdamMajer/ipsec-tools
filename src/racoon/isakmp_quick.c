@@ -1,4 +1,6 @@
-/* $Id$ */
+/*	$NetBSD$	*/
+
+/* Id: isakmp_quick.c,v 1.13.2.1 2005/03/02 20:00:03 vanhu Exp */
 
 /*
  * Copyright (C) 1995, 1996, 1997, and 1998 WIDE Project.
@@ -1579,7 +1581,7 @@ end:
 	return error;
 }
 
-static int
+int
 tunnel_mode_prop(p)
 	struct saprop *p;
 {
@@ -1698,6 +1700,7 @@ quick_r3prep(iph2, msg0)
 		delsp_bothdir((struct policyindex *)iph2->spidx_gen);
 		racoon_free(iph2->spidx_gen);
 		iph2->spidx_gen = NULL;
+		iph2->generated_spidx=1;
 	}
 
 	error = 0;

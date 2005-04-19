@@ -1,4 +1,6 @@
-/* $Id$ */
+/*	$NetBSD$	*/
+
+/* Id: pfkey.c,v 1.31.2.1 2005/02/18 10:01:40 vanhu Exp */
 
 /*
  * Copyright (C) 1995, 1996, 1997, and 1998 WIDE Project.

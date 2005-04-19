@@ -1,4 +1,6 @@
-/* $Id$ */
+/*	$NetBSD$	*/
+
+/* Id: isakmp.c,v 1.34.2.2 2005/03/13 17:31:55 vanhu Exp */
 
 /*
  * Copyright (C) 1995, 1996, 1997, and 1998 WIDE Project.
@@ -1346,7 +1348,7 @@ isakmp_parsewoh(np0, gen, len)
 
 		p->type = np;
 		p->len = ntohs(gen->len);
-		if (p->len == 0 || p->len > tlen) {
+		if (p->len < sizeof(struct isakmp_gen) || p->len > tlen) {
 			plog(LLV_DEBUG, LOCATION, NULL,
 				"invalid length of payload\n");
 			vfree(result);
@@ -1597,11 +1599,11 @@ isakmp_open()
 			if(option != -1){
 				if (setsockopt (p->sock, SOL_UDP, UDP_ENCAP,
 								&option, sizeof (option)) < 0) {
-					plog(LLV_ERROR, LOCATION, NULL,
+					plog(LLV_WARNING, LOCATION, NULL,
 						 "setsockopt(%s): %s\n",
 						 option == UDP_ENCAP_ESPINUDP ? "UDP_ENCAP_ESPINUDP" : "UDP_ENCAP_ESPINUDP_NON_IKE",
 						 strerror(errno));
-					goto err_and_next;
+					goto skip_encap;
 				}
 				else {
 					plog(LLV_INFO, LOCATION, NULL,
@@ -1611,8 +1613,8 @@ isakmp_open()
 				}
 			}
 		}
+skip_encap:
 #endif
-
 		continue;
 
 	err_and_next:
@@ -1821,18 +1823,19 @@ isakmp_ph1expire(iph1)
 {
 	char *src, *dst;
 
-	src = strdup(saddr2str(iph1->local));
-	dst = strdup(saddr2str(iph1->remote));
-	plog(LLV_INFO, LOCATION, NULL,
-		"ISAKMP-SA expired %s-%s spi:%s\n",
-		src, dst,
-		isakmp_pindex(&iph1->index, 0));
-	racoon_free(src);
-	racoon_free(dst);
-
 	SCHED_KILL(iph1->sce);
 
-	iph1->status = PHASE1ST_EXPIRED;
+	if(iph1->status != PHASE1ST_EXPIRED){
+		src = strdup(saddr2str(iph1->local));
+		dst = strdup(saddr2str(iph1->remote));
+		plog(LLV_INFO, LOCATION, NULL,
+			 "ISAKMP-SA expired %s-%s spi:%s\n",
+			 src, dst,
+			 isakmp_pindex(&iph1->index, 0));
+		racoon_free(src);
+		racoon_free(dst);
+		iph1->status = PHASE1ST_EXPIRED;
+	}
 
 	/*
 	 * the phase1 deletion is postponed until there is no phase2.

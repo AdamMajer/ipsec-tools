@@ -1,4 +1,6 @@
-/* $Id$ */
+/*	$NetBSD$	*/
+
+/* Id: handler.h,v 1.11 2004/11/16 15:44:46 ludvigm Exp */
 
 /*
  * Copyright (C) 1995, 1996, 1997, and 1998 WIDE Project.
@@ -303,6 +305,8 @@ struct ph2handle {
 					/* NOTE: Should be release after use. */
 
 	struct isakmp_ivm *ivm;		/* IVs */
+
+	int generated_spidx;	/* mark handlers whith generated policy */
 
 #ifdef ENABLE_STATS
 	struct timeval start;
