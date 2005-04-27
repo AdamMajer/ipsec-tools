@@ -619,8 +619,10 @@ isakmp_info_send_common(iph1, payload, np, flags)
 	iph2->src = dupsaddr(iph1->local);
 	switch (iph1->remote->sa_family) {
 	case AF_INET:
+#ifndef ENABLE_NATT
 		((struct sockaddr_in *)iph2->dst)->sin_port = 0;
 		((struct sockaddr_in *)iph2->src)->sin_port = 0;
+#endif
 		break;
 #ifdef INET6
 	case AF_INET6:

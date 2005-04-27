@@ -2840,13 +2840,13 @@ sadbsecas2str(src, dst, proto, spi, mode)
 	p += i;
 	blen -= i;
 
-	i = snprintf(p, blen, "%s->", saddrwop2str(src));
+	i = snprintf(p, blen, "%s->", saddr2str(src));
 	if (i < 0 || i >= blen)
 		return NULL;
 	p += i;
 	blen -= i;
 
-	i = snprintf(p, blen, "%s ", saddrwop2str(dst));
+	i = snprintf(p, blen, "%s ", saddr2str(dst));
 	if (i < 0 || i >= blen)
 		return NULL;
 	p += i;

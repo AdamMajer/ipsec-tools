@@ -451,6 +451,13 @@ quick_i2recv(iph2, msg0)
 			isakmp_check_notify(pa->ptr, iph2->ph1);
 			break;
 
+#ifdef ENABLE_NATT
+		case ISAKMP_NPTYPE_NATOA_DRAFT:
+		case ISAKMP_NPTYPE_NATOA_RFC:
+			/* Ignore original source/destination messages */
+			break;
+#endif
+
 		default:
 			/* don't send information, see ident_r1recv() */
 			plog(LLV_ERROR, LOCATION, iph2->ph1->remote,
