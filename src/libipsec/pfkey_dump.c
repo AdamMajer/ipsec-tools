@@ -413,14 +413,14 @@ void
 pfkey_spdump(m)
 	struct sadb_msg *m;
 {
-	return pfkey_spdump1(m, 0);
+	pfkey_spdump1(m, 0);
 }
 
 void
 pfkey_spdump_withports(m)
 	struct sadb_msg *m;
 {
-	return pfkey_spdump1(m, 1);
+	pfkey_spdump1(m, 1);
 }
 
 static void
