@@ -1,4 +1,6 @@
-/* $Id$ */
+/*	$NetBSD$	*/
+
+/* Id: handler.c,v 1.13 2004/11/21 19:36:26 manubsd Exp */
 
 /*
  * Copyright (C) 1995, 1996, 1997, and 1998 WIDE Project.
@@ -425,6 +427,23 @@ getph2bymsgid(iph1, msgid)
 
 	LIST_FOREACH(p, &ph2tree, chain) {
 		if (p->msgid == msgid)
+			return p;
+	}
+
+	return NULL;
+}
+
+struct ph2handle *
+getph2byid(src, dst, spid)
+	struct sockaddr *src, *dst;
+	u_int32_t spid;
+{
+	struct ph2handle *p;
+
+	LIST_FOREACH(p, &ph2tree, chain) {
+		if (spid == p->spid &&
+		    cmpsaddrwop(src, p->src) == 0 &&
+		    cmpsaddrwop(dst, p->dst) == 0)
 			return p;
 	}
 
