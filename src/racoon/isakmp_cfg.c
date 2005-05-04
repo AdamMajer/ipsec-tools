@@ -130,7 +130,7 @@ isakmp_cfg_r(iph1, msg)
 {
 	struct isakmp *packet;
 	struct isakmp_gen *ph;
-	size_t tlen;
+	int tlen;
 	char *npp;
 	int np;
 	vchar_t *dmsg;
@@ -303,7 +303,7 @@ isakmp_cfg_reply(iph1, attrpl)
 	struct isakmp_pl_attr *attrpl;
 {
 	struct isakmp_data *attr;
-	size_t tlen;
+	int tlen;
 	size_t alen;
 	char *npp;
 	int type;
@@ -440,7 +440,7 @@ isakmp_cfg_request(iph1, attrpl)
 	struct isakmp_pl_attr *attrpl;
 {
 	struct isakmp_data *attr;
-	size_t tlen;
+	int tlen;
 	size_t alen;
 	char *npp;
 	vchar_t *payload;
@@ -586,7 +586,7 @@ isakmp_cfg_set(iph1, attrpl)
 	struct isakmp_pl_attr *attrpl;
 {
 	struct isakmp_data *attr;
-	size_t tlen;
+	int tlen;
 	size_t alen;
 	char *npp;
 	vchar_t *payload;
