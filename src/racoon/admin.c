@@ -92,7 +92,6 @@ mode_t adminsock_mode = 0600;
 static struct sockaddr_un sunaddr;
 static int admin_process __P((int, char *));
 static int admin_reply __P((int, struct admin_com *, vchar_t *));
-static void isakmp_flush_sa __P((struct ph1handle *, char *, char *));
 
 int
 admin_handler()
@@ -292,11 +291,13 @@ admin_process(so2, combuf)
 			break;
 		}
 
-		if ((iph1 = getph1byaddr(src, dst)) == NULL) {
+		if ((iph1 = getph1byaddrwop(src, dst)) == NULL) {
 			plog(LLV_ERROR, LOCATION, NULL, 
 			    "phase 1 for %s -> %s not found\n", loc, rem);
 		} else {
-			isakmp_flush_sa(iph1, loc, rem);
+			if (iph1->status == PHASE1ST_ESTABLISHED)
+				isakmp_info_send_d1(iph1);
+			purge_remote(iph1);
 		}
 
 		racoon_free(loc);
@@ -323,14 +324,16 @@ admin_process(so2, combuf)
 		plog(LLV_INFO, LOCATION, NULL, 
 		    "Flushing all SAs for peer %s\n", rem);
 
-		while ((iph1 = getph1bydstaddr(dst)) != NULL) {
+		while ((iph1 = getph1bydstaddrwop(dst)) != NULL) {
 			if ((loc = strdup(saddrwop2str(iph1->local))) == NULL) {
 				plog(LLV_ERROR, LOCATION, NULL, 
 				    "cannot allocate memory\n");
 				break;
 			}
 
-			isakmp_flush_sa(iph1, loc, rem);
+			if (iph1->status == PHASE1ST_ESTABLISHED)
+				isakmp_info_send_d1(iph1);
+			purge_remote(iph1);
 
 			racoon_free(loc);
 		}
@@ -631,21 +634,3 @@ admin_close()
 	return 0;
 }
 #endif
-
-static void
-isakmp_flush_sa(iph1, loc, rem)
-	struct ph1handle *iph1;
-	char *loc;
-	char *rem;
-{
-	plog(LLV_INFO, LOCATION, NULL, 
-	    "Flushing SA for %s -> %s\n", loc, rem);
-
-	if (iph1->status == PHASE1ST_ESTABLISHED)
-		isakmp_info_send_d1(iph1);
-
-	remph1(iph1);
-	delph1(iph1);
-
-	return;
-}

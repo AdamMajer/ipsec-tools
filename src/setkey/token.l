@@ -141,7 +141,7 @@ spddump		{ return(SPDDUMP); }
 spdflush	{ return(SPDFLUSH); }
 tagged		{ return(TAGGED); }
 {hyphen}P	{ BEGIN S_PL; return(F_POLICY); }
-<S_PL>[a-zA-Z0-9:\.\-_/ \n\t][a-zA-Z0-9:\.%\-+_/ \n\t]* {
+<S_PL>[a-zA-Z0-9:\.\-_/ \n\t][a-zA-Z0-9:\.%\-+_/ \n\t\]\[]* {
 			yymore();
 
 			/* count up for nl */
