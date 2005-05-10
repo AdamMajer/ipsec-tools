@@ -1,3 +1,5 @@
+/*	$NetBSD$	*/
+
 /*	$KAME$ */
 
 /*
@@ -83,6 +85,8 @@ struct isakmp_cfg_config {
 	size_t pool_size;
 	int auth_throttle;
 	char motd[MAXPATHLEN + 1];
+	int pfs_group;
+	int save_passwd;
 };
 
 /* For authsource */
@@ -160,6 +164,7 @@ int isakmp_cfg_putport(struct ph1handle *, unsigned int);
 
 #ifdef HAVE_LIBRADIUS
 struct rad_handle;
+extern struct rad_handle *radius_acct_state;
 int isakmp_cfg_radius_common(struct rad_handle *, int); 
 #endif
 

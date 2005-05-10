@@ -1,3 +1,5 @@
+/*	$NetBSD$	*/
+
 /* $Id$ */
 
 /*
@@ -140,8 +142,13 @@ isakmp_unity_req(iph1, attr)
 	}
 
 	case UNITY_PFS:
+		reply_attr = isakmp_cfg_short(iph1, attr, 
+		    isakmp_cfg_config.pfs_group);
+		break;
+
 	case UNITY_SAVE_PASSWD:
-		reply_attr = isakmp_cfg_short(iph1, attr, 0);
+		reply_attr = isakmp_cfg_short(iph1, attr, 
+		    isakmp_cfg_config.save_passwd);
 		break;
 
 	case UNITY_DDNS_HOSTNAME:
