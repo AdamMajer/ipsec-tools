@@ -1305,9 +1305,14 @@ pfkey_send_x1(so, type, satype, mode, src, dst, spi, reqid, wsize,
 #ifdef SADB_X_EXT_NAT_T_TYPE
 	/* add nat-t packets */
 	if (l_natt_type) {
-		if (satype != SADB_SATYPE_ESP) {
+		switch(satype) {
+		case SADB_SATYPE_ESP:
+		case SADB_X_SATYPE_IPCOMP:
+			break;
+		default:
 			__ipsec_errcode = EIPSEC_NO_ALGS;
 			return -1;
+			break;
 		}
 
 		len += sizeof(struct sadb_x_nat_t_type);

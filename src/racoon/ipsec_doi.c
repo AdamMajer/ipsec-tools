@@ -2434,6 +2434,15 @@ check_attr_ipcomp(trns)
 			case IPSECDOI_ATTR_ENC_MODE_TUNNEL:
 			case IPSECDOI_ATTR_ENC_MODE_TRNS:
 				break;
+#ifdef ENABLE_NATT
+			case IPSECDOI_ATTR_ENC_MODE_UDPTUNNEL_RFC:
+			case IPSECDOI_ATTR_ENC_MODE_UDPTRNS_RFC:
+			case IPSECDOI_ATTR_ENC_MODE_UDPTUNNEL_DRAFT:
+			case IPSECDOI_ATTR_ENC_MODE_UDPTRNS_DRAFT:
+				plog(LLV_DEBUG, LOCATION, NULL,
+				     "UDP encapsulation requested\n");
+				break;
+#endif
 			default:
 				plog(LLV_ERROR, LOCATION, NULL,
 					"invalid encryption mode=%u.\n",
