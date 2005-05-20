@@ -286,6 +286,11 @@ delph1(iph1)
 		iph1->local = NULL;
 	}
 
+	if (iph1->approval) {
+		delisakmpsa(iph1->approval);
+		iph1->approval = NULL;
+	}
+
 #ifdef ENABLE_HYBRID
 	if (iph1->mode_cfg)
 		isakmp_cfg_rmstate(iph1);

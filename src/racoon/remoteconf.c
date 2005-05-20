@@ -668,3 +668,31 @@ script_path_add(path)
 
 	return (size - 2);
 }
+
+struct isakmpsa *
+dupisakmpsa(sa)
+	struct isakmpsa *sa;
+{
+	struct isakmpsa *res = NULL;
+
+	if (sa == NULL)
+		return NULL;
+
+	res = newisakmpsa();
+	if(res == NULL)
+		return NULL;
+
+	*res = *sa;
+#ifdef HAVE_GSSAPI
+	/* 
+	 * XXX gssid
+	 */
+#endif
+	res->next=NULL;
+
+	if (sa->dhgrp != NULL)
+		oakley_setdhgroup(sa->dh_group, &(res->dhgrp));
+
+	return res;
+
+}
