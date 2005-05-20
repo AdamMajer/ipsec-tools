@@ -417,8 +417,12 @@ parse_sockaddr(addrbuf, portbuf)
 	}
 
 	strncpy(addr, addrbuf->buf, addrbuf->len);
-	if (portbuf)
+	addr[addrbuf->len] = '\0';
+
+	if (portbuf) {
 		strncpy(serv, portbuf->buf, portbuf->len);
+		serv[portbuf->len] = '\0';
+	}
 
 	memset(&hints, 0, sizeof(hints));
 	hints.ai_family = PF_UNSPEC;
