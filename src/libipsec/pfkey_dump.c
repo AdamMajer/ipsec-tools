@@ -532,9 +532,9 @@ pfkey_spdump1(m, withports)
 		return;
 	}
 	if (withports)
-		d_xpl = ipsec_dump_policy_withports((char *)m_xpl, "\n\t");
+		d_xpl = ipsec_dump_policy_withports(m_xpl, "\n\t");
 	else
-		d_xpl = ipsec_dump_policy((char *)m_xpl, "\n\t");
+		d_xpl = ipsec_dump_policy(m_xpl, "\n\t");
 		
 	if (!d_xpl)
 		printf("\n\tPolicy:[%s]\n", ipsec_strerror());
