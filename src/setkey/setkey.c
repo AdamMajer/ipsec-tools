@@ -70,6 +70,8 @@
 #include "config.h"
 #include "libpfkey.h"
 #include "package_version.h"
+#define extern
+#include "extern.h"
 
 #define strlcpy(d,s,l) (strncpy(d,s,l), (d)[(l)-1] = '\0')
 
@@ -78,7 +80,6 @@ int main __P((int, char **));
 int get_supported __P((void));
 void sendkeyshort __P((u_int));
 void promisc __P((void));
-int sendkeymsg __P((char *, size_t));
 int postproc __P((struct sadb_msg *, int));
 int verifypriority __P((struct sadb_msg *m));
 int fileproc __P((const char *));
@@ -88,8 +89,6 @@ void shortdump __P((struct sadb_msg *));
 static void printdate __P((void));
 static int32_t gmt2local __P((time_t));
 void stdin_loop __P((void));
-
-extern void parse_init __P((void));
 
 #define MODE_SCRIPT	1
 #define MODE_CMDDUMP	2
@@ -127,22 +126,6 @@ rkwarn(void)
 
 #endif
 static time_t thiszone;
-
-extern int lineno;
-
-#ifdef HAVE_PFKEY_POLICY_PRIORITY
-extern int last_msg_type;
-int last_msg_type = -1;
-
-extern u_int32_t last_priority;
-u_int32_t last_priority = 0;
-#endif
-
-extern int exit_now;
-int exit_now = 0;
-
-extern int parse __P((FILE **));
-extern int parse_string __P((char *));
 
 void
 usage(int only_version)
