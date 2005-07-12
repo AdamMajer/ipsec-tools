@@ -1,4 +1,6 @@
-/* $Id$ */
+/*	$NetBSD$	*/
+
+/* Id: algorithm.c,v 1.11 2004/10/24 17:36:46 manubsd Exp */
 
 /*
  * Copyright (C) 1995, 1996, 1997, and 1998 WIDE Project.
@@ -192,15 +194,15 @@ static struct hmac_algorithm ipsec_hmacdef[] = {
 		NULL,			eay_null_hashlen,
 		NULL, },
 #ifdef WITH_SHA2
-{ "hmac_sha2_256",	algtype_hmac_sha2_256,	IPSECDOI_ATTR_SHA2_256,
+{ "hmac_sha2_256",	algtype_hmac_sha2_256,IPSECDOI_ATTR_AUTH_HMAC_SHA2_256,
 		NULL,			NULL,
 		NULL,			eay_sha2_256_hashlen,
 		NULL, },
-{ "hmac_sha2_384",	algtype_hmac_sha2_384,	IPSECDOI_ATTR_SHA2_384,
+{ "hmac_sha2_384",	algtype_hmac_sha2_384,IPSECDOI_ATTR_AUTH_HMAC_SHA2_384,
 		NULL,			NULL,
 		NULL,			eay_sha2_384_hashlen,
 		NULL, },
-{ "hmac_sha2_512",	algtype_hmac_sha2_512,	IPSECDOI_ATTR_SHA2_512,
+{ "hmac_sha2_512",	algtype_hmac_sha2_512,IPSECDOI_ATTR_AUTH_HMAC_SHA2_512,
 		NULL,			NULL,
 		NULL,			eay_sha2_512_hashlen,
 		NULL, },

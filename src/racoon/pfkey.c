@@ -447,6 +447,24 @@ ipsecdoi2pfkey_aalg(hashtype)
 		return SADB_AALG_MD5HMAC;
 	case IPSECDOI_ATTR_AUTH_HMAC_SHA1:
 		return SADB_AALG_SHA1HMAC;
+	case IPSECDOI_ATTR_AUTH_HMAC_SHA2_256:
+#if (defined SADB_X_AALG_SHA2_256) && !defined(SADB_X_AALG_SHA2_256HMAC)
+		return SADB_X_AALG_SHA2_256;
+#else
+		return SADB_X_AALG_SHA2_256HMAC;
+#endif
+	case IPSECDOI_ATTR_AUTH_HMAC_SHA2_384:
+#if (defined SADB_X_AALG_SHA2_384) && !defined(SADB_X_AALG_SHA2_384HMAC)
+		return SADB_X_AALG_SHA2_384;
+#else
+		return SADB_X_AALG_SHA2_384HMAC;
+#endif
+	case IPSECDOI_ATTR_AUTH_HMAC_SHA2_512:
+#if (defined SADB_X_AALG_SHA2_512) && !defined(SADB_X_AALG_SHA2_512HMAC)
+		return SADB_X_AALG_SHA2_512;
+#else
+		return SADB_X_AALG_SHA2_512HMAC;
+#endif
 	case IPSECDOI_ATTR_AUTH_KPDK:		/* need special care */
 		return SADB_AALG_NONE;
 
@@ -2131,7 +2149,7 @@ pk_recvspdupdate(mhp)
 	sp = getsp(&spidx);
 	if (sp == NULL) {
 		plog(LLV_ERROR, LOCATION, NULL,
-			"such policy does not already exist: %s\n",
+			"such policy does not already exist: \"%s\"\n",
 			spidx2str(&spidx));
 	} else {
 		remsp(sp);
