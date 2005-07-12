@@ -572,8 +572,10 @@ admin2pfkey_proto(proto)
 int
 admin_init()
 {
-	if (adminsock_path == NULL)
+	if (adminsock_path == NULL) {
+		lcconf->sock_admin = -1;
 		return 0;
+	}
 
 	memset(&sunaddr, 0, sizeof(sunaddr));
 	sunaddr.sun_family = AF_UNIX;
