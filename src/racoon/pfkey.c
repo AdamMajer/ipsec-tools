@@ -1059,9 +1059,13 @@ pk_sendupdate(iph2)
 			natt.dport = extract_port (iph2->ph1->local);
 			natt.oa = NULL;		// FIXME: Here comes OA!!!
 			natt.frag = iph2->ph1->rmconf->esp_frag;
-		}
-		else
+		} else {
 			memset (&natt, 0, sizeof (natt));
+
+			/* Remove port information, that SA doesn't use it */
+			set_port(src, 0);
+			set_port(dst, 0);
+		}
 
 		if (pfkey_send_update_nat(
 				lcconf->sock_pfkey,
@@ -1084,6 +1088,10 @@ pk_sendupdate(iph2)
 			return -1;
 		}
 #else
+		/* Remove port information, it is not used without NAT-T */
+		set_port(src, 0);
+		set_port(dst, 0);
+
 		plog(LLV_DEBUG, LOCATION, NULL, "call pfkey_send_update\n");
 		if (pfkey_send_update(
 				lcconf->sock_pfkey,
@@ -1352,9 +1360,13 @@ pk_sendadd(iph2)
 			natt.dport = extract_port (iph2->ph1->remote);
 			natt.oa = NULL;		// FIXME: Here comes OA!!!
 			natt.frag = iph2->ph1->rmconf->esp_frag;
-		}
-		else
+		} else {
 			memset (&natt, 0, sizeof (natt));
+
+			/* Remove port information, that SA doesn't use it */
+			set_port(src, 0);
+			set_port(dst, 0);
+		}
 
 		if (pfkey_send_add_nat(
 				lcconf->sock_pfkey,
@@ -1378,6 +1390,10 @@ pk_sendadd(iph2)
 		}
 #else
 		plog(LLV_DEBUG, LOCATION, NULL, "call pfkey_send_add\n");
+
+		/* Remove port information, it is not used without NAT-T */
+		set_port(src, 0);
+		set_port(dst, 0);
 
 		if (pfkey_send_add(
 				lcconf->sock_pfkey,
