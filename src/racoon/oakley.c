@@ -2017,6 +2017,7 @@ oakley_savecert(iph1, gen)
                  PKCS7 *p7;
                  u_char *bp;
                  int i;
+		 STACK_OF(X509) *certs=NULL;
 
                  /* Skip the header */
                  bp = (u_char *)(gen + 1);
@@ -2036,7 +2037,6 @@ oakley_savecert(iph1, gen)
                   * there"s little by way of documentation for any of
                   * it. I can only presume it"s correct.
                   */
-		 STACK_OF(X509) *certs=NULL;
 		 
 		 i = OBJ_obj2nid(p7->type);
 		 switch (i) {
