@@ -61,6 +61,7 @@
 #else
 #include "y.tab.h"
 #endif
+
 #include "extern.h"
 
 /* make the code compile on *BSD-current */
@@ -166,9 +167,7 @@ esp-old		{ yylval.num = 1; return(PR_ESP); }
 esp-udp		{ yylval.num = 0; return(PR_ESPUDP); }
 ipcomp		{ yylval.num = 0; return(PR_IPCOMP); }
 tcp		{ 
-#ifdef SADB_X_SATYPE_TCPSIGNATURE
 			yylval.num = 0; return(PR_TCP); 
-#endif
 		}
 
 	/* authentication alogorithm */

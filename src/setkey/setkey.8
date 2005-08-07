@@ -1,7 +1,5 @@
 .\"	$NetBSD$
 .\"
-.\"	$KAME: setkey.8,v 1.93 2003/09/24 23:44:46 itojun Exp $
-.\"
 .\" Copyright (C) 1995, 1996, 1997, 1998, and 1999 WIDE Project.
 .\" All rights reserved.
 .\"
@@ -95,18 +93,18 @@ system because it is referenced by some SPD entries.
 .It Fl D
 Dump the SAD entries.
 If
-.Fl P ,
-is also specified, SPD entries are dumped.
+.Fl P
+is also specified, the SPD entries are dumped. 
 If
 .Fl p
-is specified with
-.Fl P ,
-the ports that can be used for ESP over UDP are displayed in policies.
+is specified with 
+.FL P ,
+the ports that can be used for ESP over UDP are displayed.
 .It Fl F
 Flush the SAD entries.
 If
 .Fl P
-is also specified, the SPD entries are dumped.
+is also specified, the SPD entries are flushed.
 .It Fl H
 Add hexadecimal dump in
 .Fl x

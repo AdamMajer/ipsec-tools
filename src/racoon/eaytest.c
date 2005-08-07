@@ -1,6 +1,6 @@
 /*	$NetBSD$	*/
 
-/* Id: eaytest.c,v 1.20.4.1 2005/02/18 10:23:10 manubsd Exp */
+/* Id: eaytest.c,v 1.20.4.2 2005/06/28 22:38:02 manubsd Exp */
 
 /*
  * Copyright (C) 1995, 1996, 1997, and 1998 WIDE Project.

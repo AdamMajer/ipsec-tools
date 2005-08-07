@@ -1,6 +1,6 @@
 /*	$NetBSD$	*/
 
-/* $Id$ */
+/* Id: isakmp_unity.c,v 1.5.4.1 2005/05/10 09:45:46 manubsd Exp */
 
 /*
  * Copyright (C) 2004 Emmanuel Dreyfus

@@ -1,6 +1,6 @@
 /*	$NetBSD$	*/
 
-/* $Id$ */
+/* Id: cftoken.l,v 1.31.2.5 2005/06/28 22:38:02 manubsd Exp */
 
 %{
 /*
@@ -518,7 +518,7 @@ no		{ YYD; yylval.num = FALSE; return(BOOLEAN); }
 		}
 
 {quotedstring}	{
-			u_char *p = yytext;
+			char *p = yytext;
 
 			YYD;
 			while (*++p != '"') ;
