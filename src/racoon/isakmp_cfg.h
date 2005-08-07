@@ -85,6 +85,8 @@ struct isakmp_cfg_config {
 	size_t pool_size;
 	int auth_throttle;
 	char motd[MAXPATHLEN + 1];
+	int pfs_group;
+	int save_passwd;
 };
 
 /* For authsource */

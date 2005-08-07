@@ -168,7 +168,8 @@ session(void)
 		}
 
 #ifdef ENABLE_ADMINPORT
-		if (FD_ISSET(lcconf->sock_admin, &rfds))
+		if ((lcconf->sock_admin != -1) &&
+		    (FD_ISSET(lcconf->sock_admin, &rfds)))
 			admin_handler();
 #endif
 
@@ -226,17 +227,19 @@ initfds()
 	FD_ZERO(&maskdying);
 
 #ifdef ENABLE_ADMINPORT
-	if (lcconf->sock_admin >= FD_SETSIZE) {
-		plog(LLV_ERROR, LOCATION, NULL, "fd_set overrun\n");
-		exit(1);
-	}
-	FD_SET(lcconf->sock_admin, &mask0);
-	/* XXX should we listen on admin socket when dying ?
-	 */
+	if (lcconf->sock_admin != -1) {
+		if (lcconf->sock_admin >= FD_SETSIZE) {
+			plog(LLV_ERROR, LOCATION, NULL, "fd_set overrun\n");
+			exit(1);
+		}
+		FD_SET(lcconf->sock_admin, &mask0);
+		/* XXX should we listen on admin socket when dying ?
+		 */
 #if 0
-	FD_SET(lcconf->sock_admin, &maskdying);
+		FD_SET(lcconf->sock_admin, &maskdying);
 #endif
-	nfds = (nfds > lcconf->sock_admin ? nfds : lcconf->sock_admin);
+		nfds = (nfds > lcconf->sock_admin ? nfds : lcconf->sock_admin);
+	}
 #endif
 	if (lcconf->sock_pfkey >= FD_SETSIZE) {
 		plog(LLV_ERROR, LOCATION, NULL, "fd_set overrun\n");

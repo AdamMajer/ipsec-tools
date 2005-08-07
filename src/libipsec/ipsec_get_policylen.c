@@ -37,6 +37,7 @@
 
 #include <sys/types.h>
 #include <sys/param.h>
+#include <sys/socket.h>
 
 #ifdef HAVE_NETINET6_IPSEC
 #  include <netinet6/ipsec.h>
@@ -44,14 +45,14 @@
 #  include <netinet/ipsec.h>
 #endif
 
-
 #include <net/pfkeyv2.h>
 
+#include "libpfkey.h"
 #include "ipsec_strerror.h"
 
 int
 ipsec_get_policylen(policy)
-	caddr_t policy;
+	ipsec_policy_t policy;
 {
 	return policy ? PFKEY_EXTLEN(policy) : -1;
 }
