@@ -1,3 +1,6 @@
+/*	$NetBSD$	*/
+
+
 
 void parse_init __P((void));
 int parse __P((FILE **));

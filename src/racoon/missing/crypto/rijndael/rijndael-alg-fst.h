@@ -1,3 +1,5 @@
+/*	$NetBSD$	*/
+
 /*	$KAME: rijndael-alg-fst.h,v 1.1.1.1 2001/08/08 09:56:23 sakane Exp $	*/
 
 /*

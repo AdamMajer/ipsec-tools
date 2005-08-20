@@ -1,3 +1,5 @@
+/*	$NetBSD$	*/
+
 /*	$KAME: isakmp_newg.c,v 1.10 2002/09/27 05:55:52 itojun Exp $	*/
 
 /*

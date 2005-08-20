@@ -401,7 +401,7 @@ kdebug_sadb_key(ext)
 	}
 
 	ipsec_hexdump(key + sizeof(struct sadb_key),
-	              (int)(uint32_t)key->sadb_key_bits >> 3);
+	              (int)((uint32_t)key->sadb_key_bits >> 3));
 	printf(" }\n");
 	return;
 }

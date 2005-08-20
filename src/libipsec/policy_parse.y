@@ -641,7 +641,7 @@ ipsec_set_policy(msg, msglen)
 	__ipsec_const char *msg;
 	int msglen;
 {
-	void *policy;
+	caddr_t policy;
 
 	policy = policy_parse(msg, msglen);
 	if (policy == NULL) {

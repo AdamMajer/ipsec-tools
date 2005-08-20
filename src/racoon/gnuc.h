@@ -1,4 +1,6 @@
-/* $Id$ */
+/*	$NetBSD$	*/
+
+/* Id: gnuc.h,v 1.4 2004/11/18 15:14:44 ludvigm Exp */
 
 /* Define __P() macro, if necessary */
 #undef __P

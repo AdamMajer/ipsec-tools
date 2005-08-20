@@ -1,3 +1,5 @@
+/*	$NetBSD$	*/
+
 /*	$KAME: dump.c,v 1.3 2000/09/23 15:31:05 itojun Exp $	*/
 
 /*

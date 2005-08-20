@@ -1,3 +1,5 @@
+/*	$NetBSD$	*/
+
 /*	$KAME: sainfo.c,v 1.16 2003/06/27 07:32:39 sakane Exp $	*/
 
 /*

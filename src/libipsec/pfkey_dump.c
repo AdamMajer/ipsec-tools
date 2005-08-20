@@ -91,7 +91,7 @@ do { \
 		printf("%u ", (num)); \
 	else \
 		printf("%s ", (str)[(num)]); \
-} while (0/*CONSTCOND*/)
+} while (/*CONSTCOND*/0)
 
 #define GETMSGV2S(v2s, num) \
 do { \
@@ -104,7 +104,7 @@ do { \
 		printf("%s ", p->str); \
 	else \
 		printf("%u ", (num)); \
-} while (0/*CONSTCOND*/)
+} while (/*CONSTCOND*/0)
 
 static char *str_ipaddr __P((struct sockaddr *));
 static char *str_prefport __P((u_int, u_int, u_int, u_int));

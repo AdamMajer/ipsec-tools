@@ -1,4 +1,6 @@
-/*	$Id$ */
+/*	$NetBSD$	*/
+
+/*	Id: isakmp_frag.h,v 1.2 2004/10/24 16:51:24 manubsd Exp */
 
 /*
  * Copyright (C) 2004 Emmanuel Dreyfus 

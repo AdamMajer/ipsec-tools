@@ -1,3 +1,5 @@
+/*	$NetBSD$	*/
+
 /*	$KAME: dnssec.c,v 1.2 2001/08/05 18:46:07 itojun Exp $	*/
 
 /*
@@ -98,7 +100,7 @@ dnssec_getcert(id)
 	}
 
 	/* check response */
-	if (res->ci_next == NULL) {
+	if (res->ci_next != NULL) {
 		plog(LLV_WARNING, LOCATION, NULL,
 			"not supported multiple CERT RR.\n");
 	}

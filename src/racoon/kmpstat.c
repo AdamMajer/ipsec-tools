@@ -1,3 +1,5 @@
+/*	$NetBSD$	*/
+
 /*	$KAME: kmpstat.c,v 1.33 2004/08/16 08:20:28 itojun Exp $	*/
 
 /*

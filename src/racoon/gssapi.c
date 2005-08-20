@@ -1,3 +1,5 @@
+/*	$NetBSD$	*/
+
 /*	$KAME: gssapi.c,v 1.19 2001/04/03 15:51:55 thorpej Exp $	*/
 
 /*

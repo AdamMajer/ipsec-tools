@@ -1,3 +1,5 @@
+/*	$NetBSD$	*/
+
 /*	$KAME: backupsa.c,v 1.16 2001/12/31 20:13:40 thorpej Exp $	*/
 
 /*

@@ -1,4 +1,6 @@
-/* $Id$ */
+/*	$NetBSD$	*/
+
+/* Id: localconf.h,v 1.9.2.2 2005/03/16 23:18:43 manubsd Exp */
 
 /*
  * Copyright (C) 1995, 1996, 1997, and 1998 WIDE Project.
@@ -40,7 +42,8 @@
 #define LC_PATHTYPE_PSK		1
 #define LC_PATHTYPE_CERT	2
 #define LC_PATHTYPE_BACKUPSA	3
-#define LC_PATHTYPE_MAX		4
+#define LC_PATHTYPE_SCRIPT	4
+#define LC_PATHTYPE_MAX		5
 
 #define LC_DEFAULT_PAD_MAXSIZE		20
 #define LC_DEFAULT_PAD_RANDOM		TRUE
@@ -67,6 +70,7 @@ struct localconf {
 
 	uid_t uid;
 	gid_t gid;
+	char *chroot;			/* chroot path */
 	u_int16_t port_isakmp;		/* port for isakmp as default */
 	u_int16_t port_isakmp_natt;	/* port for NAT-T use */
 	u_int16_t port_admin;		/* port for admin */

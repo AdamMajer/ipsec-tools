@@ -1,4 +1,6 @@
-/* $Id$ */
+/*	$NetBSD$	*/
+
+/* Id: dump.h,v 1.3 2004/06/11 16:00:16 ludvigm Exp */
 
 /*
  * Copyright (C) 2000 WIDE Project.

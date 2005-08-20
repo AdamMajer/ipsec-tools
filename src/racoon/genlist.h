@@ -1,4 +1,6 @@
-/* $Id$ */
+/*	$NetBSD$	*/
+
+/* Id: genlist.h,v 1.2 2004/07/12 20:43:50 ludvigm Exp */
 
 /*
  * Copyright (C) 2004 SuSE Linux AG, Nuernberg, Germany.

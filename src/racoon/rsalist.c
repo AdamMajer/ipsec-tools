@@ -1,4 +1,6 @@
-/* $Id$ */
+/*	$NetBSD$	*/
+
+/* Id: rsalist.c,v 1.3 2004/11/08 12:04:23 ludvigm Exp */
 
 /*
  * Copyright (C) 2004 SuSE Linux AG, Nuernberg, Germany.

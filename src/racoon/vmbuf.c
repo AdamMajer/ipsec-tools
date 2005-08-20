@@ -1,3 +1,5 @@
+/*	$NetBSD$	*/
+
 /*	$KAME: vmbuf.c,v 1.11 2001/11/26 16:54:29 sakane Exp $	*/
 
 /*
