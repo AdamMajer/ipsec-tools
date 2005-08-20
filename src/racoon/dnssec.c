@@ -100,7 +100,7 @@ dnssec_getcert(id)
 	}
 
 	/* check response */
-	if (res->ci_next == NULL) {
+	if (res->ci_next != NULL) {
 		plog(LLV_WARNING, LOCATION, NULL,
 			"not supported multiple CERT RR.\n");
 	}

@@ -1,6 +1,6 @@
 /*	$NetBSD$	*/
 
-/* Id: privsep.c,v 1.6.2.6 2005/06/04 22:08:15 manubsd Exp */
+/* Id: privsep.c,v 1.6.2.7 2005/08/08 11:25:01 vanhu Exp */
 
 /*
  * Copyright (C) 2004 Emmanuel Dreyfus
@@ -914,7 +914,7 @@ port_check(port)
 {
 	if ((port < 0) || (port >= isakmp_cfg_config.pool_size)) {
 		plog(LLV_ERROR, LOCATION, NULL, 
-		    "privsep: port %d outsied of allowed range [0,%d]\n",
+		    "privsep: port %d outside of allowed range [0,%zu]\n",
 		    port, isakmp_cfg_config.pool_size - 1);
 		return -1;
 	}

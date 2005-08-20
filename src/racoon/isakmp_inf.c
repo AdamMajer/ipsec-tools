@@ -955,13 +955,7 @@ purge_isakmp_spi(proto, spi, n)
 	}
 }
 
-<<<<<<< isakmp_inf.c
-
-
-void
-=======
 static void
->>>>>>> 1.14.4.9
 purge_ipsec_spi(dst0, proto, spi, n)
 	struct sockaddr *dst0;
 	int proto;
@@ -1556,11 +1550,6 @@ isakmp_info_recv_r_u_ack (iph1, ru, msgid)
 }
 
 
-<<<<<<< isakmp_inf.c
-
-
-=======
->>>>>>> 1.14.4.9
 /*
  * send Delete payload (for ISAKMP SA) in Informational exchange.
  */
