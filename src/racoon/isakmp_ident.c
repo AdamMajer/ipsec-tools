@@ -103,7 +103,7 @@ ident_i1send(iph1, msg)
 	struct payload_list *plist = NULL;
 	int error = -1;
 #ifdef ENABLE_NATT
-	vchar_t *vid_natt[MAX_NATT_VID_COUNT];
+	vchar_t *vid_natt[MAX_NATT_VID_COUNT] = { NULL };
 	int i;
 #endif
 #ifdef ENABLE_DPD
@@ -137,8 +137,6 @@ ident_i1send(iph1, msg)
 	/* set VID payload for NAT-T if NAT-T support allowed in the config file */
 	if (iph1->rmconf->nat_traversal) 
 		plist = isakmp_plist_append_natt_vids(plist, vid_natt);
-	else
-		vid_natt[0]=NULL;
 #endif
 #ifdef ENABLE_DPD
 	if(iph1->rmconf->dpd){

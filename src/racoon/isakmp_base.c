@@ -99,7 +99,7 @@ base_i1send(iph1, msg)
 	struct payload_list *plist = NULL;
 	int error = -1;
 #ifdef ENABLE_NATT
-	vchar_t *vid_natt[MAX_NATT_VID_COUNT];
+	vchar_t *vid_natt[MAX_NATT_VID_COUNT] = { NULL };
 	int i, vid_natt_i = 0;
 #endif
 #ifdef ENABLE_FRAG
