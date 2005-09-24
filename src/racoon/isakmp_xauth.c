@@ -693,7 +693,7 @@ xauth_login_system(usr, pwd)
 	struct passwd *pw, pwres;
 	char *cryptpwd;
 	char *syscryptpwd;
-	char buf;
+	char buf[1024];
 #ifdef HAVE_SHADOW_H
 	struct spwd *spw;
 

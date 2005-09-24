@@ -295,7 +295,7 @@ privsep_stmt
 	|	GROUP QUOTEDSTRING
 		{
 			struct group *gr, grres;
-			char buf[1024]
+			char buf[1024];
 
 			(void)getgrnam_r($2->v, &grres, buf, sizeof(buf), &gr);
 			if (gr == NULL) {
