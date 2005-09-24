@@ -690,9 +690,10 @@ xauth_login_system(usr, pwd)
 	char *usr;
 	char *pwd;
 {
-	struct passwd *pw;
+	struct passwd *pw, pwres;
 	char *cryptpwd;
 	char *syscryptpwd;
+	char buf;
 #ifdef HAVE_SHADOW_H
 	struct spwd *spw;
 
@@ -702,7 +703,8 @@ xauth_login_system(usr, pwd)
 	syscryptpwd = spw->sp_pwdp;
 #endif
 
-	if ((pw = getpwnam(usr)) == NULL)
+	(void)getpwnam_r(usr, &pwres, buf, sizeof(buf), &pw);
+	if (pw == NULL)
 		return -1;
 
 #ifndef HAVE_SHADOW_H
