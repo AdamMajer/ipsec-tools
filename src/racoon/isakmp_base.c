@@ -427,6 +427,11 @@ base_i2send(iph1, msg)
 	case OAKLEY_ATTR_AUTH_METHOD_RSAENC:
 	case OAKLEY_ATTR_AUTH_METHOD_RSAREV:
 		break;
+	default:
+		plog(LLV_ERROR, LOCATION, NULL, "invalid authmethod %d\n",
+			iph1->approval->authmethod);
+		goto end;
+		break;
 	}
 
 #ifdef ENABLE_NATT
@@ -1125,6 +1130,11 @@ base_r2send(iph1, msg)
 		break;
 	case OAKLEY_ATTR_AUTH_METHOD_RSAENC:
 	case OAKLEY_ATTR_AUTH_METHOD_RSAREV:
+		break;
+	default:
+		plog(LLV_ERROR, LOCATION, NULL, "invalid authmethod %d\n",
+			iph1->approval->authmethod);
+		goto end;
 		break;
 	}
 

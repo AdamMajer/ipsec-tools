@@ -1263,6 +1263,7 @@ remote_spec
 		{
 #ifdef ENABLE_HYBRID
 			/* formerly identifier type login */
+			cur_rmconf->idvtype = IDTYPE_LOGIN;
 			if (set_identifier(&cur_rmconf->idv, IDTYPE_LOGIN, $2) != 0) {
 				yyerror("failed to set identifer.\n");
 				return -1;
