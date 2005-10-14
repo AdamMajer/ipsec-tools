@@ -536,7 +536,7 @@ set_x_request(src, dst)
 {
 	struct sadb_x_ipsecrequest *p;
 	int reqlen;
-	caddr_t n;
+	u_int8_t *n;
 
 	reqlen = sizeof(*p)
 		+ (src ? sysdep_sa_len(src) : 0)

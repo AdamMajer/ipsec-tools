@@ -373,6 +373,7 @@ void
 inssp(new)
 	struct secpolicy *new;
 {
+#ifdef HAVE_PFKEY_POLICY_PRIORITY
 	struct secpolicy *p;
 
 	TAILQ_FOREACH(p, &sptree, chain) {
@@ -382,6 +383,7 @@ inssp(new)
 		}
 	}
 	if (p == NULL)
+#endif
 		TAILQ_INSERT_TAIL(&sptree, new, chain);
 
 	return;

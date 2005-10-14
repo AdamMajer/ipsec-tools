@@ -271,7 +271,6 @@ pfkey_sadump(m)
 	if (natt_type && natt_type->sadb_x_nat_t_type_type)
 		use_natt = 1;
 #endif
-
 	/* source address */
 	if (m_saddr == NULL) {
 		printf("no ADDRESS_SRC extension.\n");

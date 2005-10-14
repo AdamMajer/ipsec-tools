@@ -1968,6 +1968,10 @@ pfkey_align(msg, mhp)
 #ifdef SADB_X_EXT_TAG
 		case SADB_X_EXT_TAG:
 #endif
+#ifdef SADB_X_EXT_PACKET
+		case SADB_X_EXT_PACKET:
+#endif
+
 			mhp[ext->sadb_ext_type] = (void *)ext;
 			break;
 		default:
