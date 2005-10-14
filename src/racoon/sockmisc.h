@@ -58,7 +58,7 @@ extern int cmpsaddrstrict __P((const struct sockaddr *, const struct sockaddr *)
 extern struct sockaddr *getlocaladdr __P((struct sockaddr *));
 
 extern int recvfromto __P((int, void *, size_t, int,
-	struct sockaddr *, int *, struct sockaddr *, unsigned int *));
+	struct sockaddr *, socklen_t *, struct sockaddr *, unsigned int *));
 extern int sendfromto __P((int, const void *, size_t,
 	struct sockaddr *, struct sockaddr *, int));
 

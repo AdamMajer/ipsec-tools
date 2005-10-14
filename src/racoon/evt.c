@@ -63,6 +63,23 @@ evt_push(src, dst, type, optdata)
 	struct evt *evt;
 	size_t len;
 
+	/* If we are above the limit, don't record anything */
+	if (evtlist_len > EVTLIST_MAX) {
+		plog(LLV_DEBUG, LOCATION, NULL, 
+		    "Cannot record event: event queue overflowed\n");
+		return;
+	}
+
+	/* If we hit the limit, record an overflow event instead */
+	if (evtlist_len == EVTLIST_MAX) {
+		plog(LLV_ERROR, LOCATION, NULL, 
+		    "Cannot record event: event queue overflow\n");
+		src = NULL;
+		dst = NULL;
+		type = EVTT_OVERFLOW;
+		optdata = NULL;
+	}
+
 	len = sizeof(*evtdump);
 	if (optdata)
 		len += optdata->l;
@@ -94,8 +111,7 @@ evt_push(src, dst, type, optdata)
 	evt->dump = evtdump;
 	TAILQ_INSERT_TAIL(&evtlist, evt, next);
 
-	if (evtlist_len++ == EVTLIST_MAX)
-		evt_push(NULL, NULL, EVTT_OVERFLOW, NULL);
+	evtlist_len++;
 
 	return;
 }

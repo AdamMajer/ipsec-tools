@@ -2261,7 +2261,7 @@ save_certx509(cert)
 		new = NULL;
 		return NULL;
 	}
-        bp = new->pl->v;
+        bp = (u_char *) new->pl->v;
         len = i2d_X509(cert, &bp);
 	new->type = ISAKMP_CERT_X509SIGN;
 	new->cert.v = new->pl->v;

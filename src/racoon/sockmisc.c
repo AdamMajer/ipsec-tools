@@ -314,7 +314,7 @@ recvfromto(s, buf, buflen, flags, from, fromlen, to, tolen)
 	size_t buflen;
 	int flags;
 	struct sockaddr *from;
-	int *fromlen;
+	socklen_t *fromlen;
 	struct sockaddr *to;
 	u_int *tolen;
 {

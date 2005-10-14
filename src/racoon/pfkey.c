@@ -156,6 +156,10 @@ NULL,	/* SADB_X_SPDSETIDX */
 pk_recvspdexpire,
 NULL,	/* SADB_X_SPDDELETE2 */
 NULL,	/* SADB_X_NAT_T_NEW_MAPPING */
+NULL, /* SADB_X_MIGRATE */
+#if (SADB_MAX > 24)
+#error "SADB extra message?"
+#endif
 };
 
 static int addnewsp __P((caddr_t *));
