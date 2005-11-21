@@ -1,6 +1,6 @@
 /*	$NetBSD$	*/
 
-/* Id: sockmisc.c,v 1.17.4.3 2005/06/29 13:01:29 manubsd Exp */
+/* Id: sockmisc.c,v 1.17.4.4 2005/10/04 09:54:27 manubsd Exp */
 
 /*
  * Copyright (C) 1995, 1996, 1997, and 1998 WIDE Project.

@@ -1,6 +1,6 @@
 /*	$NetBSD$	*/
 
-/* Id: evt.c,v 1.2 2004/11/29 23:30:39 manubsd Exp */
+/* Id: evt.c,v 1.2.4.1 2005/09/26 17:49:38 manubsd Exp */
 
 /*
  * Copyright (C) 2004 Emmanuel Dreyfus
