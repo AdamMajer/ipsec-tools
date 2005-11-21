@@ -1,6 +1,6 @@
 /*	$NetBSD$	*/
 
-/* Id: cfparse.y,v 1.37.2.5 2005/09/26 16:12:20 manubsd Exp */
+/* Id: cfparse.y,v 1.37.2.6 2005/10/17 16:23:50 monas Exp */
 
 %{
 /*
@@ -823,7 +823,9 @@ sainfo_id
 					return -1;
 				}
 				$$ = ipsecdoi_sockaddr2id(saddr,
-					$3 == ~0 ? (sizeof(struct in_addr) << 3): $3,
+					$3 == (sizeof(struct in_addr) << 3) &&
+						$1 == IDTYPE_ADDRESS
+					  ? ~0 : $3,
 					$5);
 				break;
 #ifdef INET6
@@ -834,7 +836,9 @@ sainfo_id
 					return -1;
 				}
 				$$ = ipsecdoi_sockaddr2id(saddr,
-					$3 == ~0 ? (sizeof(struct in6_addr) << 3) : $3,
+					$3 == (sizeof(struct in6_addr) << 3) &&
+						$1 == IDTYPE_ADDRESS
+					  ? ~0 : $3,
 					$5);
 				break;
 #endif

@@ -1667,7 +1667,7 @@ pfkey_send_x4(so, type, src, prefs, dst, prefd, proto,
 	}
 	ep = ((caddr_t)(void *)newmsg) + len;
 
-	p = pfkey_setsadbmsg((caddr_t)newmsg, ep, type, (u_int)len,
+	p = pfkey_setsadbmsg((void *)newmsg, ep, type, (u_int)len,
 	    SADB_SATYPE_UNSPEC, seq, getpid());
 	if (!p) {
 		free(newmsg);
