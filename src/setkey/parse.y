@@ -180,7 +180,7 @@ add_command
 
 	/* delete */
 delete_command
-	:	DELETE ipaddropts ipaddr ipaddr protocol_spec spi extension_spec EOT
+	:	DELETE ipaddropts ipandport ipandport protocol_spec spi extension_spec EOT
 		{
 			int status;
 
@@ -211,7 +211,7 @@ deleteall_command
 
 	/* get command */
 get_command
-	:	GET ipaddropts ipaddr ipaddr protocol_spec spi extension_spec EOT
+	:	GET ipaddropts ipandport ipandport protocol_spec spi extension_spec EOT
 		{
 			int status;
 
@@ -708,7 +708,6 @@ ipandport
 			}
 		}
 	;
-
 
 prefix
 	:	/*NOTHING*/ { $$ = -1; }

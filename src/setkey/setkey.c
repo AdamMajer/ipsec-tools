@@ -135,7 +135,7 @@ usage(int only_version)
 		printf("usage: setkey [-v" RK_OPTS "] file ...\n");
 		printf("       setkey [-nv" RK_OPTS "] -c\n");
 		printf("       setkey [-nv" RK_OPTS "] -f filename\n");
-		printf("       setkey [-Palv" RK_OPTS "] -D\n");
+		printf("       setkey [-Palpv" RK_OPTS "] -D\n");
 		printf("       setkey [-Pv] -F\n");
 		printf("       setkey [-H] -x\n");
 		printf("       setkey [-V] [-h]\n");
@@ -570,7 +570,10 @@ postproc(msg, len)
 
 	switch (msg->sadb_msg_type) {
 	case SADB_GET:
-		pfkey_sadump(msg);
+		if (f_withports)
+			pfkey_sadump_withports(msg);
+		else
+			pfkey_sadump(msg);
 		break;
 
 	case SADB_DUMP:
@@ -585,10 +588,15 @@ postproc(msg, len)
 					break;
 			}
 		}
-		if (f_forever)
+		if (f_forever) {
+			/* TODO: f_withports */
 			shortdump(msg);
-		else
-			pfkey_sadump(msg);
+		} else {
+			if (f_withports)
+				pfkey_sadump_withports(msg);
+			else
+				pfkey_sadump(msg);
+		}
 		msg = (struct sadb_msg *)((caddr_t)msg +
 				     PFKEY_UNUNIT64(msg->sadb_msg_len));
 		if (f_verbose) {

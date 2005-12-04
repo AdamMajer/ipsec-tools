@@ -46,6 +46,7 @@
 
 struct sadb_msg;
 extern void pfkey_sadump __P((struct sadb_msg *));
+extern void pfkey_sadump_withports __P((struct sadb_msg *));
 extern void pfkey_spdump __P((struct sadb_msg *));
 extern void pfkey_spdump_withports __P((struct sadb_msg *));
 
