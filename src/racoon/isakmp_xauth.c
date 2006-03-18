@@ -676,11 +676,15 @@ xauth_login_pam(port, raddr, usr, pwd)
 		goto out;
 	}
 
+	if (remote != NULL)
+		free(remote);
 	return 0;
 
 out:
 	pam_end(pam, error);
 	isakmp_cfg_config.port_pool[port].pam = NULL;
+	if (remote != NULL)
+		free(remote);
 	return -1;
 }
 #endif
