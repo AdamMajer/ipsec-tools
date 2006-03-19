@@ -1063,7 +1063,7 @@ remote_statement
 				return -1;
 			prspec = newprspec();
 			if (prspec == NULL)
-				return -1 
+				return -1;
 			prspec->lifetime = cur_rmconf->inherited_from->proposal->lifetime;
 			prspec->lifebyte = cur_rmconf->inherited_from->proposal->lifebyte;
 			insprspec(prspec, &cur_rmconf->prhead);
