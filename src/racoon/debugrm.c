@@ -206,6 +206,25 @@ DRM_free(file, line, func, ptr)
 	free(ptr);
 }
 
+char *
+DRM_strdup(file, line, func, str)
+	char *file, *func;
+	int line;
+	const char *str;
+{
+	char *p;
+
+	p = strdup(str);
+
+	if (p) {
+		char buf[1024];
+		DRM_setmsg(buf, sizeof(buf), p, size, file, line, func);
+		DRM_add(p, buf);
+	}
+
+	return p;
+}
+
 /*
  * mask vmbuf.c functions.
  */

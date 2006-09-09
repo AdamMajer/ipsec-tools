@@ -176,9 +176,9 @@ backupsa_to_file(satype, mode, src, dst, spi, reqid, wsize,
 
 	k = val2str(keymat, e_keylen + a_keylen);
 	l = snprintf(p, len, " %s", k);
+	racoon_free(k);
 	if (l < 0 || l >= len)
 		goto err;
-	racoon_free(k);
 	p += l;
 	len -= l;
 	if (len < 0)

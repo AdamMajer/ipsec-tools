@@ -62,6 +62,7 @@
 #endif
 #include <err.h>
 #include <sys/ioctl.h> 
+#include <resolv.h>
 
 #include "libpfkey.h"
 
@@ -80,7 +81,6 @@
 #include "isakmp_xauth.h"
 #include "isakmp_var.h"
 #include "isakmp_cfg.h"
-#include "isakmp_unity.h"
 #include "oakley.h"
 #include "handler.h"
 #include "pfkey.h"
