@@ -333,3 +333,39 @@ doitype2doi(doitype)
 	return -1;
 }
 
+
+
+static void
+saverestore_params(f)
+	int f;
+{
+	static u_int16_t s_port_isakmp;
+#ifdef ENABLE_ADMINPORT
+	static u_int16_t s_port_admin;
+#endif
+
+	/* 0: save, 1: restore */
+	if (f) {
+		lcconf->port_isakmp = s_port_isakmp;
+#ifdef ENABLE_ADMINPORT
+		lcconf->port_admin = s_port_admin;
+#endif
+	} else {
+		s_port_isakmp = lcconf->port_isakmp;
+#ifdef ENABLE_ADMINPORT
+		s_port_admin = lcconf->port_admin;
+#endif
+	}
+}
+
+void
+restore_params()
+{
+	saverestore_params(1);
+}
+
+void
+save_params()
+{
+	saverestore_params(0);
+}

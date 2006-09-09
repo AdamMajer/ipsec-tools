@@ -39,6 +39,9 @@
 
 #include <netinet/in.h>
 #include <arpa/nameser.h>
+#if (defined(__APPLE__) && defined(__MACH__))
+# include <nameser8_compat.h>
+#endif
 #include <resolv.h>
 #ifdef HAVE_LWRES_GETRRSETBYNAME
 #include <lwres/netdb.h>

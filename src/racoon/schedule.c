@@ -310,7 +310,7 @@ getstdin()
 		struct scheddump *scbuf, *p;
 		int len;
 		sched_dump((caddr_t *)&scbuf, &len);
-		if (buf == NULL)
+		if (scbuf == NULL)
 			return;
 		for (p = scbuf; len; p++) {
 			printf("xtime=%ld\n", p->xtime);

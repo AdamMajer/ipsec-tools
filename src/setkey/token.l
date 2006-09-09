@@ -56,7 +56,8 @@
 #include <netdb.h>
 
 #include "vchar.h"
-#if defined(__NetBSD__) || defined(__FreeBSD__) || defined(__linux__)
+#if defined(__NetBSD__) || defined(__FreeBSD__) || defined(__linux__) || \
+(defined(__APPLE__) && defined(__MACH__))
 #include "parse.h"
 #else
 #include "y.tab.h"
@@ -238,6 +239,7 @@ nocyclic-seq	{ return(NOCYCLICSEQ); }
 {hyphen}ls	{ return(F_LIFETIME_SOFT); }
 {hyphen}bh	{ return(F_LIFEBYTE_HARD); }
 {hyphen}bs	{ return(F_LIFEBYTE_SOFT); }
+{hyphen}ctx	{ return(SECURITY_CTX); }
 
 	/* ... */
 any		{ return(ANY); }
