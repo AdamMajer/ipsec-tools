@@ -4100,7 +4100,9 @@ ipsecdoi_id2str(id)
 	case IPSECDOI_ID_IPV4_ADDR_SUBNET:
 	case IPSECDOI_ID_IPV4_ADDR_RANGE:
 
+#ifndef __linux__
 		saddr.sa_len = sizeof(struct sockaddr_in);
+#endif
 		saddr.sa_family = AF_INET;
 		((struct sockaddr_in *)&saddr)->sin_port = IPSEC_PORT_ANY;
 		memcpy(&((struct sockaddr_in *)&saddr)->sin_addr,
@@ -4111,7 +4113,9 @@ ipsecdoi_id2str(id)
 	case IPSECDOI_ID_IPV6_ADDR_SUBNET:
 	case IPSECDOI_ID_IPV6_ADDR_RANGE:
 
+#ifndef __linux__
 		saddr.sa_len = sizeof(struct sockaddr_in6);
+#endif
 		saddr.sa_family = AF_INET6;
 		((struct sockaddr_in6 *)&saddr)->sin6_port = IPSEC_PORT_ANY;
 		memcpy(&((struct sockaddr_in6 *)&saddr)->sin6_addr,
@@ -4189,7 +4193,9 @@ ipsecdoi_id2str(id)
 
 		len = snprintf( buf, BUFLEN, "%s-", saddrwop2str(&saddr));
 
+#ifndef __linux__
 		saddr.sa_len = sizeof(struct sockaddr_in);
+#endif
 		saddr.sa_family = AF_INET;
 		((struct sockaddr_in *)&saddr)->sin_port = IPSEC_PORT_ANY;
 		memcpy(&((struct sockaddr_in *)&saddr)->sin_addr,
@@ -4205,7 +4211,9 @@ ipsecdoi_id2str(id)
 
 		len = snprintf( buf, BUFLEN, "%s-", saddrwop2str(&saddr));
 
+#ifndef __linux__
 		saddr.sa_len = sizeof(struct sockaddr_in6);
+#endif
 		saddr.sa_family = AF_INET6;
 		((struct sockaddr_in6 *)&saddr)->sin6_port = IPSEC_PORT_ANY;
 		memcpy(&((struct sockaddr_in6 *)&saddr)->sin6_addr,
