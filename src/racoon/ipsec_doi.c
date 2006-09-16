@@ -3335,7 +3335,7 @@ ipsecdoi_checkid1(iph1)
 	}
 
 	/* if phase 1 ID payload conformed RFC2407 4.6.2. */
-	if (id_b->type == IPSECDOI_ID_IPV4_ADDR &&
+	if (id_b->type == IPSECDOI_ID_IPV4_ADDR ||
 	    id_b->type == IPSECDOI_ID_IPV6_ADDR) {
 
 		if (id_b->proto_id == 0 && ntohs(id_b->port) != 0) {
