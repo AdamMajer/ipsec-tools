@@ -31,6 +31,12 @@
  * SUCH DAMAGE.
  */
 
+/* These are the values from parsing "remote {}"
+   block of the config file. */
+#define ISAKMP_FRAG_OFF		FLASE   /* = 0 */
+#define ISAKMP_FRAG_ON		TRUE    /* = 1 */
+#define ISAKMP_FRAG_FORCE	2
+
 /* IKE fragmentation capabilities */
 #define VENDORID_FRAG_IDENT 	0x80000000
 #define VENDORID_FRAG_BASE 	0x40000000

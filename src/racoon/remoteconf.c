@@ -77,6 +77,7 @@
 #include "strnames.h"
 #include "algorithm.h"
 #include "nattraversal.h"
+#include "isakmp_frag.h"
 #include "genlist.h"
 
 static TAILQ_HEAD(_rmtree, remoteconf) rmtree, rmtree_save, rmtree_tmp;
@@ -593,7 +594,8 @@ dump_rmconf_single (struct remoteconf *p, void *data)
 	plog(LLV_INFO, LOCATION, NULL, "\tpassive %s;\n",
 		s_switch (p->passive));
 	plog(LLV_INFO, LOCATION, NULL, "\tike_frag %s;\n",
-		s_switch (p->ike_frag));
+		p->ike_frag == ISAKMP_FRAG_FORCE ?
+			"force" : s_switch (p->ike_frag));
 	plog(LLV_INFO, LOCATION, NULL, "\tesp_frag %d;\n", p->esp_frag);
 	plog(LLV_INFO, LOCATION, NULL, "\tinitial_contact %s;\n",
 		s_switch (p->ini_contact));

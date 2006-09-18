@@ -73,7 +73,6 @@
 #include "isakmp.h"
 #include "ipsec_doi.h"
 #include "proposal.h"
-#include "nattraversal.h"
 #include "remoteconf.h"
 #ifdef GC
 #include "gcmalloc.h"
@@ -340,7 +339,7 @@ hexstring	0x{hexdigit}+
 <S_RMTS>support_proxy	{ YYD; return(SUPPORT_PROXY); }
 <S_RMTS>initial_contact	{ YYD; return(INITIAL_CONTACT); }
 <S_RMTS>nat_traversal	{ YYD; return(NAT_TRAVERSAL); }
-<S_RMTS>force		{ YYD; yylval.num = NATT_FORCE; return(NAT_TRAVERSAL_LEVEL); }
+<S_RMTS>force		{ YYD; return(REMOTE_FORCE_LEVEL); }
 <S_RMTS>proposal_check	{ YYD; return(PROPOSAL_CHECK); }
 <S_RMTS>obey		{ YYD; yylval.num = PROP_CHECK_OBEY; return(PROPOSAL_CHECK_LEVEL); }
 <S_RMTS>strict		{ YYD; yylval.num = PROP_CHECK_STRICT; return(PROPOSAL_CHECK_LEVEL); }

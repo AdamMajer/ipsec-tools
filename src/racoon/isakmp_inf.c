@@ -731,6 +731,7 @@ isakmp_info_send_nx(isakmp, remote, local, type, data)
 		error = -1;
 		goto end;
 	}
+	printf("%s: iph1->local = %p\n", __func__, iph1->local);
 
 	tlen = sizeof(*n) + spisiz;
 	if (data)
