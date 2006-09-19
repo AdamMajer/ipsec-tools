@@ -80,6 +80,9 @@
 #define SADB_X_EALG_RC5CBC	SADB_EALG_RC5CBC
 #endif
 #endif
+#if defined(SADB_X_EALG_AES) && ! defined(SADB_X_EALG_AESCBC)
+#define SADB_X_EALG_AESCBC  SADB_X_EALG_AES
+#endif
 
 #define GETMSGSTR(str, num) \
 do { \

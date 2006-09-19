@@ -87,6 +87,9 @@
 #ifndef SADB_X_EALG_AESCTR
 #define SADB_X_EALG_AESCTR	(-1)
 #endif
+#if defined(SADB_X_EALG_AES) && ! defined(SADB_X_EALG_AESCBC)
+#define SADB_X_EALG_AESCBC  SADB_X_EALG_AES
+#endif
 %}
 
 /* common section */
