@@ -113,6 +113,7 @@
 
 #ifdef ENABLE_NATT
 # include "nattraversal.h"
+#endif
 # ifdef __linux__
 #  include <linux/udp.h>
 #  include <linux/ip.h>
@@ -128,7 +129,6 @@
 #  include <netinet/ip.h>
 #  define SOL_UDP IPPROTO_UDP
 # endif /* __NetBSD__ / __FreeBSD__ */
-#endif
 
 static int nostate1 __P((struct ph1handle *, vchar_t *));
 static int nostate2 __P((struct ph2handle *, vchar_t *));
