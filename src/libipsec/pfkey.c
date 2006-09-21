@@ -1250,9 +1250,9 @@ pfkey_send_migrate(so, src, prefs, dst, prefd, proto, policy, policylen, seq)
 	/* create new sadb_msg to reply. */
 	len = sizeof(struct sadb_msg)
 		+ sizeof(struct sadb_address)
-		+ PFKEY_ALIGN8(src->sa_len)
+		+ PFKEY_ALIGN8(sysdep_sa_len(src))
 		+ sizeof(struct sadb_address)
-		+ PFKEY_ALIGN8(src->sa_len)
+		+ PFKEY_ALIGN8(sysdep_sa_len(dst))
 		+ policylen;
 
 	if ((newmsg = CALLOC(len, struct sadb_msg *)) == NULL) {
