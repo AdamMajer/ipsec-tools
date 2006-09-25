@@ -166,7 +166,7 @@ static int (*ph2exchange[][2][PHASE2ST_MAX])
 	__P((struct ph2handle *, vchar_t *)) = {
  /* error */
  { {}, {}, },
- /* Quick mode for IKE*/
+ /* Quick mode for IKE */
  {
   { nostate2, nostate2, quick_i1prep, nostate2, quick_i1send,
     quick_i2recv, quick_i2send, quick_i3recv, nostate2, nostate2, },
