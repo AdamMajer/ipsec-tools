@@ -1200,9 +1200,6 @@ found:
 		if (!x)
 			goto err;	/* XXX */
 
-		if (n != NULL)
-			racoon_free(n);
-
 		n = racoon_calloc(1, sizeof(struct prop_pair));
 		if (n == NULL) {
 			plog(LLV_ERROR, LOCATION, NULL,
