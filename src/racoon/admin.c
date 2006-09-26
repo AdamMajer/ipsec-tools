@@ -529,11 +529,18 @@ admin_process(so2, combuf)
 	if (buf != NULL)
 		vfree(buf);
 
+	if (key != NULL)
+		vfree(key);
+
 	return 0;
 
     bad:
 	if (buf != NULL)
 		vfree(buf);
+
+	if (key != NULL)
+		vfree(key);
+
 	return -1;
 }
 
