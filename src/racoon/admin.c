@@ -211,6 +211,7 @@ admin_process(so2, combuf)
 		}
 
 		memcpy(buf->v, p, len);
+		racoon_free(p);
 	}
 		break;
 
