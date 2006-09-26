@@ -2389,6 +2389,7 @@ expand_isakmpspec(prop_no, trns_no, types,
 	if (new->authmethod == OAKLEY_ATTR_AUTH_METHOD_GSSAPI_KRB) {
 		if (gssid != NULL) {
 			if ((new->gssid = vmalloc(strlen(gssid))) == NULL) {
+				racoon_free(new);
 				yyerror("failed to allocate gssid");
 				return -1;
 			}
