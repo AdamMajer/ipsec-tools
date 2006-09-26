@@ -4047,9 +4047,9 @@ ipsecdoi_id2sockaddr(buf, saddr, prefixlen, ul_proto)
 			+ alen;
 
 		for (; *p == 0xff; p++) {
+			plen += 8;
 			if (plen >= max)
 				break;
-			plen += 8;
 		}
 
 		if (plen < max) {
@@ -4164,9 +4164,9 @@ ipsecdoi_id2str(id)
 			+ alen;
 
 		for (; *p == 0xff; p++) {
+			plen += 8;
 			if (plen >= max)
 				break;
-			plen += 8;
 		}
 
 		if (plen < max) {
