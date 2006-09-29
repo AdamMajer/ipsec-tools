@@ -339,8 +339,10 @@ evt_poll(void) {
 		errx(1, "Cannot make combuf");
 
 
-	com_init();
 	while (evt_filter & (EVTF_LOOP|EVTF_PURGE)) {
+		/* handle_recv closes the socket time, so open it each time */
+		com_init();
+
 		if (com_send(sendbuf) != 0)
 			errx(1, "Cannot send combuf");
 
