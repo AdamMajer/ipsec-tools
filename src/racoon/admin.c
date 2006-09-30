@@ -526,12 +526,6 @@ out:
 	if (buf != NULL)
 		vfree(buf);
 
-	if (key != NULL)
-		vfree(key);
-
-	if (id != NULL)
-		vfree(id);
-
 	return error;
 }
 
