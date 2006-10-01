@@ -1684,17 +1684,18 @@ get_sabysaprop(pp0, sa0)
 	struct satrns *tr;
 	int prophlen, trnslen;
 	caddr_t bp;
+	int error = -1;
 
 	/* get proposal pair */
 	pair = get_proppair(sa0, IPSECDOI_TYPE_PH2);
 	if (pair == NULL)
-		goto bad;
+		goto out;
 
 	newtlen = sizeof(struct ipsecdoi_sa_b);
 	for (pp = pp0; pp; pp = pp->next) {
 
 		if (pair[pp->prop_no] == NULL)
-			goto bad;
+			goto out;
 
 		for (pr = pp->head; pr; pr = pr->next) {
 			newtlen += (sizeof(struct isakmp_pl_p)
@@ -1706,7 +1707,7 @@ get_sabysaprop(pp0, sa0)
 						break;
 				}
 				if (p == NULL)
-					goto bad;
+					goto out;
 
 				newtlen += ntohs(p->trns->h.len);
 			}
@@ -1716,7 +1717,7 @@ get_sabysaprop(pp0, sa0)
 	newsa = vmalloc(newtlen);
 	if (newsa == NULL) {
 		plog(LLV_ERROR, LOCATION, NULL, "failed to get newsa.\n");
-		goto bad;
+		goto out;
 	}
 	bp = newsa->v;
 
@@ -1737,7 +1738,7 @@ get_sabysaprop(pp0, sa0)
 						break;
 				}
 				if (p == NULL)
-					goto bad;
+					goto out;
 
 				trnslen = ntohs(p->trns->h.len);
 
@@ -1762,14 +1763,19 @@ get_sabysaprop(pp0, sa0)
 		}
 	}
 
-	return newsa;
-
-bad:
-	if (newsa != NULL)
-		vfree(newsa);
+	error = 0;
+out:
 	if (pair != NULL)
 		racoon_free(pair);
-	return NULL;
+
+	if (error != 0) {
+		if (newsa != NULL) {
+			vfree(newsa);
+			newsa = NULL;
+		}
+	}
+
+	return newsa;
 }
 
 /*
