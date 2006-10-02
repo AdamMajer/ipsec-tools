@@ -1037,6 +1037,8 @@ get_comindex(str, name, port, pref)
 				*p = '\0';
 			}
 		} else if (*p == '[') {
+			if (*pref == NULL)
+				goto bad;
 			*p = '\0';
 			*port = racoon_strdup(p + 1);
 			STRDUP_FATAL(*port);
