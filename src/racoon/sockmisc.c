@@ -777,10 +777,11 @@ newsaddr(len)
 {
 	struct sockaddr *new;
 
-	new = racoon_calloc(1, len);
-	if (new == NULL)
+	if ((new = racoon_calloc(1, len)) == NULL) {
 		plog(LLV_ERROR, LOCATION, NULL,
 			"%s\n", strerror(errno)); 
+		goto out;
+	}
 
 #ifdef __linux__
 	if (len == sizeof (struct sockaddr_in6))
@@ -791,7 +792,7 @@ newsaddr(len)
 	/* initial */
 	new->sa_len = len;
 #endif
-
+out:
 	return new;
 }
 
