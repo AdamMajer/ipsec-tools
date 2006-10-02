@@ -1199,6 +1199,7 @@ end:
 
 	if (pp_peer)
 		flushsaprop(pp_peer);
-	free_proppair(pair);
+	if (pair)
+		free_proppair(pair);
 	return error;
 }
