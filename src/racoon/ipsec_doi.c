@@ -752,7 +752,7 @@ t2isakmpsa(trns, sa)
 		case OAKLEY_ATTR_GSS_ID:
 		{
 			int error = -1;
-			iconv_t cd = -1;
+			iconv_t cd = (iconv_t) -1;
 			size_t srcleft, dstleft, rv;
 			__iconv_const char *src;
 			char *dst;
