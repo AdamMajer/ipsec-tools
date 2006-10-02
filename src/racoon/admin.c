@@ -385,6 +385,7 @@ admin_process(so2, combuf)
 			    "cannot allocate memory: %s\n", 
 			    strerror(errno));
 			vfree(id);
+			id = NULL;
 			break;
 		}
 		data = (char *)(data + acp->id_len);
