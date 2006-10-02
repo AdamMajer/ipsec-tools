@@ -620,7 +620,7 @@ alg_ipsec_hmacdef(doi)
 	for (i = 0; i < ARRAYLEN(ipsec_hmacdef); i++)
 		if (doi == ipsec_hmacdef[i].doi) {
 			plog(LLV_DEBUG, LOCATION, NULL, "hmac(%s)\n",
-				oakley_hmacdef[i].name);
+				ipsec_hmacdef[i].name);
 			return &ipsec_hmacdef[i];
 		}
 	return NULL;
