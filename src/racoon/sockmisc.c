@@ -1060,7 +1060,7 @@ naddr_score(const struct netaddr *naddr, const struct sockaddr *saddr)
 u_int16_t
 extract_port (const struct sockaddr *addr)
 {
-  u_int16_t port = -1;
+  u_int16_t port = 0;
   
   if (!addr)
     return port;
