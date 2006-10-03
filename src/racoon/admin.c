@@ -434,7 +434,8 @@ out2:
 			if ((local = dupsaddr(src)) == NULL)
 				goto out1;
 
-			if (set_port(local, getmyaddrsport(local)) == NULL)
+			port = ntohs(getmyaddrsport(local));
+			if (set_port(local, port) == NULL)
 				goto out1;
 
 #ifdef ENABLE_HYBRID
