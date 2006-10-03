@@ -81,8 +81,9 @@ static LIST_HEAD(_sitree, sainfo) sitree, sitree_save, sitree_tmp;
  * First pass is for sainfo from a specified peer, second for others.
  */
 struct sainfo *
-getsainfo(src, dst, peer)
+getsainfo(src, dst, peer, remoteid)
 	const vchar_t *src, *dst, *peer;
+	int remoteid;
 {
 	struct sainfo *s = NULL;
 	struct sainfo *anonymous = NULL;
@@ -124,10 +125,12 @@ getsainfo(src, dst, peer)
 		"getsainfo pass #%i\n", pass);
  
 	LIST_FOREACH(s, &sitree, chain) {
- 
 		const char *sainfostr = sainfo2str(s);
 		plog(LLV_DEBUG, LOCATION, NULL,
 			"evaluating sainfo: %s\n", sainfostr);
+
+		if(s->remoteid != remoteid)
+			continue;
 
 		if (s->id_i != NULL) {
 			if (pass == 2)

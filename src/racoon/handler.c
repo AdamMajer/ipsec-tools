@@ -1047,7 +1047,8 @@ static int revalidate_ph2(struct ph2handle *iph2){
 	 */
 	if (iph2->sainfo != NULL) {
 		iph2->sainfo = getsainfo(iph2->sainfo->idsrc, 
-		    iph2->sainfo->iddst, iph2->sainfo->id_i);
+					  iph2->sainfo->iddst, iph2->sainfo->id_i,
+					  iph2->sainfo->remoteid);
 	}
 	approval = iph2->approval;
 	sainfo = iph2->sainfo;
