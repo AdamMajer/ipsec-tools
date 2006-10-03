@@ -110,6 +110,8 @@ struct remoteconf {
 	int dpd_interval;		/* in seconds */
 	int dpd_maxfails; 
 
+	int ph1id; /* ph1id to be matched with sainfo sections */
+
 	int weak_phase1_check;		/* act on unencrypted deletions ? */
 
 	struct isakmpsa *proposal;	/* proposal list */
