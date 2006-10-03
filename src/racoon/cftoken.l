@@ -288,6 +288,7 @@ hexstring	0x{hexdigit}+
 <S_SAINF>{semi}		{ BEGIN S_INI; return(EOS); }
 <S_SAINFS>{ecl}		{ BEGIN S_INI; return(EOC); }
 <S_SAINFS>pfs_group	{ YYD; return(PFS_GROUP); }
+<S_SAINFS>remoteid	{ YYD; return(REMOTEID); }
 <S_SAINFS>identifier	{ YYD; yywarn("it is obsoleted.  use \"my_identifier\"."); return(IDENTIFIER); }
 <S_SAINFS>my_identifier	{ YYD; return(MY_IDENTIFIER); }
 <S_SAINFS>lifetime	{ YYD; return(LIFETIME); }
@@ -354,6 +355,7 @@ hexstring	0x{hexdigit}+
 <S_RMTS>dpd_delay	{ YYD; return(DPD_DELAY); }
 <S_RMTS>dpd_retry	{ YYD; return(DPD_RETRY); }
 <S_RMTS>dpd_maxfail	{ YYD; return(DPD_MAXFAIL); }
+<S_RMTS>ph1id		{ YYD; return(PH1ID); }
 <S_RMTS>ike_frag	{ YYD; return(IKE_FRAG); }
 <S_RMTS>esp_frag	{ YYD; return(ESP_FRAG); }
 <S_RMTS>script		{ YYD; return(SCRIPT); }
