@@ -446,6 +446,7 @@ null		{ YYD; yylval.num = algtype_null_enc;	return(ALGORITHMTYPE); }
 aes		{ YYD; yylval.num = algtype_aes;	return(ALGORITHMTYPE); }
 rijndael	{ YYD; yylval.num = algtype_aes;	return(ALGORITHMTYPE); }
 twofish		{ YYD; yylval.num = algtype_twofish;	return(ALGORITHMTYPE); }
+camellia	{ YYD; yylval.num = algtype_camellia;	return(ALGORITHMTYPE); }
 non_auth	{ YYD; yylval.num = algtype_non_auth;	return(ALGORITHMTYPE); }
 hmac_md5	{ YYD; yylval.num = algtype_hmac_md5;	return(ALGORITHMTYPE); }
 hmac_sha1	{ YYD; yylval.num = algtype_hmac_sha1;	return(ALGORITHMTYPE); }

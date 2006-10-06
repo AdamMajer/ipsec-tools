@@ -219,6 +219,11 @@ tcp		{
 #endif
 }
 <S_ENCALG>aes-ctr	{ yylval.num = SADB_X_EALG_AESCTR; BEGIN INITIAL; return(ALG_ENC); }
+<S_ENCALG>camellia-cbc	{ 
+#ifdef SADB_X_EALG_CAMELLIACBC
+	yylval.num = SADB_X_EALG_CAMELLIACBC; BEGIN INITIAL; return(ALG_ENC); 
+#endif
+}
 
 	/* compression algorithms */
 {hyphen}C	{ return(F_COMP); }

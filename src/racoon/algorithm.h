@@ -70,6 +70,7 @@ enum algtype {
 	algtype_null_enc,
 	algtype_aes,
 	algtype_twofish,
+	algtype_camellia,
 
 	/* ipsec auth */
 	algtype_hmac_md5,

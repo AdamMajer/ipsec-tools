@@ -47,6 +47,7 @@
 #define   OAKLEY_ATTR_ENC_ALG_3DES		5
 #define   OAKLEY_ATTR_ENC_ALG_CAST		6
 #define   OAKLEY_ATTR_ENC_ALG_AES		7
+#define   OAKLEY_ATTR_ENC_ALG_CAMELLIA		8	
 					/*	65001 - 65535 Private Use */
 #define OAKLEY_ATTR_HASH_ALG		2 /* B */
 #define   OAKLEY_ATTR_HASH_ALG_MD5		1

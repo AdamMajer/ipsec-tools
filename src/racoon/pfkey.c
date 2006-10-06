@@ -534,6 +534,10 @@ ipsecdoi2pfkey_ealg(t_id)
 	case IPSECDOI_ESP_TWOFISH:
 		return SADB_X_EALG_TWOFISHCBC;
 #endif
+#ifdef SADB_X_EALG_CAMELLIACBC
+	case IPSECDOI_ESP_CAMELLIA:
+		return SADB_X_EALG_CAMELLIACBC;
+#endif
 
 	/* not supported */
 	case IPSECDOI_ESP_3IDEA:

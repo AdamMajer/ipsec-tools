@@ -474,6 +474,7 @@ static struct ksmap name_ipsecdoi_trns_esp[] = {
 { IPSECDOI_ESP_NULL,		"NULL",		NULL },
 { IPSECDOI_ESP_AES,		"AES",		NULL },
 { IPSECDOI_ESP_TWOFISH,		"TWOFISH",	NULL },
+{ IPSECDOI_ESP_CAMELLIA,	"CAMELLIA",	NULL },
 };
 
 char *

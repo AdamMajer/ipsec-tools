@@ -714,6 +714,14 @@ ciphertest(ac, av)
 			  eay_rc5_encrypt, eay_rc5_decrypt) < 0)
 	  return -1;
 #endif
+#if defined(HAVE_OPENSSL_CAMELLIA_H)
+	if (ciphertest_1 ("CAMELLIA",
+			  &data, 16,
+			  &key, key.l,
+			  &iv0, 16,
+			  eay_camellia_encrypt, eay_camellia_decrypt) < 0)
+	  return -1;
+#endif
 	return 0;
 }
 

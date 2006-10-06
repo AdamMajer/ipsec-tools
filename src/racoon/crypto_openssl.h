@@ -125,6 +125,14 @@ extern vchar_t *eay_aes_decrypt __P((vchar_t *, vchar_t *, vchar_t *));
 extern int eay_aes_weakkey __P((vchar_t *));
 extern int eay_aes_keylen __P((int));
 
+#if defined(HAVE_OPENSSL_CAMELLIA_H)
+/* Camellia */
+extern vchar_t *eay_camellia_encrypt __P((vchar_t *, vchar_t *, vchar_t *));
+extern vchar_t *eay_camellia_decrypt __P((vchar_t *, vchar_t *, vchar_t *));
+extern int eay_camellia_weakkey __P((vchar_t *));
+extern int eay_camellia_keylen __P((int));
+#endif
+
 /* misc */
 extern int eay_null_keylen __P((int));
 extern int eay_null_hashlen __P((void));
