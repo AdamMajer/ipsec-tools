@@ -124,7 +124,7 @@ isakmp_unity_req(iph1, attr)
 		char buf[MAXMOTD + 1];
 		int fd;
 		char *filename = &isakmp_cfg_config.motd[0];
-		size_t len;
+		int len;
 
 		if ((fd = open(filename, O_RDONLY, 0)) == -1) {
 			plog(LLV_ERROR, LOCATION, NULL, 
