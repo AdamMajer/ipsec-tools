@@ -208,6 +208,7 @@ extern struct prop_pair **get_proppair __P((vchar_t *, int));
 extern vchar_t *get_sabyproppair __P((struct prop_pair *, struct ph1handle *));
 extern int ipsecdoi_updatespi __P((struct ph2handle *iph2));
 extern vchar_t *get_sabysaprop __P((struct saprop *, vchar_t *));
+extern int ipsecdoi_chkcmpids( const vchar_t *, const vchar_t *, int );
 extern int ipsecdoi_checkid1 __P((struct ph1handle *));
 extern int ipsecdoi_setid1 __P((struct ph1handle *));
 extern int set_identifier __P((vchar_t **, int, vchar_t *));
