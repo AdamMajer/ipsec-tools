@@ -1933,7 +1933,7 @@ exchange_types
 			struct etypes *new;
 			new = racoon_malloc(sizeof(struct etypes));
 			if (new == NULL) {
-				yyerror("filed to allocate etypes");
+				yyerror("failed to allocate etypes");
 				return -1;
 			}
 			new->type = $2;

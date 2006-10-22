@@ -329,7 +329,7 @@ do { 								\
 				e_type, e_keylen, a_type, a_keylen, flags,
 				0, l_bytes, l_addtime, 0, seq) < 0) {
 			plog(LLV_ERROR, LOCATION, NULL,
-				"restore SA filed line#%d in %s: %s\n",
+				"restore SA failed line#%d in %s: %s\n",
 				line, lcconf->pathinfo[LC_PATHTYPE_BACKUPSA], 
 				ipsec_strerror());
 		}
