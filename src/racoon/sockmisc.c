@@ -45,7 +45,8 @@
 #include <netinet6/ipsec.h>
 #endif
 
-#if defined(IP_RECVDSTADDR) && !defined(IPV6_RECVDSTADDR)
+#if defined(INET6) && !defined(INET6_ADVAPI) && \
+	defined(IP_RECVDSTADDR) && !defined(IPV6_RECVDSTADDR)
 #define IPV6_RECVDSTADDR IP_RECVDSTADDR
 #endif
 
