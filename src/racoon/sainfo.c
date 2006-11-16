@@ -111,8 +111,8 @@ getsainfo(loc, rmt, peer, remoteid)
 			dpeer = ipsecdoi_id2str(peer);
  
 		plog(LLV_DEBUG, LOCATION, NULL,
-			"getsainfo params: loc=\'%s\', rmt=\'%s\', peer=\'%s\'\n",
-			dloc, drmt, dpeer );
+			"getsainfo params: loc=\'%s\', rmt=\'%s\', peer=\'%s\', id=%i\n",
+			dloc, drmt, dpeer, remoteid );
  
                 racoon_free(dloc);
                 racoon_free(drmt);
@@ -156,7 +156,7 @@ getsainfo(loc, rmt, peer, remoteid)
 			return s;
 	}
 
-	if ((anonymous != NULL) && (pass == 1)) {
+	if ((anonymous == NULL) && (pass == 1)) {
 		pass++;
 		goto again;
 	}
@@ -295,7 +295,8 @@ sainfo2str(si)
         else
                 id_i = ipsecdoi_id2str(si->id_i);
  
-        snprintf(buf, 255, "loc=\'%s\', rmt=\'%s\', peer=\'%s\'", idloc, idrmt, id_i);
+        snprintf(buf, 255, "loc=\'%s\', rmt=\'%s\', peer=\'%s\', id=%i",
+		idloc, idrmt, id_i, si->remoteid);
  
         racoon_free(idloc);
         racoon_free(idrmt);
