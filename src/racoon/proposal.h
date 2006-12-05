@@ -192,7 +192,7 @@ extern void inssatrns __P((struct saproto *, struct satrns *));
 extern struct saprop *cmpsaprop_alloc __P((struct ph1handle *,
 	const struct saprop *, const struct saprop *, int));
 extern int cmpsaprop __P((const struct saprop *, const struct saprop *));
-extern int cmpsatrns __P((int, const struct satrns *, const struct satrns *));
+extern int cmpsatrns __P((int, const struct satrns *, const struct satrns *, int));
 extern int set_satrnsbysainfo __P((struct saproto *, struct sainfo *));
 extern struct saprop *aproppair2saprop __P((struct prop_pair *));
 extern void free_proppair __P((struct prop_pair **));
