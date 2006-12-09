@@ -72,6 +72,7 @@
 #include "isakmp_var.h"
 #include "isakmp.h"
 #include "ipsec_doi.h"
+#include "policy.h"
 #include "proposal.h"
 #include "remoteconf.h"
 #ifdef GC

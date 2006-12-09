@@ -1,4 +1,4 @@
-# $Id$
+# Id: Makefile.am,v 1.23 2005/07/01 08:57:50 manubsd Exp
 
 sbin_PROGRAMS = racoon racoonctl plainrsa-gen
 noinst_PROGRAMS = eaytest
@@ -10,9 +10,9 @@ lib_LTLIBRARIES = libracoon.la
 adminsockdir=${localstatedir}/racoon
 
 INCLUDES = -I${srcdir}/../libipsec 
-AM_CFLAGS = @GLIBC_BUGS@ -DSYSCONFDIR=\"${sysconfdir}\" \
+AM_CFLAGS = -D_GNU_SOURCE @GLIBC_BUGS@ -DSYSCONFDIR=\"${sysconfdir}\" \
 	-DADMINPORTDIR=\"${adminsockdir}\"
-AM_LDFLAGS = -lcrypto
+AM_LDFLAGS = @EXTRA_CRYPTO@ -lcrypto
 
 MISSING_ALGOS = \
 	missing/crypto/sha2/sha2.c \
@@ -31,12 +31,12 @@ racoon_SOURCES = \
 	safefile.c backupsa.c genlist.c rsalist.c \
 	cftoken.l cfparse.y prsa_tok.l prsa_par.y 
 EXTRA_racoon_SOURCES = isakmp_xauth.c isakmp_cfg.c isakmp_unity.c throttle.c \
-	isakmp_frag.c nattraversal.c $(MISSING_ALGOS)
+	isakmp_frag.c nattraversal.c security.c $(MISSING_ALGOS)
 racoon_LDFLAGS = ../libipsec/libipsec.la
 racoon_LDADD = $(CRYPTOBJS) $(HYBRID_OBJS) $(NATT_OBJS) $(FRAG_OBJS) $(LEXLIB) \
-	vmbuf.o sockmisc.o misc.o
+	 $(SECCTX_OBJS) vmbuf.o sockmisc.o misc.o
 racoon_DEPENDENCIES = ../libipsec/libipsec.la \
-	$(CRYPTOBJS) $(HYBRID_OBJS) $(NATT_OBJS) $(FRAG_OBJS) \
+	$(CRYPTOBJS) $(HYBRID_OBJS) $(NATT_OBJS) $(FRAG_OBJS) $(SECCTX_OBJS) \
 	vmbuf.o sockmisc.o misc.o
 
 racoonctl_SOURCES = racoonctl.c str2val.c 
@@ -93,7 +93,6 @@ EXTRA_DIST = \
    samples/roadwarrior/client/phase1-down.sh \
    samples/roadwarrior/client/phase1-up.sh \
    samples/roadwarrior/client/racoon.conf \
-   samples/roadwarrior/server/phase1-down.sh \
    samples/roadwarrior/server/racoon.conf \
    samples/roadwarrior/server/racoon.conf-radius
 
@@ -115,8 +114,8 @@ cftoken.c: cftoken.l
 	$(LEX) -ocftoken.c $(srcdir)/cftoken.l
 
 cfparse.h cfparse.c: $(srcdir)/cfparse.y
-	$(YACC) -d $(srcdir)/cfparse.y
-	mv y.tab.c cfparse.c
+	$(YACC) -d $(srcdir)/cfparse.y && \
+	mv y.tab.c cfparse.c && \
 	mv y.tab.h cfparse.h
 
 # Plain-RSA parser
@@ -130,8 +129,8 @@ prsa_tok.c: $(srcdir)/prsa_tok.l
 	$(LEX) -Pprsa -oprsa_tok.c $(srcdir)/prsa_tok.l
 
 prsa_par.h prsa_par.c: $(srcdir)/prsa_par.y
-	$(YACC) -pprsa -d $(srcdir)/prsa_par.y
-	mv y.tab.c prsa_par.c
+	$(YACC) -pprsa -d $(srcdir)/prsa_par.y && \
+	mv y.tab.c prsa_par.c && \
 	mv y.tab.h prsa_par.h
 
 # special object rules

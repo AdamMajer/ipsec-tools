@@ -78,6 +78,7 @@
 #include "remoteconf.h"
 #include "sockmisc.h"
 #include "handler.h"
+#include "policy.h"
 #include "proposal.h"
 #include "isakmp_var.h"
 #include "evt.h"

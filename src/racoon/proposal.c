@@ -315,6 +315,57 @@ cmpsaprop_alloc(ph1, pp1, pp2, side)
 		goto err;
 	}
 
+#ifdef HAVE_SECCTX
+	/* check the security_context properties.
+	 * It is possible for one side to have a security context
+	 * and the other side doesn't. If so, this is an error.
+	 */
+
+	if (*pp1->sctx.ctx_str && !(*pp2->sctx.ctx_str)) {
+		plog(LLV_ERROR, LOCATION, NULL,
+		     "My proposal missing security context\n");
+		goto err;
+	}
+	if (!(*pp1->sctx.ctx_str) && *pp2->sctx.ctx_str) {
+		plog(LLV_ERROR, LOCATION, NULL, 
+		     "Peer is missing security context\n");
+		goto err;
+	}
+
+	if (*pp1->sctx.ctx_str && *pp2->sctx.ctx_str) {
+		if (pp1->sctx.ctx_doi == pp2->sctx.ctx_doi)
+			newpp->sctx.ctx_doi = pp1->sctx.ctx_doi;
+		else {
+			plog(LLV_ERROR, LOCATION, NULL, 
+			     "sec doi mismatched: my:%d peer:%d\n",
+			     pp2->sctx.ctx_doi, pp1->sctx.ctx_doi);
+			     goto err;
+		}
+
+		if (pp1->sctx.ctx_alg == pp2->sctx.ctx_alg)
+			newpp->sctx.ctx_alg = pp1->sctx.ctx_alg;
+		else {
+			plog(LLV_ERROR, LOCATION, NULL,
+			     "sec alg mismatched: my:%d peer:%d\n",
+			     pp2->sctx.ctx_alg, pp1->sctx.ctx_alg);
+			goto err;
+		}
+
+		if ((pp1->sctx.ctx_strlen != pp2->sctx.ctx_strlen) ||
+		     memcmp(pp1->sctx.ctx_str, pp2->sctx.ctx_str,
+		     pp1->sctx.ctx_strlen) != 0) {
+			plog(LLV_ERROR, LOCATION, NULL,
+			     "sec ctx string mismatched: my:%s peer:%s\n",
+			     pp2->sctx.ctx_str, pp1->sctx.ctx_str);
+				goto err;
+		} else {
+			newpp->sctx.ctx_strlen = pp1->sctx.ctx_strlen;
+			memcpy(newpp->sctx.ctx_str, pp1->sctx.ctx_str,
+				pp1->sctx.ctx_strlen);
+		}
+	}
+#endif /* HAVE_SECCTX */
+
 	npr1 = npr2 = 0;
 	for (pr1 = pp1->head; pr1; pr1 = pr1->next)
 		npr1++;
@@ -1156,6 +1207,15 @@ set_proposal_from_proposal(iph2)
 		pp0->lifebyte = iph2->sainfo->lifebyte;
 		pp0->pfs_group = iph2->sainfo->pfs_group;
 
+#ifdef HAVE_SECCTX
+		if (*pp_peer->sctx.ctx_str) {
+			pp0->sctx.ctx_doi = pp_peer->sctx.ctx_doi;
+			pp0->sctx.ctx_alg = pp_peer->sctx.ctx_alg;
+			pp0->sctx.ctx_strlen = pp_peer->sctx.ctx_strlen;
+			memcpy(pp0->sctx.ctx_str, pp_peer->sctx.ctx_str,
+			       pp_peer->sctx.ctx_strlen);
+		}
+#endif /* HAVE_SECCTX */
 
 		if (pp_peer->next != NULL) {
 			plog(LLV_ERROR, LOCATION, NULL,

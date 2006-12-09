@@ -136,6 +136,10 @@
 #define IPSECDOI_ATTR_COMP_DICT_SIZE          8 /* B */
 #define IPSECDOI_ATTR_COMP_PRIVALG            9 /* V */
 
+#ifdef HAVE_SECCTX
+#define IPSECDOI_ATTR_SECCTX		     10 /* V */
+#endif
+
 /* 4.6.1 Security Association Payload */
 struct ipsecdoi_pl_sa {
 	struct isakmp_gen h;

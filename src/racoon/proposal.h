@@ -62,7 +62,9 @@ struct saprop {
 	int pfs_group;			/* pfs group */
 	int claim;			/* flag to send RESPONDER-LIFETIME. */
 					/* XXX assumed DOI values are 1 or 2. */
-
+#ifdef HAVE_SECCTX
+	struct security_ctx sctx;       /* security context structure */
+#endif
 	struct saproto *head;
 	struct saprop *next;
 };

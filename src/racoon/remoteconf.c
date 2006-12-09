@@ -71,6 +71,7 @@
 #include "remoteconf.h"
 #include "localconf.h"
 #include "grabmyaddr.h"
+#include "policy.h"
 #include "proposal.h"
 #include "vendorid.h"
 #include "gcmalloc.h"
