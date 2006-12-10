@@ -304,7 +304,7 @@ do { 								\
 		}
 		sa_args.l_addtime -= current - created;
 
-		if (pfkey_send_add(&sa_args) < 0) {
+		if (pfkey_send_add2(&sa_args) < 0) {
 			plog(LLV_ERROR, LOCATION, NULL,
 				"restore SA failed line#%d in %s: %s\n",
 				line, lcconf->pathinfo[LC_PATHTYPE_BACKUPSA], 
