@@ -132,7 +132,7 @@ eay_str2asn1dn(str, len)
 	char *buf;
 	char *field, *value;
 	int i, j;
-	vchar_t *ret;
+	vchar_t *ret = NULL;
 	caddr_t p;
 
 	if (len == -1)
@@ -217,6 +217,8 @@ eay_str2asn1dn(str, len)
 		racoon_free(buf);
 	if (name)
 		X509_NAME_free(name);
+	if (ret)
+		vfree(ret);
 	return NULL;
 }
 
