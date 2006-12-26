@@ -320,7 +320,7 @@ saok:
 	}
 
 	newsa = get_sabyproppair(p, iph1);
-	if (newsa == NULL){
+	if (newsa == NULL && iph1->approval != NULL){
 		delisakmpsa(iph1->approval);
 		iph1->approval = NULL;
 	}
