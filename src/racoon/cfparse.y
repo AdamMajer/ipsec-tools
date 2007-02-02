@@ -1848,7 +1848,7 @@ remote_spec
 	|	NAT_TRAVERSAL SWITCH
 		{
 #ifdef ENABLE_NATT
-        		if (libipsec_opt & LIBIPSEC_OPT_FRAG)
+        		if (libipsec_opt & LIBIPSEC_OPT_NATT)
 				cur_rmconf->nat_traversal = $2;
 			else
                 		yyerror("libipsec lacks NAT-T support");
