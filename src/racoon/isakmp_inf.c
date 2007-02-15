@@ -524,7 +524,11 @@ isakmp_info_recv_d(iph1, delete, msgid, encrypted)
 			if (del_ph1->scr)
 				SCHED_KILL(del_ph1->scr);
 
-			purge_remote(del_ph1);
+			/*
+			 * Do not delete IPsec SAs when receiving an IKE delete notification.
+			 * Just delete the IKE SA.
+			 */
+			isakmp_ph1expire(del_ph1);
 		}
 		break;
 
