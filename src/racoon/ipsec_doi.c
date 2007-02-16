@@ -3478,8 +3478,8 @@ cmpid_invalid:
 	/* id integrity error */
 	plog(LLV_DEBUG, LOCATION, NULL, "check and compare ids : %s integrity error\n",
 		s_ipsecdoi_ident(id_bs->type));
-	plog(LLV_DEBUG, LOCATION, NULL, "cmpid target: length = \'%i\'\n", ident_t.l );
-	plog(LLV_DEBUG, LOCATION, NULL, "cmpid source: length = \'%i\'\n", ident_s.l );
+	plog(LLV_DEBUG, LOCATION, NULL, "cmpid target: length = \'%zu\'\n", ident_t.l );
+	plog(LLV_DEBUG, LOCATION, NULL, "cmpid source: length = \'%zu\'\n", ident_s.l );
 
 	return -1;
 }
