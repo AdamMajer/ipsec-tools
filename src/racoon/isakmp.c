@@ -1204,8 +1204,6 @@ isakmp_ph1begin_r(msg, remote, local, etype)
 		delph1(iph1);
 		return -1;
 	}
-	printf("%s: iph1->local = %p\n", __func__, iph1->local);
-
 	(void)insph1(iph1);
 
 	plog(LLV_DEBUG, LOCATION, NULL, "===\n");
