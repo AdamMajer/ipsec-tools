@@ -125,7 +125,7 @@ extern int script_env_append __P((char ***, int *, char *, char *));
 extern int script_exec __P((char *, int, char * const *));
 
 void purge_remote __P((struct ph1handle *));
-void delete_spd __P((struct ph2handle *));
+void delete_spd __P((struct ph2handle *, u_int64_t));
 #ifdef INET6
 u_int32_t setscopeid __P((struct sockaddr *, struct sockaddr *));
 #endif

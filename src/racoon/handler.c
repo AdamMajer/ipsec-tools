@@ -687,7 +687,7 @@ flushph2()
 		if (p->status == PHASE2ST_ESTABLISHED) 
 			isakmp_info_send_d2(p);
 
-		delete_spd(p);
+		delete_spd(p, 0);
 		unbindph12(p);
 		remph2(p);
 		delph2(p);
