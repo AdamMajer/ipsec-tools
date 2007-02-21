@@ -4442,10 +4442,11 @@ ipsecdoi_id2str(id)
 	case IPSECDOI_ID_DER_ASN1_DN:
 	case IPSECDOI_ID_DER_ASN1_GN:
 	{
+		X509_NAME *xn = NULL;
+
 		dat = id->v + sizeof(*id_b);
 		len = id->l - sizeof(*id_b);
 
-		X509_NAME *xn = NULL;
 		if (d2i_X509_NAME(&xn, (void*) &dat, len) != NULL) {
 			BIO *bio = BIO_new(BIO_s_mem());
 			X509_NAME_print_ex(bio, xn, 0, 0);
