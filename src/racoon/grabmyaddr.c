@@ -854,7 +854,7 @@ initmyaddr()
 
 	memset(&nl, 0, sizeof(nl));
 	nl.nl_family = AF_NETLINK;
-	nl.nl_groups = RTMGRP_IPV4_IFADDR|RTMGRP_LINK;
+	nl.nl_groups = RTMGRP_IPV4_IFADDR|RTMGRP_LINK|RTMGRP_IPV6_IFADDR;
 
 	if (bind(lcconf->rtsock, (struct sockaddr*)&nl, sizeof(nl)) < 0) {
 		plog(LLV_ERROR, LOCATION, NULL,
