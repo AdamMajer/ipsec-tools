@@ -292,8 +292,7 @@ delph1(iph1)
 #endif
 
 #ifdef ENABLE_DPD
-	if (iph1->dpd_r_u != NULL)
-		SCHED_KILL(iph1->dpd_r_u);
+	SCHED_KILL(iph1->dpd_r_u);
 #endif
 
 	if (iph1->remote) {
