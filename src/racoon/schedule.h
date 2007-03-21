@@ -59,8 +59,10 @@ struct sched {
 /* cancel schedule */
 #define SCHED_KILL(s)                                                          \
 do {                                                                           \
-	sched_kill(s);                                                         \
-	s = NULL;                                                              \
+	if(s != NULL){	   														\
+		sched_kill(s);                                                         \
+		s = NULL;                                                              \
+	}\
 } while(0)
 
 /* must be called after it's called from scheduler. */
