@@ -3123,9 +3123,13 @@ setph2proposal0(iph2, pp, pr)
 				iph2->sainfo->pfs_group);
 
 #ifdef HAVE_SECCTX
-		if (*pp->sctx.ctx_str) 
+		if (*pp->sctx.ctx_str) {
+			struct security_ctx secctx;
+			secctx = pp->sctx;
+			secctx.ctx_strlen = htons(pp->sctx.ctx_strlen);
 			x = isakmp_set_attr_v(x, IPSECDOI_ATTR_SECCTX,
-					     (caddr_t)&pp->sctx, truectxlen);
+					     (caddr_t)&secctx, truectxlen);
+		}
 #endif
 		/* update length of this transform. */
 		trns = (struct isakmp_pl_t *)(p->v + trnsoff);
@@ -4770,6 +4774,7 @@ ipsecdoi_t2satrns(t, pp, pr, tr)
 		{
 			int len = ntohs(d->lorv);
 			memcpy(&pp->sctx, d + 1, len);
+			pp->sctx.ctx_strlen = ntohs(pp->sctx.ctx_strlen);
 			break;
 		}
 #endif /* HAVE_SECCTX */
