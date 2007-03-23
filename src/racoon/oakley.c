@@ -1877,7 +1877,7 @@ oakley_check_certid(iph1)
 		vfree(name);
 		if (error != 0) {
 			plog(LLV_ERROR, LOCATION, NULL,
-				"ID mismatched with subjectAltName.\n");
+				"ID mismatched with ASN1 SubjectName.\n");
 			return ISAKMP_NTYPE_INVALID_ID_INFORMATION;
 		}
 		return 0;
