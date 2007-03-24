@@ -670,8 +670,15 @@ xauth_login_pam(port, raddr, usr, pwd)
 		    "cannot allocate memory: %s\n", strerror(errno)); 
 		goto out;
 	}
-	
+
 	if ((error = pam_set_item(pam, PAM_RHOST, remote)) != 0) {
+		plog(LLV_ERROR, LOCATION, NULL, 
+		    "pam_set_item failed: %s\n", 
+		    pam_strerror(pam, error));
+		goto out;
+	}
+
+	if ((error = pam_set_item(pam, PAM_RUSER, usr)) != 0) {
 		plog(LLV_ERROR, LOCATION, NULL, 
 		    "pam_set_item failed: %s\n", 
 		    pam_strerror(pam, error));
