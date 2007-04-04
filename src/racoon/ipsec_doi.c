@@ -3480,6 +3480,14 @@ ipsecdoi_chkcmpids( idt, ids, exact )
 		return 1;
 	}
 
+	if(id_bs->proto_id != id_bt->proto_id){
+		plog(LLV_DEBUG, LOCATION, NULL,
+			"check and compare ids : proto_id mismatch %d != %d\n",
+			id_bs->proto_id, id_bt->proto_id);
+
+		return 1;
+	}
+
 	/* compare the ID data. */
 
 	switch (id_bt->type) {
