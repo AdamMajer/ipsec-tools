@@ -1072,6 +1072,7 @@ static int revalidate_ph2(struct ph2handle *iph2){
 	int found, check_level;
 	struct sainfo *sainfo;
 	struct saprop *approval;
+	struct ph1handle *iph1;
 
 	/* 
 	 * Get the new sainfo using values of the old one
@@ -1118,11 +1119,18 @@ static int revalidate_ph2(struct ph2handle *iph2){
 	 * XXX try tu find the new remote section to get the new check level ?
 	 * XXX lifebyte
 	 */
-	if (iph2->ph1 != NULL && iph2->ph1->rmconf != NULL) {
-		check_level = iph2->ph1->rmconf->pcheck_level;
+	if (iph2->ph1 != NULL)
+		iph1=iph2->ph1;
+	else
+		iph1=getph1byaddr(iph2->src, iph2->dst);
+
+	if(iph1 != NULL && iph1->rmconf != NULL) {
+		check_level = iph1->rmconf->pcheck_level;
 	} else {
-		plog(LLV_DEBUG, LOCATION, NULL,
-			 "No phase1 rmconf found !\n");
+		if(iph1 != NULL)
+			plog(LLV_DEBUG, LOCATION, NULL, "No phase1 rmconf found !\n");
+		else
+			plog(LLV_DEBUG, LOCATION, NULL, "No phase1 found !\n");
 		check_level = PROP_CHECK_EXACT;
 	}
 
