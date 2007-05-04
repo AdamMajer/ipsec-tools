@@ -1283,6 +1283,15 @@ pk_recvupdate(mhp)
 	/* turn off schedule */
 	SCHED_KILL(iph2->scr);
 
+	/* Force the update of ph2's ports, as there is at least one
+	 * situation where they'll mismatch with ph1's values
+	 */
+
+#ifdef ENABLE_NATT
+	set_port(iph2->src, extract_port(iph2->ph1->local));
+	set_port(iph2->dst, extract_port(iph2->ph1->remote));
+#endif
+
 	/*
 	 * since we are going to reuse the phase2 handler, we need to
 	 * remain it and refresh all the references between ph1 and ph2 to use.
