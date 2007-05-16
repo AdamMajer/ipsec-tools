@@ -1018,12 +1018,16 @@ authgroup
 
 			grouplist = racoon_realloc(icc->grouplist,
 					sizeof(char**)*(icc->groupcount+1));
-			if (grouplist == NULL)
+			if (grouplist == NULL) {
 				yyerror("unable to allocate auth group list");
+				return -1;
+			}
 
 			groupname = racoon_malloc($1->l+1);
-			if (groupname == NULL)
+			if (groupname == NULL) {
 				yyerror("unable to allocate auth group name");
+				return -1;
+			}
 
 			memcpy(groupname,$1->v,$1->l);
 			groupname[$1->l]=0;
