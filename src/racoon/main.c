@@ -77,6 +77,7 @@
 #include "session.h"
 #include "oakley.h"
 #include "pfkey.h"
+#include "policy.h"
 #include "crypto_openssl.h"
 #include "backupsa.h"
 #include "vendorid.h"
@@ -165,6 +166,9 @@ main(ac, av)
 	DRM_init();
 #endif
 
+#ifdef HAVE_SECCTX
+	init_avc();
+#endif
 	eay_init();
 	initlcconf();
 	initrmconf();
