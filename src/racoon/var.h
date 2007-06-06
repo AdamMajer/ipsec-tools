@@ -78,9 +78,9 @@
 do { \
 	if (getnameinfo((x), sysdep_sa_len(x), (y), sizeof(y), (z), sizeof(z), \
 			NIFLAGS) != 0) { \
-		if (y) \
+		if (y != NULL) \
 			strncpy((y), "(invalid)", sizeof(y)); \
-		if (z) \
+		if (z != NULL) \
 			strncpy((z), "(invalid)", sizeof(z)); \
 	} \
 } while (0);
@@ -89,7 +89,7 @@ do { \
 do { \
 	if (getnameinfo((x), sysdep_sa_len(x), (y), sizeof(y), NULL, 0, \
 			NIFLAGS) != 0) { \
-		if (y) \
+		if (y != NULL) \
 			strncpy((y), "(invalid)", sizeof(y)); \
 	} \
 } while (0);
