@@ -228,8 +228,9 @@ session(void)
 
 		if (lcconf->rtsock >= 0 && FD_ISSET(lcconf->rtsock, &rfds)) {
 			if (update_myaddrs() && lcconf->autograbaddr)
-				sched_new(5, check_rtsock, NULL);
-			initfds();
+				check_rtsock(NULL);
+			else
+				initfds();
 		}
 	}
 }
