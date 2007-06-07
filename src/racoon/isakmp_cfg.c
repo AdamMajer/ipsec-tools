@@ -1809,7 +1809,7 @@ isakmp_cfg_appendaddr4(attr, ip, num, max)
 
 	addr = (in_addr_t *)(attr + 1);
 	ip->s_addr = *addr;
-	*num++;
+	(*num)++;
 
 	return;
 }
