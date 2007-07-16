@@ -461,6 +461,7 @@ grab_myaddrs()
 	ifconf.ifc_req = iflist;
 	ifconf.ifc_len = len;
 	if (ioctl(s, SIOCGIFCONF, &ifconf) < 0) {
+		close(s);
 		plog(LLV_ERROR, LOCATION, NULL,
 			"ioctl(SIOCGIFCONF) failed: %s\n",
 			strerror(errno));
