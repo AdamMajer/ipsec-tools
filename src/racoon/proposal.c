@@ -1185,10 +1185,10 @@ set_proposal_from_proposal(iph2)
 	 * make my proposal according as the client proposal.
 	 * XXX assumed there is only one proposal even if it's the SA bundle.
 	 */
-        for (i = 0; i < MAXPROPPAIRLEN; i++) {
-                if (pair[i] == NULL)
-                        continue;
-
+	for (i = 0; i < MAXPROPPAIRLEN; i++) {
+		if (pair[i] == NULL)
+			continue;
+		
 		if (pp_peer != NULL)
 			flushsaprop(pp_peer);
 
