@@ -57,11 +57,7 @@
 #include <resolv.h>
 #endif
 
-#ifndef HAVE_NETINET6_IPSEC
-#include <netinet/ipsec.h>
-#else
-#include <netinet6/ipsec.h>
-#endif
+#include PATH_IPSEC_H
 
 #include "var.h"
 #include "vmbuf.h"

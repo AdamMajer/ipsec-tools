@@ -55,11 +55,7 @@ struct sadb_alg;
 
 /* Accomodate different prototypes in <netinet6/ipsec.h> */
 #include <sys/types.h>
-#ifdef HAVE_NETINET6_IPSEC
-#  include <netinet6/ipsec.h>
-#else 
-#  include <netinet/ipsec.h>
-#endif
+#include PATH_IPSEC_H
 
 #ifndef HAVE_IPSEC_POLICY_T
 typedef caddr_t ipsec_policy_t;

@@ -43,11 +43,7 @@
 #include <ctype.h>
 
 #include <netinet/in.h>
-#ifndef HAVE_NETINET6_IPSEC
-#include <netinet/ipsec.h>
-#else
-#include <netinet6/ipsec.h>
-#endif
+#include PATH_IPSEC_H
 
 #if TIME_WITH_SYS_TIME
 # include <sys/time.h>

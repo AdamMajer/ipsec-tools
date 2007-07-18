@@ -39,11 +39,7 @@
 #include <sys/param.h>
 
 #include <string.h>
-#ifdef HAVE_NETINET6_IPSEC
-#  include <netinet6/ipsec.h>
-#else
-#  include <netinet/ipsec.h>
-#endif
+#include PATH_IPSEC_H
 
 #include "ipsec_strerror.h"
 
