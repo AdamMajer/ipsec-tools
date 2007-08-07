@@ -470,7 +470,7 @@ xauth_radius_init(void)
 
 	if ((isakmp_cfg_config.accounting == ISAKMP_CFG_ACCT_RADIUS) &&
 	    (radius_acct_state == NULL)) {
-		if ((radius_acct_state = rad_auth_open()) == NULL) {
+		if ((radius_acct_state = rad_acct_open()) == NULL) {
 			plog(LLV_ERROR, LOCATION, NULL, 
 			    "Cannot init libradius\n");
 			return -1;
