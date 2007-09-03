@@ -237,6 +237,7 @@ hexstring	0x{hexdigit}+
 <S_CFG>network4		{ YYD; return(CFG_NET4); }
 <S_CFG>netmask4		{ YYD; return(CFG_MASK4); }
 <S_CFG>dns4		{ YYD; return(CFG_DNS4); }
+<S_CFG>nbns4		{ YYD; return(CFG_NBNS4); }
 <S_CFG>wins4		{ YYD; return(CFG_NBNS4); }
 <S_CFG>default_domain	{ YYD; return(CFG_DEFAULT_DOMAIN); }
 <S_CFG>auth_source	{ YYD; return(CFG_AUTH_SOURCE); }
