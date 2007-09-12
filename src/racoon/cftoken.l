@@ -277,6 +277,7 @@ hexstring	0x{hexdigit}+
 	/* sainfo */
 <S_INI>sainfo		{ BEGIN S_SAINF; YYDB; return(SAINFO); }
 <S_SAINF>anonymous	{ YYD; return(ANONYMOUS); }
+<S_SAINF>clientaddr	{ YYD; return(CLIENTADDR); }
 <S_SAINF>{blcl}any{elcl}	{ YYD; return(PORTANY); }
 <S_SAINF>any		{ YYD; return(ANY); }
 <S_SAINF>from		{ YYD; return(FROM); }

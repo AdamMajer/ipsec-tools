@@ -1861,7 +1861,7 @@ pk_recvacquire(mhp)
 			remoteid=0;
 		}
 	}
-	iph2[n]->sainfo = getsainfo(idsrc, iddst, NULL, remoteid);
+	iph2[n]->sainfo = getsainfo(idsrc, iddst, NULL, NULL, remoteid);
 	vfree(idsrc);
 	vfree(iddst);
 	if (iph2[n]->sainfo == NULL) {
