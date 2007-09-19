@@ -1724,6 +1724,20 @@ isakmp_open()
 		}
 #endif
 
+		if (setsockopt(p->sock, SOL_SOCKET,
+#ifdef __linux__
+					 SO_REUSEADDR,
+#else
+					 SO_REUSEPORT,
+#endif
+					 (void *)&yes, sizeof(yes)) < 0) {
+			plog(LLV_ERROR, LOCATION, NULL,
+				"failed to set REUSE flag on %s (%s).\n",
+				saddr2str(p->addr), strerror(errno));
+			close(p->sock);
+			goto err_and_next;
+		}
+
 		if (setsockopt_bypass(p->sock, p->addr->sa_family) < 0)
 			goto err_and_next;
 
