@@ -64,7 +64,12 @@ extern int f_foreground;
 extern int print_location;
 
 struct sockaddr;
-extern void plog __P((int, const char *, struct sockaddr *, const char *, ...))
+#define plog(pri, ...) \
+	do { \
+		if ((pri) <= loglevel) \
+			_plog((pri), __VA_ARGS__); \
+	} while (0)
+extern void _plog __P((int, const char *, struct sockaddr *, const char *, ...))
 	__attribute__ ((__format__ (__printf__, 4, 5)));
 extern void plogv __P((int, const char *, struct sockaddr *,
 	const char *, va_list));

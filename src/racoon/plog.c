@@ -138,7 +138,7 @@ plog_common(pri, fmt, func)
 }
 
 void
-plog(int pri, const char *func, struct sockaddr *sa, const char *fmt, ...)
+_plog(int pri, const char *func, struct sockaddr *sa, const char *fmt, ...)
 {
 	va_list ap;
 
