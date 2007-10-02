@@ -89,6 +89,7 @@
 #include "crypto/sha2/sha2.h"
 #endif
 #endif
+#include "plog.h"
 
 /* 0.9.7 stuff? */
 #if OPENSSL_VERSION_NUMBER < 0x0090700fL
