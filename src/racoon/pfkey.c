@@ -2833,6 +2833,11 @@ pk_recv(so, lenp)
 		return NULL;
 
 	reallen = PFKEY_UNUNIT64(buf.sadb_msg_len);
+	if (reallen < sizeof(buf)) {
+		*lenp = -1;
+		errno = EIO;
+		return NULL;    /*fatal*/
+	}
 	if ((newmsg = racoon_calloc(1, reallen)) == NULL)
 		return NULL;
 
