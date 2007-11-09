@@ -2083,8 +2083,13 @@ get_proposal_r(iph2)
 				    "buffer allocation failed.\n");
 				return ISAKMP_INTERNAL_ERROR;
 			}
+		} else {
+			plog(LLV_DEBUG, LOCATION, NULL,
+			     "Family (%d - %d) or types (%d - %d) of ID"
+			     "from initiator differ.\n",
+			     spidx.src.ss_family, spidx.dst.ss_family,
+			     _XIDT(iph2->id_p),idi2type);
 		}
-
 	} else {
 		plog(LLV_DEBUG, LOCATION, NULL,
 			"get a source address of SP index "
