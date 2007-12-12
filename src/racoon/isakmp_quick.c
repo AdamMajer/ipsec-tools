@@ -504,7 +504,7 @@ quick_i2recv(iph2, msg0)
 			struct sockaddr *daddr;
 			u_int8_t prefix;
 			u_int16_t ul_proto;
-			vchar_t *vp;
+			vchar_t *vp = NULL;
 
 			if (isakmp_p2ph(&vp, pa->ptr) < 0)
 				goto end;
@@ -1184,7 +1184,7 @@ quick_r1recv(iph2, msg0)
 			struct sockaddr *daddr;
 			u_int8_t prefix;
 			u_int16_t ul_proto;
-			vchar_t *vp;
+			vchar_t *vp = NULL;
 
 			if (isakmp_p2ph(&vp, pa->ptr) < 0)
 				goto end;
