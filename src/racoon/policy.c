@@ -232,8 +232,7 @@ cmpspidxwild(a, b)
 	if (!(b->dir == IPSEC_DIR_ANY || a->dir == b->dir))
 		return 1;
 
-	if (!(a->ul_proto == IPSEC_ULPROTO_ANY ||
-	      b->ul_proto == IPSEC_ULPROTO_ANY ||
+	if (!(b->ul_proto == IPSEC_ULPROTO_ANY ||
 	      a->ul_proto == b->ul_proto))
 		return 1;
 
