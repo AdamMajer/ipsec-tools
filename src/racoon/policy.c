@@ -91,13 +91,17 @@ getsp_r(spidx)
 	struct policyindex *spidx;
 {
 	struct secpolicy *p;
+	struct secpolicy *found = NULL;
 
 	for (p = TAILQ_FIRST(&sptree); p; p = TAILQ_NEXT(p, chain)) {
-		if (!cmpspidxwild(spidx, &p->spidx))
+		if (!cmpspidxstrict(spidx, &p->spidx))
 			return p;
+
+		if (!found && !cmpspidxwild(spidx, &p->spidx))
+			found = p;
 	}
 
-	return NULL;
+	return found;
 }
 #else
 struct secpolicy *
@@ -228,8 +232,7 @@ cmpspidxwild(a, b)
 	if (!(b->dir == IPSEC_DIR_ANY || a->dir == b->dir))
 		return 1;
 
-	if (!(a->ul_proto == IPSEC_ULPROTO_ANY ||
-	      b->ul_proto == IPSEC_ULPROTO_ANY ||
+	if (!(b->ul_proto == IPSEC_ULPROTO_ANY ||
 	      a->ul_proto == b->ul_proto))
 		return 1;
 

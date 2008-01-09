@@ -253,6 +253,10 @@ struct ph2handle {
 		 */
 	struct sockaddr *src_id;
 	struct sockaddr *dst_id;
+#ifdef ENABLE_NATT
+	struct sockaddr *natoa_src;	/* peer's view of my address */
+	struct sockaddr *natoa_dst;	/* peer's view of his address */
+#endif
 
 	u_int32_t spid;			/* policy id by kernel */
 

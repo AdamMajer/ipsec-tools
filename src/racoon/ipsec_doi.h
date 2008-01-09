@@ -197,6 +197,12 @@ struct ipsecdoi_pl_id {
 #define IPSECDOI_TYPE_PH1	0
 #define IPSECDOI_TYPE_PH2	1
 
+/*
+ * Prefix that will make ipsecdoi_sockaddr2id() generate address type
+ * identities without knowning the exact length of address.
+ */
+#define IPSECDOI_PREFIX_HOST	0xff
+
 struct isakmpsa;
 struct ipsecdoi_pl_sa;
 struct saprop;

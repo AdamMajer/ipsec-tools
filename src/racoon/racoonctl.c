@@ -184,6 +184,7 @@ struct ulproto_tag {
 	{ IPPROTO_ICMP,	"icmp" },
 	{ IPPROTO_TCP,	"tcp" },
 	{ IPPROTO_UDP,	"udp" },
+	{ IPPROTO_GRE,	"gre" },
 	{ 0, NULL },
 };
 
@@ -240,7 +241,7 @@ usage()
 "            : {\"esp\",\"ah\"} <family> <src/prefixlen/port> <dst/prefixlen/port>\n"
 "                              <ul_proto>\n"
 "    <family>: \"inet\" or \"inet6\"\n"
-"    <ul_proto>: \"icmp\", \"tcp\", \"udp\" or \"any\"\n",
+"    <ul_proto>: \"icmp\", \"tcp\", \"udp\", \"gre\" or \"any\"\n",
 	pname, pname, pname, pname, pname, pname, pname);
 }
 
