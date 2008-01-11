@@ -430,7 +430,7 @@ struct policyindex;
 extern struct ph1handle *getph1byindex __P((isakmp_index *));
 extern struct ph1handle *getph1byindex0 __P((isakmp_index *));
 extern struct ph1handle *getph1byaddr __P((struct sockaddr *,
-	struct sockaddr *));
+										   struct sockaddr *, int));
 extern struct ph1handle *getph1byaddrwop __P((struct sockaddr *,
 	struct sockaddr *));
 extern struct ph1handle *getph1bydstaddrwop __P((struct sockaddr *));
