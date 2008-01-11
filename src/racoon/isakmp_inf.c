@@ -1613,6 +1613,8 @@ isakmp_info_send_r_u(arg)
 
 	plog(LLV_DEBUG, LOCATION, iph1->remote, "DPD monitoring....\n");
 
+	iph1->dpd_r_u=NULL;
+
 	if (iph1->dpd_fails >= iph1->rmconf->dpd_maxfails) {
 
 		plog(LLV_INFO, LOCATION, iph1->remote,
