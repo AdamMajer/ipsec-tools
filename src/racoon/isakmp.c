@@ -2540,7 +2540,7 @@ isakmp_newcookie(place, remote, local)
 		break;
 #ifdef INET6
 	case AF_INET6:
-		alen = sizeof(struct in_addr);
+		alen = sizeof(struct in6_addr);
 		sa1 = (caddr_t)&((struct sockaddr_in6 *)remote)->sin6_addr;
 		sa2 = (caddr_t)&((struct sockaddr_in6 *)local)->sin6_addr;
 		break;
