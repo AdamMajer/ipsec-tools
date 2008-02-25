@@ -1062,10 +1062,10 @@ cmp_aproppair_i(a, b)
 			return -1;
 		}
 
-		if (p->prop->proto_id != r->prop->proto_id) {
+		if (p->prop->spi_size != r->prop->spi_size) {
 			plog(LLV_ERROR, LOCATION, NULL,
 				"invalid spi size: %d.\n",
-				p->prop->proto_id);
+				p->prop->spi_size);
 			return -1;
 		}
 
