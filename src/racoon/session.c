@@ -361,10 +361,8 @@ static void reload_conf(){
 	save_rmconf();
 	initrmconf();
 
-	/* Do a part of pfkey_init() ?
-	 * SPD reload ?
-	 */
-	
+	pfkey_reload();
+
 	save_params();
 	error = cfparse();
 	if (error != 0){
