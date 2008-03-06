@@ -1452,8 +1452,15 @@ oakley_validate_auth(iph1)
 				return ISAKMP_NTYPE_INVALID_CERT_AUTHORITY;
 			}
 		}
-
-		plog(LLV_DEBUG, LOCATION, NULL, "CERT validated\n");
+	
+		/* Generate a warning if verify_cert == 0
+		 */
+		if (iph1->rmconf->verify_cert){
+			plog(LLV_DEBUG, LOCATION, NULL, "CERT validated\n");
+		}else{
+			plog(LLV_WARNING, LOCATION, NULL,
+				"CERT validation disabled by configuration\n");
+		}
 
 		/* compute hash */
 		switch (iph1->etype) {
