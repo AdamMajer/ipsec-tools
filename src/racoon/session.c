@@ -146,14 +146,7 @@ session(void)
 	natt_keepalive_init ();
 #endif
 
-	if (privsep_init() != 0)
-		exit(1);
-
-	for (i = 0; i <= NSIG; i++)
-		sigreq[i] = 0;
-
 	/* write .pid file */
-	racoon_pid = getpid();
 	if (lcconf->pathinfo[LC_PATHTYPE_PIDFILE] == NULL) 
 		strlcpy(pid_file, _PATH_VARRUN "racoon.pid", MAXPATHLEN);
 	else if (lcconf->pathinfo[LC_PATHTYPE_PIDFILE][0] == '/') 
@@ -170,12 +163,24 @@ session(void)
 			fclose(fp);
 			exit(1);
 		}
-		fprintf(fp, "%ld\n", (long)racoon_pid);
-		fclose(fp);
 	} else {
 		plog(LLV_ERROR, LOCATION, NULL,
 			"cannot open %s", pid_file);
 	}
+
+	if (privsep_init() != 0)
+		exit(1);
+
+	/*
+	 * The fork()'ed privileged side will close its copy of fp.  We wait
+	 * until here to get the correct child pid.
+	 */
+	racoon_pid = getpid();
+	fprintf(fp, "%ld\n", (long)racoon_pid);
+	fclose(fp);
+
+	for (i = 0; i <= NSIG; i++)
+		sigreq[i] = 0;
 
 	while (1) {
 		if (dying)
