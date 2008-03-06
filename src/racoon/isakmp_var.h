@@ -35,6 +35,7 @@
 #define _ISAKMP_VAR_H
 
 #include "vmbuf.h"
+#include "policy.h"
 
 #define PORT_ISAKMP 500
 #define PORT_ISAKMP_NATT 4500
@@ -87,6 +88,7 @@ extern void isakmp_ph2expire __P((struct ph2handle *));
 extern void isakmp_ph2delete_stub __P((void *));
 extern void isakmp_ph2delete __P((struct ph2handle *));
 
+extern int isakmp_get_sainfo __P((struct ph2handle *, struct secpolicy *, struct secpolicy *));
 extern int isakmp_post_acquire __P((struct ph2handle *));
 extern int isakmp_post_getspi __P((struct ph2handle *));
 extern void isakmp_chkph1there_stub __P((void *));

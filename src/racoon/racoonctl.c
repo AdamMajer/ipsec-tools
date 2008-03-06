@@ -208,12 +208,15 @@ usage()
 	printf(
 "Usage:\n"
 "  %s reload-config\n"
+"  %s show-schedule\n"
 "  %s [-l [-l]] show-sa [protocol]\n"
 "  %s flush-sa [protocol]\n"
 "  %s delete-sa <saopts>\n"
-"  %s establish-sa [-u identity] <saopts>\n"
+"  %s establish-sa [-u identity] [-w] <saopts>\n"
 "  %s vpn-connect [-u identity] vpn_gateway\n"
 "  %s vpn-disconnect vpn_gateway\n"
+"  %s show-event\n"
+"  %s logout-user login\n"
 "\n"
 "    <protocol>: \"isakmp\", \"esp\" or \"ah\".\n"
 "        In the case of \"show-sa\" or \"flush-sa\", you can use \"ipsec\".\n"
@@ -223,7 +226,7 @@ usage()
 "                              <ul_proto>\n"
 "    <family>: \"inet\" or \"inet6\"\n"
 "    <ul_proto>: \"icmp\", \"tcp\", \"udp\", \"gre\" or \"any\"\n",
-	pname, pname, pname, pname, pname, pname, pname);
+	pname, pname, pname, pname, pname, pname, pname, pname, pname, pname);
 }
 
 /*
@@ -536,6 +539,7 @@ f_exchangesa(ac, av)
 	char *id = NULL;
 	char *key = NULL;
 	struct admin_com_psk *acp;
+	int wait = 0;
 
 	if (ac < 1)
 		errx(1, "insufficient arguments");
@@ -556,6 +560,12 @@ f_exchangesa(ac, av)
 		ac -= 2;
 	}
 
+	if (ac >= 1 && strcmp(av[0], "-w") == 0) {
+		wait = 1;
+		av++;
+		ac--;
+	}
+
 	/* need protocol */
 	if (ac < 1)
 		errx(1, "insufficient arguments");
@@ -570,12 +580,16 @@ f_exchangesa(ac, av)
 		index = get_index(ac, av);
 		if (index == NULL)
 			return NULL;
+		if (wait)
+			evt_quit_event = EVT_PHASE1_MODE_CFG;
 		break;
 	case ADMIN_PROTO_AH:
 	case ADMIN_PROTO_ESP:
 		index = get_index(ac, av);
 		if (index == NULL)
 			return NULL;
+		if (wait)
+			evt_quit_event = EVT_PHASE2_UP;
 		break;
 	default:
 		errno = EPROTONOSUPPORT;
