@@ -1577,13 +1577,11 @@ isakmp_xauth_set(iph1, attr)
 			plog(LLV_ERROR, LOCATION, NULL, 
 			    "Xauth authentication failed\n");
 
-			EVT_PUSH(iph1->local, iph1->remote, 
-			    EVTT_XAUTH_FAILED, NULL);
+			evt_phase1(iph1, EVT_PHASE1_XAUTH_FAILED, NULL);
 
 			iph1->mode_cfg->flags |= ISAKMP_CFG_DELETE_PH1;
 		} else {
-			EVT_PUSH(iph1->local, iph1->remote, 
-			    EVTT_XAUTH_SUCCESS, NULL);
+			evt_phase1(iph1, EVT_PHASE1_XAUTH_SUCCESS, NULL);
 		}
 
 

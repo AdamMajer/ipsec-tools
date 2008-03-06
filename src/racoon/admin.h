@@ -46,9 +46,17 @@ extern mode_t adminsock_mode;
 struct admin_com {
 	u_int16_t ac_len;	/* total packet length including data */
 	u_int16_t ac_cmd;
-	int16_t ac_errno;
+	union {
+		int16_t ac_errno;
+		uint16_t ac_version;
+	};
 	u_int16_t ac_proto;
 };
+
+/*
+ * Version field in request is valid.
+ */
+#define ADMIN_FLAG_VERSION	0x8000
 
 /*
  * No data follows as the data.

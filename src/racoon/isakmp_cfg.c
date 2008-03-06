@@ -473,8 +473,7 @@ isakmp_cfg_reply(iph1, attrpl)
 			    "Cannot allocate memory: %s\n", strerror(errno));
 		} else {
 			memcpy(buf->v, attrpl + 1, buf->l);
-			EVT_PUSH(iph1->local, iph1->remote, 
-			    EVTT_ISAKMP_CFG_DONE, buf);
+			evt_phase1(iph1, EVT_PHASE1_MODE_CFG, buf);
 			vfree(buf);
 		}
 	}

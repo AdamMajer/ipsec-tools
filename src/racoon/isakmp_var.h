@@ -62,8 +62,8 @@ struct isakmp_pl_ke;	/* XXX */
 struct isakmp_pl_nonce;	/* XXX */
 
 extern int isakmp_handler __P((int));
-extern int isakmp_ph1begin_i __P((struct remoteconf *, struct sockaddr *,
-	struct sockaddr *));
+extern struct ph1handle *isakmp_ph1begin_i __P((struct remoteconf *,
+	struct sockaddr *, struct sockaddr *));
 
 extern vchar_t *isakmp_parsewoh __P((int, struct isakmp_gen *, int));
 extern vchar_t *isakmp_parse __P((vchar_t *));

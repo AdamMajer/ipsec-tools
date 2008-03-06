@@ -41,6 +41,7 @@
 
 #include "isakmp_var.h"
 #include "oakley.h"
+#include "evt.h"
 
 /* Phase 1 handler */
 /*
@@ -211,7 +212,7 @@ struct ph1handle {
 #ifdef ENABLE_HYBRID
 	struct isakmp_cfg_state *mode_cfg;	/* ISAKMP mode config state */
 #endif       
-
+	EVT_LISTENER_LIST(evt_listeners);
 };
 
 /* Phase 2 handler */
@@ -324,6 +325,7 @@ struct ph2handle {
 
 	LIST_ENTRY(ph2handle) chain;
 	LIST_ENTRY(ph2handle) ph1bind;	/* chain to ph1handle */
+	EVT_LISTENER_LIST(evt_listeners);
 };
 
 /*
