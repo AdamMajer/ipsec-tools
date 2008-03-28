@@ -1667,7 +1667,8 @@ isakmp_open()
 		}
 #endif
 
-		if ((p->sock = socket(p->addr->sa_family, SOCK_DGRAM, 0)) < 0) {
+		if ((p->sock = privsep_socket(p->addr->sa_family,
+					      SOCK_DGRAM, 0)) < 0) {
 			plog(LLV_ERROR, LOCATION, NULL,
 				"socket (%s)\n", strerror(errno));
 			goto err_and_next;
@@ -1744,7 +1745,7 @@ isakmp_open()
 		if (setsockopt_bypass(p->sock, p->addr->sa_family) < 0)
 			goto err_and_next;
 
-		if (bind(p->sock, p->addr, sysdep_sa_len(p->addr)) < 0) {
+		if (privsep_bind(p->sock, p->addr, sysdep_sa_len(p->addr)) < 0) {
 			plog(LLV_ERROR, LOCATION, p->addr,
 				"failed to bind to address %s (%s).\n",
 				saddr2str(p->addr), strerror(errno));
