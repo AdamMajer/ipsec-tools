@@ -575,6 +575,7 @@ privsep_init(void)
 				goto out;
 			}
 
+			close(s);
 			break;
 		}
 
@@ -621,6 +622,7 @@ privsep_init(void)
 				     "privsep_bind: "
 				     "unauthorized address family (%d)\n",
 				     bind_args.addr->sa_family);
+				close(bind_args.s);
 				goto out;
 			}
 
@@ -631,18 +633,17 @@ privsep_init(void)
 				     "privsep_bind: "
 				     "unauthorized port (%d)\n",
 				     port);
+				close(bind_args.s);
 				goto out;
 			}
 
 			err = bind(bind_args.s, bind_args.addr,
 				   bind_args.addrlen);
-			if (err) {
-				reply->hdr.ac_errno = errno;
-				close(bind_args.s);
-				break;
-			}
-			close(bind_args.s);
 
+			if (err)
+				reply->hdr.ac_errno = errno;
+
+			close(bind_args.s);
 			break;
 		}
 
@@ -693,12 +694,10 @@ privsep_init(void)
 					 sockopt_args.optname,
 					 sockopt_args.optval,
 					 sockopt_args.optlen);
-			if (err) {
+			if (err)
 				reply->hdr.ac_errno = errno;
-				close(sockopt_args.s);
-				break;
-			}
 
+			close(sockopt_args.s);
 			break;
 		}
 
