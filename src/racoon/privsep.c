@@ -1583,20 +1583,25 @@ rec_fd(s)
 	struct msghdr msg;
 	struct cmsghdr *cmsg;
 	int fd;
-	char cmsbuf[CMSG_SPACE(sizeof(fd))];
+	char cmsbuf[1024];
 	struct iovec iov;
 	char iobuf[1];
 
 	iov.iov_base = iobuf;
 	iov.iov_len = 1;
 
+	if (sizeof(cmsbuf) < CMSG_SPACE(sizeof(fd))) {
+		plog(LLV_ERROR, LOCATION, NULL, 
+		    "send_fd: buffer size too small\n");
+		return -1;
+	}
 	bzero(&msg, sizeof(msg));
 	msg.msg_name = NULL;
 	msg.msg_namelen = 0;
 	msg.msg_iov = &iov;
 	msg.msg_iovlen = 1;
 	msg.msg_control = cmsbuf;
-	msg.msg_controllen = sizeof(cmsbuf);
+	msg.msg_controllen = CMSG_SPACE(sizeof(fd));
 
 	if (recvmsg(s, &msg, MSG_WAITALL) == -1)
 		return -1;
@@ -1613,12 +1618,17 @@ send_fd(s, fd)
 {
 	struct msghdr msg;
 	struct cmsghdr *cmsg;
-	char cmsbuf[CMSG_SPACE(sizeof(fd))];
+	char cmsbuf[1024];
 	struct iovec iov;
 
 	iov.iov_base = " ";
 	iov.iov_len = 1;
 
+	if (sizeof(cmsbuf) < CMSG_SPACE(sizeof(fd))) {
+		plog(LLV_ERROR, LOCATION, NULL, 
+		    "send_fd: buffer size too small\n");
+		return -1;
+	}
 	bzero(&msg, sizeof(msg));
 	msg.msg_name = NULL;
 	msg.msg_namelen = 0;
