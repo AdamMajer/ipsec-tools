@@ -76,15 +76,6 @@
 #define SETSOCKOPT privsep_setsockopt
 #endif
 
-#ifndef IP_IPSEC_POLICY
-#define IP_IPSEC_POLICY 16	/* XXX: from linux/in.h */
-#endif
-
-#ifndef IPV6_IPSEC_POLICY
-#define IPV6_IPSEC_POLICY 34	/* XXX: from linux/???.h per
-				   "Tom Lendacky" <toml@us.ibm.com> */
-#endif
-
 const int niflags = 0;
 
 /*
