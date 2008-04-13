@@ -1635,7 +1635,7 @@ send_fd(s, fd)
 	msg.msg_iov = &iov;
 	msg.msg_iovlen = 1;
 	msg.msg_control = cmsbuf;
-	msg.msg_controllen = sizeof(cmsbuf);
+	msg.msg_controllen = CMSG_SPACE(sizeof(fd));
 	msg.msg_flags = 0;
 
 	cmsg = CMSG_FIRSTHDR(&msg);
