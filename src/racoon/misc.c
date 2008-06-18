@@ -44,6 +44,7 @@
 #include <errno.h>
 #include <syslog.h>
 #include <ctype.h>
+#include <fcntl.h>
 
 #include "var.h"
 #include "misc.h"
@@ -151,6 +152,16 @@ getfsize(path)
                 return -1;
         else
                 return st.st_size;
+}
+
+/*
+ * set the close-on-exec flag for file descriptor fd.
+ */
+void
+close_on_exec(fd)
+	int fd;
+{
+	fcntl(fd, F_SETFD, FD_CLOEXEC);
 }
 
 /*

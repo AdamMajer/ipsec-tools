@@ -831,6 +831,7 @@ initmyaddr()
 			strerror(errno));
 		return -1;
 	}
+	close_on_exec(lcconf->rtsock);
 
 #ifdef __linux__
    {

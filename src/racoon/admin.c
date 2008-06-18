@@ -113,6 +113,7 @@ admin_handler()
 			strerror(errno));
 		return -1;
 	}
+	close_on_exec(so2);
 
 	/* get buffer length */
 	while ((len = recv(so2, (char *)&com, sizeof(com), MSG_PEEK)) < 0) {
@@ -675,6 +676,7 @@ admin_init()
 			"socket: %s\n", strerror(errno));
 		return -1;
 	}
+	close_on_exec(lcconf->sock_admin);
 
 	unlink(sunaddr.sun_path);
 	if (bind(lcconf->sock_admin, (struct sockaddr *)&sunaddr,
