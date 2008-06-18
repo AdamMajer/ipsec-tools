@@ -1282,7 +1282,7 @@ pk_recvupdate(mhp)
 
 	/* update status */
 	iph2->status = PHASE2ST_ESTABLISHED;
-	evt_phase2(iph2, EVTT_PHASE2_UP, NULL);
+	evt_phase2(iph2, EVT_PHASE2_UP, NULL);
 
 #ifdef ENABLE_STATS
 	gettimeofday(&iph2->end, NULL);
