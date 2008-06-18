@@ -214,62 +214,47 @@ admin_process(so2, combuf)
 		break;
 
 	case ADMIN_SHOW_SA:
+		switch (com->ac_proto) {
+		case ADMIN_PROTO_ISAKMP:
+			buf = dumpph1();
+			if (buf == NULL)
+				ac_errno = ENOMEM;
+			break;
+		case ADMIN_PROTO_IPSEC:
+		case ADMIN_PROTO_AH:
+		case ADMIN_PROTO_ESP: {
+			u_int p;
+			p = admin2pfkey_proto(com->ac_proto);
+			if (p != -1) {
+				buf = pfkey_dump_sadb(p);
+				if (buf == NULL)
+					ac_errno = ENOMEM;
+			} else
+				ac_errno = EINVAL;
+			break;
+		}
+		case ADMIN_PROTO_INTERNAL:
+		default:
+			ac_errno = ENOTSUP;
+			break;
+		}
+		break;
+
 	case ADMIN_FLUSH_SA:
 		switch (com->ac_proto) {
 		case ADMIN_PROTO_ISAKMP:
-			switch (com->ac_cmd) {
-			case ADMIN_SHOW_SA:
-				buf = dumpph1();
-				if (buf == NULL)
-					ac_errno = ENOMEM;
-				break;
-			case ADMIN_FLUSH_SA:
-				flushph1();
-				break;
-			default:
-				ac_errno = ENOTSUP;
-				break;
-			}
+			flushph1();
 			break;
 		case ADMIN_PROTO_IPSEC:
 		case ADMIN_PROTO_AH:
 		case ADMIN_PROTO_ESP:
-			switch (com->ac_cmd) {
-			case ADMIN_SHOW_SA: {
-				u_int p;
-				p = admin2pfkey_proto(com->ac_proto);
-				if (p != -1) {
-					buf = pfkey_dump_sadb(p);
-					if (buf == NULL)
-						ac_errno = ENOMEM;
-				} else
-					ac_errno = EINVAL;
-				break;
-			}
-			case ADMIN_FLUSH_SA:
-				pfkey_flush_sadb(com->ac_proto);
-				break;
-			default:
-				ac_errno = ENOTSUP;
-				break;
-			}
+			pfkey_flush_sadb(com->ac_proto);
 			break;
 		case ADMIN_PROTO_INTERNAL:
-			switch (com->ac_cmd) {
-			case ADMIN_SHOW_SA:
-				buf = NULL; /*XXX dumpph2(&error);*/
-				ac_errno = ENOTSUP;
-				break;
-			case ADMIN_FLUSH_SA:
-				/*XXX flushph2();*/
-				break;
-			default:
-				ac_errno = ENOTSUP;
-				break;
-			}
-			break;
+			/*XXX flushph2();*/
 		default:
 			ac_errno = ENOTSUP;
+			break;
 		}
 		break;
 
