@@ -241,6 +241,31 @@ admin_process(so2, combuf)
 		}
 		break;
 
+	case ADMIN_GET_SA_CERT: {
+		struct admin_com_indexes *ndx;
+		struct sockaddr *src, *dst;
+		struct ph1handle *iph1;
+
+		ndx = (struct admin_com_indexes *) ((caddr_t)com + sizeof(*com));
+		src = (struct sockaddr *) &ndx->src;
+		dst = (struct sockaddr *) &ndx->dst;
+
+		if (com->ac_proto != ADMIN_PROTO_ISAKMP) {
+			ac_errno = ENOTSUP;
+			break;
+		}
+
+		iph1 = getph1byaddrwop(src, dst);
+		if (iph1 == NULL) {
+			ac_errno = ENOENT;
+			break;
+		}
+
+		if (iph1->cert_p != NULL)
+			buf = vdup(&iph1->cert_p->cert);
+		break;
+	}
+
 	case ADMIN_FLUSH_SA:
 		switch (com->ac_proto) {
 		case ADMIN_PROTO_ISAKMP:

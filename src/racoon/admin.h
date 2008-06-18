@@ -80,6 +80,8 @@ struct admin_com {
 #define ADMIN_ESTABLISH_SA	0x0202
 #define ADMIN_DELETE_ALL_SA_DST	0x0204	/* All SA for a given peer */
 
+#define ADMIN_GET_SA_CERT	0x0206
+
 /*
  * The admin_com_indexes and admin_com_psk follow, see below.
  */
