@@ -608,24 +608,7 @@ privsep_init(void)
 				goto out;
 			}
 
-			switch (bind_args.addr->sa_family) {
-			case AF_INET:
-				port = ntohs(((struct sockaddr_in *)
-					      bind_args.addr)->sin_port);
-				break;
-			case AF_INET6:
-				port = ntohs(((struct sockaddr_in6 *)
-					      bind_args.addr)->sin6_port);
-				break;
-			default:
-				plog(LLV_ERROR, LOCATION, NULL,
-				     "privsep_bind: "
-				     "unauthorized address family (%d)\n",
-				     bind_args.addr->sa_family);
-				close(bind_args.s);
-				goto out;
-			}
-
+			port = extract_port(bind_args.addr);
 			if (port != PORT_ISAKMP && port != PORT_ISAKMP_NATT &&
 			    port != lcconf->port_isakmp &&
 			    port != lcconf->port_isakmp_natt) {

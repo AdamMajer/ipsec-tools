@@ -116,25 +116,9 @@ getrmconf_strict(remote, allow_anon)
 	 * In an ideal world, we would be able to have remote conf with
 	 * port, and the port could be a wildcard. That test could be used.
 	 */
-	switch (remote->sa_family) {
-	case AF_INET:
-		if (((struct sockaddr_in *)remote)->sin_port != IPSEC_PORT_ANY)
-			withport = 1;
-		break;
-#ifdef INET6
-	case AF_INET6:
-		if (((struct sockaddr_in6 *)remote)->sin6_port != IPSEC_PORT_ANY)
-			withport = 1;
-		break;
-#endif
-	case AF_UNSPEC:
-		break;
-
-	default:
-		plog(LLV_ERROR, LOCATION, NULL,
-			"invalid family: %d\n", remote->sa_family);
-		exit(1);
-	}
+	if (remote->sa_family != AF_UNSPEC &&
+	    extract_port(remote) != IPSEC_PORT_ANY)
+		withport = 1;
 #endif /* ENABLE_NATT */
 
 	if (remote->sa_family == AF_UNSPEC)

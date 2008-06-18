@@ -423,7 +423,7 @@ admin_process(so2, combuf)
 			if ((local = dupsaddr(src)) == NULL)
 				goto out1;
 
-			port = ntohs(getmyaddrsport(local));
+			port = getmyaddrsport(local);
 			if (set_port(local, port) == NULL)
 				goto out1;
 
