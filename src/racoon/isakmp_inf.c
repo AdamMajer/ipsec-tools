@@ -169,7 +169,7 @@ isakmp_info_recv(iph1, msg0)
 	if (msg->l < sizeof(*isakmp) + sizeof(*gen)) {
 		plog(LLV_ERROR, LOCATION, NULL, 
 			"ignore information because the "
-			"message is way too short - %d byte(s).\n",
+			"message is way too short - %zu byte(s).\n",
 			(int)msg->l);
 		goto end;
 	}
@@ -197,7 +197,7 @@ isakmp_info_recv(iph1, msg0)
 		if (msg->l < sizeof(*isakmp) + ntohs(gen->len) + sizeof(*nd)) {
 			plog(LLV_ERROR, LOCATION, NULL, 
 				"ignore information because the "
-				"message is too short - %d byte(s).\n",
+				"message is too short - %zu byte(s).\n",
 				(int)msg->l);
 			goto end;
 		}
