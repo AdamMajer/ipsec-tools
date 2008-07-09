@@ -2541,11 +2541,6 @@ cfreparse()
 	flushrmconf();
 	flushsainfo();
 	clean_tmpalgtype();
-	yycf_init_buffer();
-
-	if (yycf_switch_buffer(lcconf->racoon_conf) != 0)
-		return -1;
-
 	return(cfparse());
 }
 
