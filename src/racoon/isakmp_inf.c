@@ -728,10 +728,8 @@ isakmp_info_send_nx(isakmp, remote, local, type, data)
 	iph1->flags = 0;
 	iph1->msgid = 0;	/* XXX */
 #ifdef ENABLE_HYBRID
-	if ((iph1->mode_cfg = isakmp_cfg_mkstate()) == NULL) {
-		error = -1;
+	if ((iph1->mode_cfg = isakmp_cfg_mkstate()) == NULL)
 		goto end;
-	}
 #endif
 #ifdef ENABLE_FRAG
 	iph1->frag = 0;
@@ -739,10 +737,8 @@ isakmp_info_send_nx(isakmp, remote, local, type, data)
 #endif
 
 	/* copy remote address */
-	if (copy_ph1addresses(iph1, rmconf, remote, local) < 0) {
-		error = -1;
+	if (copy_ph1addresses(iph1, rmconf, remote, local) < 0)
 		goto end;
-	}
 
 	tlen = sizeof(*n) + spisiz;
 	if (data)
@@ -751,7 +747,6 @@ isakmp_info_send_nx(isakmp, remote, local, type, data)
 	if (payload == NULL) { 
 		plog(LLV_ERROR, LOCATION, NULL,
 			"failed to get buffer to send.\n");
-		error = -1;
 		goto end;
 	}
 
