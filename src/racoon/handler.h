@@ -294,6 +294,8 @@ struct ph2handle {
 	struct sainfo *sainfo;		/* place holder of sainfo */
 	struct saprop *proposal;	/* SA(s) proposal. */
 	struct saprop *approval;	/* SA(s) approved. */
+	u_int32_t lifetime_secs;	/* responder lifetime (seconds) */
+	u_int32_t lifetime_kb;		/* responder lifetime (kbytes) */
 	caddr_t spidx_gen;		/* policy from peer's proposal */
 
 	struct dhgroup *pfsgrp;		/* DH; prime number */

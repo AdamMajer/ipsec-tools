@@ -245,5 +245,8 @@ extern int ipsecdoi_authalg2trnsid __P((int));
 extern int idtype2doi __P((int));
 extern int doi2idtype __P((int));
 
+extern int ipsecdoi_parse_responder_lifetime __P((struct isakmp_pl_n *notify,
+	u_int32_t *lifetime_sec, u_int32_t *liftime_kb));
+
 
 #endif /* _IPSEC_DOI_H */
