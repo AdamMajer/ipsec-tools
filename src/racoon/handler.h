@@ -191,6 +191,7 @@ struct ph1handle {
 	struct isakmp_pl_hash *pl_hash;	/* pointer to hash payload */
 
 	time_t created;			/* timestamp for establish */
+	int initial_contact_received;	/* set if initial contact received */
 #ifdef ENABLE_STATS
 	struct timeval start;
 	struct timeval end;

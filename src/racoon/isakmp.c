@@ -901,6 +901,8 @@ ph1_main(iph1, msg)
 				/* ignore */
 			}
 		}
+		if (iph1->initial_contact_received)
+			isakmp_info_recv_initialcontact(iph1, NULL);
 
 		log_ph1established(iph1);
 		plog(LLV_DEBUG, LOCATION, NULL, "===\n");

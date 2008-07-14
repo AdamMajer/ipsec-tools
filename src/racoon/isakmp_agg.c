@@ -455,7 +455,9 @@ agg_i2recv(iph1, msg)
 #endif
 			break;
 		case ISAKMP_NPTYPE_N:
-			isakmp_check_notify(pa->ptr, iph1);
+			isakmp_log_notify(iph1,
+				(struct isakmp_pl_n *) pa->ptr,
+				"aggressive exchange");
 			break;
 #ifdef HAVE_GSSAPI
 		case ISAKMP_NPTYPE_GSS:
@@ -1428,7 +1430,9 @@ agg_r2recv(iph1, msg0)
 				goto end;
 			break;
 		case ISAKMP_NPTYPE_N:
-			isakmp_check_notify(pa->ptr, iph1);
+			isakmp_log_notify(iph1,
+				(struct isakmp_pl_n *) pa->ptr,
+				"aggressive exchange");
 			break;
 
 #ifdef ENABLE_NATT
