@@ -65,7 +65,7 @@
 
 #include "package_version.h"
 
-#define PVDUMP(var) hexdump((var)->v, (var)->l)
+#define PVDUMP(var) racoon_hexdump((var)->v, (var)->l)
 
 /*#define CERTTEST_BROKEN */
 

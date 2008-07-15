@@ -74,7 +74,7 @@ bindump(buf0, len)
 #endif
 
 int
-hexdump(buf0, len)
+racoon_hexdump(buf0, len)
 	void *buf0;
 	size_t len;
 {

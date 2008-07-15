@@ -291,7 +291,7 @@ main(ac, av)
 		err(1, "kmpstat");
 
 	if (loglevel)
-		hexdump(combuf, ((struct admin_com *)combuf)->ac_len);
+		racoon_hexdump(combuf, ((struct admin_com *)combuf)->ac_len);
 
 	com_init();
 

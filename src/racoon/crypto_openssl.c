@@ -676,7 +676,7 @@ eay_get_x509subjectaltname(cert, altname, type, pos)
 		{
 			plog(LLV_ERROR, LOCATION, NULL,
 				 "data is not terminated by NUL.");
-			hexdump(gen->d.ia5->data, gen->d.ia5->length + 1);
+			racoon_hexdump(gen->d.ia5->data, gen->d.ia5->length + 1);
 			goto end;
 		}
 		
