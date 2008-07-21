@@ -2435,7 +2435,7 @@ expand_isakmpspec(prop_no, trns_no, types,
 			memcpy(new->gssid->v, gssid, new->gssid->l);
 			racoon_free(gssid);
 #ifdef ENABLE_HYBRID
-		} else if (rmmconf->xauth == NULL) {
+		} else if (rmconf->xauth == NULL) {
 #else
 		} else {
 #endif
