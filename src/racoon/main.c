@@ -198,8 +198,15 @@ main(ac, av)
 #endif
 
 #ifdef HAVE_LIBLDAP
-	if (xauth_ldap_init() != 0)
-		errx(1, "could not initialize libldap");
+	if (xauth_ldap_init_conf() != 0)
+		errx(1, "could not initialize ldap config");
+#endif
+
+#ifdef HAVE_LIBRADIUS
+	if (xauth_radius_init_conf(0) != 0) {
+		errx(1, "could not initialize radius config");
+		/* NOTREACHED*/
+	}
 #endif
 
 	/*

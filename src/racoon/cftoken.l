@@ -214,6 +214,15 @@ hexstring	0x{hexdigit}+
 <S_LST>strict_address	{ YYD; return(STRICT_ADDRESS); }
 <S_LST>{ecl}		{ BEGIN S_INI; return(EOC); }
 
+	/* radius config */
+<S_INI>radiuscfg	{ BEGIN S_LDAP; YYDB; return(RADCFG); }
+<S_LDAP>{bcl}		{ return(BOC); }
+<S_LDAP>auth		{ YYD; return(RAD_AUTH); }
+<S_LDAP>acct		{ YYD; return(RAD_ACCT); }
+<S_LDAP>timeout		{ YYD; return(RAD_TIMEOUT); }
+<S_LDAP>retries		{ YYD; return(RAD_RETRIES); }
+<S_LDAP>{ecl}		{ BEGIN S_INI; return(EOC); }
+
 	/* ldap config */
 <S_INI>ldapcfg		{ BEGIN S_LDAP; YYDB; return(LDAPCFG); }
 <S_LDAP>{bcl}		{ return(BOC); }

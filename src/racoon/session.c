@@ -78,6 +78,7 @@
 #include "cfparse_proto.h"
 #include "isakmp_var.h"
 #include "isakmp_xauth.h"
+#include "isakmp_xauth.h"
 #include "isakmp_cfg.h"
 #include "admin_var.h"
 #include "admin.h"
@@ -368,6 +369,9 @@ static void reload_conf(){
 	save_rmconf();
 	initrmconf();
 
+	/* free and init radius configuration */
+	xauth_radius_init_conf(1);
+
 	pfkey_reload();
 
 	save_params();
@@ -383,6 +387,9 @@ static void reload_conf(){
 	if (dump_config)
 		dumprmconf ();
 #endif
+
+	/* re-initialize radius state */
+	xauth_radius_init();
 
 	/* 
 	 * init_myaddr() ?
