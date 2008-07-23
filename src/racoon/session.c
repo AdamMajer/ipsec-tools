@@ -369,8 +369,10 @@ static void reload_conf(){
 	save_rmconf();
 	initrmconf();
 
+#ifdef HAVE_LIBRADIUS
 	/* free and init radius configuration */
 	xauth_radius_init_conf(1);
+#endif
 
 	pfkey_reload();
 
@@ -388,8 +390,10 @@ static void reload_conf(){
 		dumprmconf ();
 #endif
 
+#ifdef HAVE_LIBRADIUS
 	/* re-initialize radius state */
 	xauth_radius_init();
+#endif
 
 	/* 
 	 * init_myaddr() ?

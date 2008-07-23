@@ -520,9 +520,12 @@ radcfg_statement
 			yyerror("racoon not configured with --with-libradius");
 			return -1;
 #endif
+#ifdef ENABLE_HYBRID
+#ifdef HAVE_LIBRADIUS
 			xauth_rad_config.timeout = 3;
 			xauth_rad_config.retries = 3;
-
+#endif
+#endif
 		} BOC radcfg_stmts EOC
 	;
 radcfg_stmts
