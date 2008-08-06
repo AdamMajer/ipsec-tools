@@ -250,7 +250,8 @@ close_session()
 	close_sockets();
 	backupsa_clean();
 
-	plog(LLV_INFO, LOCATION, NULL, "racoon shutdown\n");
+	plog(LLV_INFO, LOCATION, NULL, "racoon process %d shutdown\n", getpid());
+
 	exit(0);
 }
 
@@ -413,6 +414,14 @@ static void reload_conf(){
 
 	save_sainfotree_flush();
 	save_rmconf_flush();
+}
+
+int get_sigreq(int sig)
+{
+	if (sig <= NSIG)
+		return sigreq[sig];
+
+	return 0;
 }
 
 static void

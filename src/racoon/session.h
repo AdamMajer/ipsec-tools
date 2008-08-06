@@ -36,5 +36,6 @@
 
 extern int session __P((void));
 extern RETSIGTYPE signal_handler __P((int));
+extern int get_sigreq(int sig);
 
 #endif /* _SESSION_H */
