@@ -117,7 +117,7 @@ struct evt_listener {
 	int fd;
 };
 LIST_HEAD(evt_listener_list, evt_listener);
-#define EVT_LISTENER_LIST(x) struct evt_listener_list x;
+#define EVT_LISTENER_LIST(x) struct evt_listener_list x
 
 void evt_generic __P((int type, vchar_t *optdata));
 void evt_phase1 __P((const struct ph1handle *ph1, int type, vchar_t *optdata));
