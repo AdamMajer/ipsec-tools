@@ -47,11 +47,13 @@ struct admin_com {
 	u_int16_t ac_len;	/* total packet length including data */
 	u_int16_t ac_cmd;
 	union {
-		int16_t ac_errno;
-		uint16_t ac_version;
-	};
+		int16_t ac_un_errno;
+		uint16_t ac_un_version;
+	} u;
 	u_int16_t ac_proto;
 };
+#define ac_errno u.ac_un_errno
+#define ac_version u.ac_un_version
 
 /*
  * Version field in request is valid.
