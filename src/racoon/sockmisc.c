@@ -1068,6 +1068,8 @@ extract_port (const struct sockaddr *addr)
     return port;
 
   switch (addr->sa_family) {
+    case AF_UNSPEC:
+      break;
     case AF_INET:
       port = ((struct sockaddr_in *)addr)->sin_port;
       break;

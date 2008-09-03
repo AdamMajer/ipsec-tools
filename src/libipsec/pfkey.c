@@ -2112,6 +2112,12 @@ pfkey_check(mhp)
 			break;
 		/*FALLTHROUGH*/
 	default:
+#ifdef __linux__
+		/* Linux kernel seems to be buggy and return
+		 * uninitialized satype for spd flush message */
+		if (msg->sadb_msg_type == SADB_X_SPDFLUSH)
+			break;
+#endif
 		__ipsec_errcode = EIPSEC_INVAL_SATYPE;
 		return -1;
 	}

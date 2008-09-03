@@ -270,7 +270,7 @@ pfkey_handler()
 	if ((pkrecvf[msg->sadb_msg_type])(mhp) < 0)
 		goto end;
 
-	error = 0;
+	error = 1;
 end:
 	if (msg)
 		racoon_free(msg);
@@ -460,6 +460,9 @@ pfkey_reload()
 			ipsec_strerror());
 		return -1;
 	}
+
+	while (pfkey_handler() > 0)
+		continue;
 
 	return 0;
 }
