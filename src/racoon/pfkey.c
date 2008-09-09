@@ -920,8 +920,8 @@ pk_sendgetspi(iph2)
 #ifdef ENABLE_NATT
 		if (! pr->udp_encap) {
 			/* Remove port information, that SA doesn't use it */
-			set_port(src, 0);
-			set_port(dst, 0);
+			set_port(iph2->src, 0);
+			set_port(iph2->dst, 0);
 		}
 #endif
 		plog(LLV_DEBUG, LOCATION, NULL, "call pfkey_send_getspi\n");
