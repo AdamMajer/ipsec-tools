@@ -1209,6 +1209,11 @@ purge_ipsec_spi(dst0, proto, spi, n)
 			natt_port = (void *)mhp[SADB_X_EXT_NAT_T_DPORT];
 			if (extract_port(dst) == 0 && natt_port != NULL)
 				set_port(dst, ntohs(natt_port->sadb_x_nat_t_port_port));
+		}else{
+			/* Force default UDP ports, so CMPSADDR will match SAs with NO encapsulation
+			 */
+			set_port(src, PORT_ISAKMP);
+			set_port(dst, PORT_ISAKMP);
 		}
 #endif
 		plog(LLV_DEBUG2, LOCATION, NULL, "src: %s\n", saddr2str(src));
@@ -1223,6 +1228,15 @@ purge_ipsec_spi(dst0, proto, spi, n)
 			continue;
 		}
 
+#ifdef ENABLE_NATT
+		if (natt_type == NULL ||
+			! natt_type->sadb_x_nat_t_type_type) {
+			/* Set back port to 0 if it was forced to default UDP port
+			 */
+			set_port(src, 0);
+			set_port(dst, 0);
+		}
+#endif
 		for (i = 0; i < n; i++) {
 			plog(LLV_DEBUG, LOCATION, NULL,
 				"check spi(packet)=%u spi(db)=%u.\n",
