@@ -231,6 +231,7 @@ static int fix_lifebyte __P((u_long));
 %token DPD DPD_DELAY DPD_RETRY DPD_MAXFAIL
 %token PH1ID
 %token XAUTH_LOGIN WEAK_PHASE1_CHECK
+%token REKEY
 
 %token PREFIX PORT PORTANY UL_PROTO ANY IKE_FRAG ESP_FRAG MODE_CFG
 %token PFS_GROUP LIFETIME LIFETYPE_TIME LIFETYPE_BYTE STRENGTH REMOTEID
@@ -2036,6 +2037,8 @@ remote_spec
 #endif
 		}
 		EOS
+	|	REKEY SWITCH { cur_rmconf->rekey = $2; } EOS
+	|	REKEY REMOTE_FORCE_LEVEL { cur_rmconf->rekey = REKEY_FORCE; } EOS
 	|	PH1ID NUMBER
 		{
 			cur_rmconf->ph1id = $2;

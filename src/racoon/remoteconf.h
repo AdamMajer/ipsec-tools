@@ -108,7 +108,12 @@ struct remoteconf {
 	int dpd;				/* Negociate DPD support ? */
 	int dpd_retry;			/* in seconds */
 	int dpd_interval;		/* in seconds */
-	int dpd_maxfails; 
+	int dpd_maxfails;
+
+	int rekey;			/* rekey ph1 when active ph2s? */
+#define REKEY_OFF		FALSE
+#define REKEY_ON		TRUE
+#define REKEY_FORCE		2
 
 	int ph1id; /* ph1id to be matched with sainfo sections */
 

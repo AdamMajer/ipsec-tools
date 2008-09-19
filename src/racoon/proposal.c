@@ -1226,8 +1226,6 @@ set_proposal_from_proposal(iph2)
 
 		for (pr = pp_peer->head; pr; pr = pr->next)
 		{
-			struct remoteconf *conf;
-
 			newpr = newsaproto();
 			if (newpr == NULL)
 			{
@@ -1244,9 +1242,7 @@ set_proposal_from_proposal(iph2)
 			newpr->reqid_in = 0;
 			newpr->reqid_out = 0;
 
-			conf = getrmconf(iph2->dst);
-			if (conf != NULL &&
-				conf->gen_policy == GENERATE_POLICY_UNIQUE){
+			if (iph2->ph1->rmconf->gen_policy == GENERATE_POLICY_UNIQUE){
 				newpr->reqid_in = g_nextreqid ;
 				newpr->reqid_out = g_nextreqid ++;
 				/* 

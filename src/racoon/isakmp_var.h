@@ -79,6 +79,8 @@ extern void isakmp_ph1resend_stub __P((struct sched *));
 extern int isakmp_ph1resend __P((struct ph1handle *));
 extern void isakmp_ph2resend_stub __P((struct sched *));
 extern int isakmp_ph2resend __P((struct ph2handle *));
+extern void isakmp_ph1dying_stub __P((struct sched *));
+extern void isakmp_ph1dying __P((struct ph1handle *));
 extern void isakmp_ph1expire_stub __P((struct sched *));
 extern void isakmp_ph1expire __P((struct ph1handle *));
 extern void isakmp_ph1delete_stub __P((struct sched *));

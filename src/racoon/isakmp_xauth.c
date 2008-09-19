@@ -130,7 +130,7 @@ xauth_sendreq(iph1)
 	size_t tlen;
 
 	/* Status checks */
-	if (iph1->status != PHASE1ST_ESTABLISHED) {
+	if (iph1->status < PHASE1ST_ESTABLISHED) {
 		plog(LLV_ERROR, LOCATION, NULL, 
 		    "Xauth request while phase 1 is not completed\n");
 		return;
@@ -391,7 +391,7 @@ xauth_reply(iph1, port, id, res)
 		xst->status = XAUTHST_NOTYET;
 
 		/* Delete Phase 1 SA */
-		if (iph1->status == PHASE1ST_ESTABLISHED)
+		if (iph1->status >= PHASE1ST_ESTABLISHED)
 			isakmp_info_send_d1(iph1);
 		remph1(iph1);
 		delph1(iph1);
