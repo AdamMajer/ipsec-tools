@@ -34,6 +34,8 @@
 #ifndef _ISAKMP_XAUTH_H
 #define _ISAKMP_XAUTH_H
 
+#include "schedule.h"
+
 /* ISAKMP mode config attribute types specific to the Xauth vendor ID */
 #define	XAUTH_TYPE                16520
 #define	XAUTH_USER_NAME           16521
@@ -90,6 +92,7 @@ struct xauth_rmconf {
 #define XAUTHST_OK	2
 
 struct xauth_reply_arg {
+	struct sched sc;
 	isakmp_index index;
 	int port;
 	int id;
@@ -107,7 +110,7 @@ int group_check(struct ph1handle *, char **, int);
 vchar_t *isakmp_xauth_req(struct ph1handle *, struct isakmp_data *);
 vchar_t *isakmp_xauth_set(struct ph1handle *, struct isakmp_data *);
 void xauth_rmstate(struct xauth_state *);
-void xauth_reply_stub(void *);
+void xauth_reply_stub(struct sched *);
 int xauth_reply(struct ph1handle *, int, int, int);
 int xauth_rmconf_used(struct xauth_rmconf **);
 void xauth_rmconf_delete(struct xauth_rmconf **);
