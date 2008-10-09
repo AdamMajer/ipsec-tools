@@ -122,7 +122,6 @@ quick_timeover(iph2)
 	if (iph2->side == INITIATOR)
 		pk_sendeacquire(iph2);
 
-	unbindph12(iph2);
 	remph2(iph2);
 	delph2(iph2);
 }
