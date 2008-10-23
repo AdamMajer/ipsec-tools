@@ -417,14 +417,6 @@ static void reload_conf(){
 	save_rmconf_flush();
 }
 
-int get_sigreq(int sig)
-{
-	if (sig <= NSIG)
-		return sigreq[sig];
-
-	return 0;
-}
-
 static void
 check_sigreq()
 {
