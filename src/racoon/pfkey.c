@@ -1033,6 +1033,7 @@ pk_sendupdate(iph2)
 	if (iph2->approval == NULL) {
 		plog(LLV_ERROR, LOCATION, NULL,
 			"no approvaled SAs found.\n");
+		return -1;
 	}
 
 	if (iph2->side == INITIATOR)
