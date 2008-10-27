@@ -57,7 +57,6 @@ struct sockaddr;
 struct ph1handle;
 struct ph2handle;
 struct remoteconf;
-struct isakmp_gen;
 struct ipsecdoi_pl_id;	/* XXX */
 struct isakmp_pl_ke;	/* XXX */
 struct isakmp_pl_nonce;	/* XXX */
