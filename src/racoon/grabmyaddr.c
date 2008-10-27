@@ -667,6 +667,9 @@ update_myaddrs()
 	case RTM_DELADDR:
 	case RTM_DELETE:
 	case RTM_IFINFO:
+#ifdef RTM_IFANNOUNCE
+	case RTM_IFANNOUNCE:
+#endif
 		break;
 	case RTM_MISS:
 		/* ignore this message silently */
