@@ -209,7 +209,8 @@ delsainfo(si)
 
 	if (si->idsrc)
 		vfree(si->idsrc);
-	if (si->iddst)
+	if (si->iddst != NULL &&
+		si->iddst != SAINFO_CLIENTADDR)
 		vfree(si->iddst);
 
 #ifdef ENABLE_HYBRID
