@@ -774,6 +774,7 @@ newmyaddr()
 
 	new->next = NULL;
 	new->addr = NULL;
+	new->sock = -1;
 
 	return new;
 }

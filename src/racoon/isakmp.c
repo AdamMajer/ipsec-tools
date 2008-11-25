@@ -1718,6 +1718,7 @@ isakmp_open()
 				"failed to bind to address %s (%s).\n",
 				saddr2str(p->addr), strerror(errno));
 			close(p->sock);
+			p->sock = -1;
 			goto err_and_next;
 		}
 
@@ -1798,6 +1799,7 @@ isakmp_close()
 			continue;
 		}
 		close(p->sock);
+		p->sock = -1;
 		racoon_free(p->addr);
 		racoon_free(p);
 	}
