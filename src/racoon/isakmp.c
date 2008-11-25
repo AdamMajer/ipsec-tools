@@ -1692,7 +1692,7 @@ isakmp_open()
 			plog(LLV_ERROR, LOCATION, NULL,
 			    "setsockopt IPV6_USE_MIN_MTU (%s)\n", 
 			    strerror(errno));
-			return -1;
+			goto err_and_next;
 		}
 #endif
 
