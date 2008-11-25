@@ -415,8 +415,7 @@ grab_myaddrs()
 			p->sock = q->sock;
 		else
 			p->sock = -1;
-		p->next = lcconf->myaddrs;
-		lcconf->myaddrs = p;
+		insmyaddr(p, &lcconf->myaddrs);
 	}
 
 	freeifaddrs(ifa0);
@@ -531,8 +530,7 @@ grab_myaddrs()
 				p->sock = q->sock;
 			else
 				p->sock = -1;
-			p->next = lcconf->myaddrs;
-			lcconf->myaddrs = p;
+			insmyaddr(p, &lcconf->myaddrs);
 			break;
 		default:
 			break;
