@@ -663,12 +663,13 @@ update_myaddrs()
 	switch (rtm->rtm_type) {
 	case RTM_NEWADDR:
 	case RTM_DELADDR:
-	case RTM_DELETE:
-	case RTM_IFINFO:
 #ifdef RTM_IFANNOUNCE
 	case RTM_IFANNOUNCE:
 #endif
 		break;
+	case RTM_DELETE:
+	case RTM_IFINFO:
+	case RTM_OIFINFO:
 	case RTM_MISS:
 		/* ignore this message silently */
 		return 0;
