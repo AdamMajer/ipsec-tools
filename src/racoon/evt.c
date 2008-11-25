@@ -268,8 +268,7 @@ evtmsg_broadcast(ll, e)
 	for (l = LIST_FIRST(ll); l != NULL; l = nl) {
 		nl = LIST_NEXT(l, ll_chain);
 
-		if (send(l->fd, e, e->adm.ac_len,
-			 MSG_NOSIGNAL | MSG_DONTWAIT) < 0) {
+		if (send(l->fd, e, e->adm.ac_len, MSG_DONTWAIT) < 0) {
 			plog(LLV_DEBUG, LOCATION, NULL, "Cannot send event to fd: %s\n",
 				strerror(errno));
 			evt_unsubscribe(l);

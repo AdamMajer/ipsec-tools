@@ -566,6 +566,12 @@ init_signal()
 {
 	int i;
 
+	/*
+	 * Ignore SIGPIPE as we check the return value of system calls
+	 * that write to pipe-like fds.
+	 */
+	signal(SIGPIPE, SIG_DFL);
+
 	for (i = 0; signals[i] != 0; i++)
 		if (set_signal(signals[i], signal_handler) < 0) {
 			plog(LLV_ERROR, LOCATION, NULL,

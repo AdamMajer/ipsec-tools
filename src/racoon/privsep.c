@@ -311,6 +311,7 @@ privsep_init(void)
 	 * Don't catch any signal
 	 * This duplicate session:signals[], which is static...
 	 */
+	signal(SIGPIPE, SIG_DFL);
 	signal(SIGHUP, SIG_DFL);
 	signal(SIGINT, SIG_DFL);
 	signal(SIGTERM, SIG_DFL);
