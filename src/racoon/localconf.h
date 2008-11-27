@@ -57,6 +57,7 @@
 #define LC_DEFAULT_RETRY_CHECKPH1	30
 #define LC_DEFAULT_WAIT_PH2COMPLETE	30
 #define LC_DEFAULT_NATT_KA_INTERVAL	20
+#define LC_DEFAULT_PFKEY_BUFFER_SIZE	0
 
 #define LC_DEFAULT_SECRETSIZE	16	/* 128 bits */
 
@@ -118,6 +119,7 @@ struct localconf {
 		 */
 
 	int gss_id_enc;			/* GSS ID encoding to use */
+	int pfkey_buffer_size;		/* Set socket buffer size for pfkey */
 };
 
 extern struct localconf *lcconf;

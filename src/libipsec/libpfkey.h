@@ -156,6 +156,7 @@ int pfkey_send_migrate __P((int, struct sockaddr *, u_int,
 
 int pfkey_open __P((void));
 void pfkey_close __P((int));
+int pfkey_set_buffer_size __P((int, int));
 struct sadb_msg *pfkey_recv __P((int));
 int pfkey_send __P((int, struct sadb_msg *, int));
 int pfkey_align __P((struct sadb_msg *, caddr_t *));

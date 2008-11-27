@@ -185,6 +185,8 @@ static int fix_lifebyte __P((u_long));
 %token PATH PATHTYPE
 	/* include */
 %token INCLUDE
+	/* PFKEY_BUFFER */
+%token PFKEY_BUFFER
 	/* self information */
 %token IDENTIFIER VENDORID
 	/* logging */
@@ -268,6 +270,7 @@ statement
 	:	privsep_statement
 	|	path_statement
 	|	include_statement
+	|	pfkey_statement
 	|	gssenc_statement
 	|	identifier_statement
 	|	logging_statement
@@ -358,6 +361,13 @@ include_statement
 		}
 	;
 
+    /* pfkey_buffer */
+pfkey_statement
+    :   PFKEY_BUFFER NUMBER EOS
+        {
+			lcconf->pfkey_buffer_size = $2;
+        }
+    ;
 	/* gss_id_enc */
 gssenc_statement
 	:	GSS_ID_ENC GSS_ID_ENCTYPE EOS

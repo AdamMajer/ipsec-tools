@@ -290,12 +290,24 @@ pfkey_dump_sadb(satype)
 	struct sadb_msg *msg = NULL;
 	size_t bl, ml;
 	int len;
+	int bufsiz;
 
 	if ((s = privsep_pfkey_open()) < 0) {
 		plog(LLV_ERROR, LOCATION, NULL,
 			"libipsec failed pfkey open: %s\n",
 			ipsec_strerror());
 		return NULL;
+	}
+
+	if ((bufsiz = pfkey_set_buffer_size(s, lcconf->pfkey_buffer_size)) < 0) {
+		plog(LLV_ERROR, LOCATION, NULL,
+		     "libipsec failed pfkey set buffer size to %d: %s\n",
+		     lcconf->pfkey_buffer_size, ipsec_strerror());
+		return NULL;
+	} else if (bufsiz < lcconf->pfkey_buffer_size) {
+		plog(LLV_WARNING, LOCATION, NULL,
+		     "pfkey socket receive buffer set to %dKB, instead of %d\n",
+		     bufsiz, lcconf->pfkey_buffer_size);
 	}
 
 	plog(LLV_DEBUG, LOCATION, NULL, "call pfkey_send_dump\n");
@@ -399,12 +411,25 @@ int
 pfkey_init()
 {
 	int i, reg_fail;
+	int bufsiz;
 
 	if ((lcconf->sock_pfkey = privsep_pfkey_open()) < 0) {
 		plog(LLV_ERROR, LOCATION, NULL,
 			"libipsec failed pfkey open (%s)\n", ipsec_strerror());
 		return -1;
 	}
+	if ((bufsiz = pfkey_set_buffer_size(lcconf->sock_pfkey,
+					    lcconf->pfkey_buffer_size)) < 0) {
+		plog(LLV_ERROR, LOCATION, NULL,
+		     "libipsec failed to set pfkey buffer size to %d (%s)\n",
+		     lcconf->pfkey_buffer_size, ipsec_strerror());
+		return -1;
+	} else if (bufsiz < lcconf->pfkey_buffer_size) {
+		plog(LLV_WARNING, LOCATION, NULL,
+		     "pfkey socket receive buffer set to %dKB, instead of %d\n",
+		     bufsiz, lcconf->pfkey_buffer_size);
+	}
+
 	if (fcntl(lcconf->sock_pfkey, F_SETFL, O_NONBLOCK) == -1)
 		plog(LLV_WARNING, LOCATION, NULL,
 		    "failed to set the pfkey socket to NONBLOCK\n");

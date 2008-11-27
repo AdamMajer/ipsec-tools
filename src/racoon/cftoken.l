@@ -174,6 +174,9 @@ hexstring	0x{hexdigit}+
 	/* include */
 <S_INI>include		{ YYDB; return(INCLUDE); }
 
+    /* pfkey_buffer */
+<S_INI>pfkey_buffer { YYDB; return(PFKEY_BUFFER); }
+
 	/* self information */
 <S_INI>identifier	{ BEGIN S_INF; YYDB; yywarn("it is obsoleted.  use \"my_identifier\" in each remote directives."); return(IDENTIFIER); }
 <S_INF>{semi}		{ BEGIN S_INI; return(EOS); }
