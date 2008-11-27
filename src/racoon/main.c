@@ -219,6 +219,12 @@ main(ac, av)
 		errx(1, "failed to parse configuration file.");
 	restore_params();
 
+#ifdef ENABLE_HYBRID
+	if(isakmp_cfg_config.network4 && isakmp_cfg_config.pool_size == 0)
+		if ((error = isakmp_cfg_resize_pool(ISAKMP_CFG_MAX_CNX)) != 0)
+			return error;
+#endif
+
 	if (dump_config)
 		dumprmconf ();
 
