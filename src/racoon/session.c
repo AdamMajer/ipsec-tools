@@ -570,7 +570,7 @@ init_signal()
 	 * Ignore SIGPIPE as we check the return value of system calls
 	 * that write to pipe-like fds.
 	 */
-	signal(SIGPIPE, SIG_DFL);
+	signal(SIGPIPE, SIG_IGN);
 
 	for (i = 0; signals[i] != 0; i++)
 		if (set_signal(signals[i], signal_handler) < 0) {
