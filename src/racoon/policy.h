@@ -82,6 +82,12 @@ struct secpolicy {
 	struct ipsecrequest *req;
 				/* pointer to the ipsec request tree, */
 				/* if policy == IPSEC else this value == NULL.*/
+
+	/* MIPv6 needs to perform negotiation of SA using different addresses
+	 * than the endpoints of the SA (CoA for the source). In that case,
+	 * MIGRATE msg provides that info (before movement occurs on the MN) */
+	struct sockaddr *local;
+	struct sockaddr *remote;
 };
 
 /* Security Assocciation Index */

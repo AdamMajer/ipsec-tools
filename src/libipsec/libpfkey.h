@@ -150,8 +150,9 @@ int pfkey_send_spdsetidx __P((int, struct sockaddr *, u_int,
 int pfkey_send_spdflush __P((int));
 int pfkey_send_spddump __P((int));
 #ifdef SADB_X_MIGRATE
-int pfkey_send_migrate __P((int, struct sockaddr *, u_int,
-	struct sockaddr *, u_int, u_int, caddr_t, int, u_int32_t));
+int pfkey_send_migrate __P((int, struct sockaddr *, struct sockaddr *,
+        struct sockaddr *, u_int, struct sockaddr *, u_int, u_int,
+        caddr_t, int, u_int32_t));
 #endif
 
 int pfkey_open __P((void));

@@ -312,6 +312,11 @@ delsp(sp)
 		racoon_free(req);
 	}
 	
+	if (sp->local)
+		racoon_free(sp->local);
+	if (sp->remote)
+		racoon_free(sp->remote);
+
 	racoon_free(sp);
 }
 

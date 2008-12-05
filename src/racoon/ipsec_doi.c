@@ -4145,9 +4145,22 @@ ipsecdoi_setid2(iph2)
 	if (!ipsecdoi_transportmode(iph2->proposal))
 		iph2->id = ipsecdoi_sockaddr2id((struct sockaddr *)&sp->spidx.src,
 				sp->spidx.prefs, sp->spidx.ul_proto);
-	else
+	else if (iph2->sa_src != NULL) {
+		/* He have a specific hint indicating that the transport
+		 * mode SA will be negotiated using addresses that differ
+		 * with the one from the SA. We need to indicate that to
+		 * our peer by setting the SA address as ID.
+		 * This is typically the case for the bootstrapping of the
+		 * transport mode SA protecting BU/BA for MIPv6 traffic
+		 *
+		 * --arno*/
+		iph2->id = ipsecdoi_sockaddr2id(iph2->sa_src,
+						IPSECDOI_PREFIX_HOST,
+						sp->spidx.ul_proto);
+	} else
 		iph2->id = ipsecdoi_sockaddr2id(iph2->src, IPSECDOI_PREFIX_HOST,
-				sp->spidx.ul_proto);
+						sp->spidx.ul_proto);
+
 	if (iph2->id == NULL) {
 		plog(LLV_ERROR, LOCATION, NULL,
 			"failed to get ID for %s\n",
@@ -4161,9 +4174,15 @@ ipsecdoi_setid2(iph2)
 	if (!ipsecdoi_transportmode(iph2->proposal))
 		iph2->id_p = ipsecdoi_sockaddr2id((struct sockaddr *)&sp->spidx.dst,
 				sp->spidx.prefd, sp->spidx.ul_proto);
-	else
+	else if (iph2->sa_dst != NULL) {
+		/* See comment above for local side. */
+		iph2->id_p = ipsecdoi_sockaddr2id(iph2->sa_dst,
+						  IPSECDOI_PREFIX_HOST,
+						  sp->spidx.ul_proto);
+	} else
 		iph2->id_p = ipsecdoi_sockaddr2id(iph2->dst, IPSECDOI_PREFIX_HOST,
 			sp->spidx.ul_proto);
+
 	if (iph2->id_p == NULL) {
 		plog(LLV_ERROR, LOCATION, NULL,
 			"failed to get ID for %s\n",
