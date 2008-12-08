@@ -61,8 +61,6 @@ struct privsep_com_msg {
 int privsep_init __P((void));
 
 vchar_t *privsep_eay_get_pkcs1privkey __P((char *));
-int privsep_pfkey_open __P((void));
-void privsep_pfkey_close __P((int));
 int privsep_script_exec __P((char *, int, char * const *));
 int privsep_setsockopt __P((int, int, int, const void *, socklen_t));
 int privsep_socket __P((int, int, int));

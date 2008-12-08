@@ -53,7 +53,6 @@
 #include "misc.h"
 #include "plog.h"
 #include "var.h"
-#include "libpfkey.h"
 
 #include "crypto_openssl.h"
 #include "isakmp_var.h"
@@ -931,37 +930,6 @@ privsep_eay_get_pkcs1privkey(path)
 out:
 	racoon_free(msg);
 	return NULL;
-}
-
-/*
- * No prigilege separation trick here, we just open PFKEY before
- * dropping root privs and we remember it later.
- */
-static int  pfkey_socket = -1;
-int
-privsep_pfkey_open(void)
-{
-	int ps;
-
-	if (pfkey_socket != -1)
-		return pfkey_socket;
-
-	ps = pfkey_open();
-	if (ps != -1)
-		pfkey_socket = ps;
-
-	return ps;
-}
-
-/*
- * Consequence of the above trickery: don't 
- * really close PFKEY as we never re-open it.
- */
-void
-privsep_pfkey_close(ps)
-	int ps;
-{
-	return;
 }
 
 int
