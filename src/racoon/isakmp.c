@@ -867,9 +867,13 @@ ph1_main(iph1, msg)
 		migrate_dying_ph12(iph1);
 
 		/* add to the schedule to expire, and seve back pointer. */
-		if ((iph1->rmconf->rekey == REKEY_FORCE) ||
+		if ((iph1->rmconf->rekey == REKEY_FORCE)
+#ifdef ENABLE_DPD
+			||
 		    (iph1->rmconf->rekey == REKEY_ON && iph1->dpd_support &&
-		     iph1->rmconf->dpd_interval)) {
+		     iph1->rmconf->dpd_interval)
+#endif
+			) {
 			sched_schedule(&iph1->sce,
 				       iph1->approval->lifetime *
 				       PFKEY_SOFT_LIFETIME_RATE / 100,
