@@ -61,8 +61,6 @@
 
 #define LC_DEFAULT_SECRETSIZE	16	/* 128 bits */
 
-#define LC_IDENTTYPE_MAX	5	/* XXX */
-
 #define	LC_GSSENC_UTF16LE	0	/* GSS ID in UTF-16LE */
 #define	LC_GSSENC_LATIN1	1	/* GSS ID in ISO-Latin-1 */
 #define	LC_GSSENC_MAX		2
@@ -82,7 +80,6 @@ struct localconf {
 	int rtsock;			/* routing socket */
 
 	char *pathinfo[LC_PATHTYPE_MAX];
-	vchar_t *ident[LC_IDENTTYPE_MAX]; /* base of Identifier payload. */
 
 	int pad_random;
 	int pad_randomlen;

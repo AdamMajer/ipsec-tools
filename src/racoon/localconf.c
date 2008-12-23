@@ -93,11 +93,6 @@ flushlcconf()
 			lcconf->pathinfo[i] = NULL;
 		}
 	}
-	for (i = 0; i < LC_IDENTTYPE_MAX; i++) {
-		if (lcconf->ident[i])
-			vfree(lcconf->ident[i]);
-		lcconf->ident[i] = NULL;
-	}
 }
 
 static void
