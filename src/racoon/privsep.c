@@ -1177,12 +1177,11 @@ privsep_bind(s, addr, addrlen)
 	struct bind_args bind_args;
 	int err, saved_errno = 0;
 
-	if ((err = bind(s, addr, addrlen) == 0) || 
-	    (saved_errno = errno) != EACCES ||
-	    geteuid() == 0) {
+	err = bind(s, addr, addrlen);
+	if ((err == 0) || (saved_errno = errno) != EACCES || geteuid() == 0) {
 		if (saved_errno)
 			plog(LLV_ERROR, LOCATION, NULL,
-			     "privsep_bind (%s)\n", strerror(saved_errno));
+			     "privsep_bind (%s) = %d\n", strerror(saved_errno), err);
 		errno = saved_errno;
 		return err;
 	}

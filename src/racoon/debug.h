@@ -37,5 +37,6 @@
 /* define by main.c */
 extern int f_local;
 extern int vflag;
+extern int dump_config;
 
 #endif /* _DEBUG_H */

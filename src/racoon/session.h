@@ -37,4 +37,8 @@
 extern int session __P((void));
 extern RETSIGTYPE signal_handler __P((int));
 
+extern void monitor_fd __P((int fd, int when_dying,
+			    int (*callback)(void *, int), void *ctx));
+extern void unmonitor_fd __P((int fd));
+
 #endif /* _SESSION_H */

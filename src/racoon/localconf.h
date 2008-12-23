@@ -75,15 +75,11 @@ struct localconf {
 	char *chroot;			/* chroot path */
 	u_int16_t port_isakmp;		/* port for isakmp as default */
 	u_int16_t port_isakmp_natt;	/* port for NAT-T use */
-	u_int16_t port_admin;		/* port for admin */
 	int default_af;			/* default address family */
 
 	int sock_admin;
 	int sock_pfkey;
 	int rtsock;			/* routing socket */
-
-	int autograbaddr;
-	struct myaddrs *myaddrs;
 
 	char *pathinfo[LC_PATHTYPE_MAX];
 	vchar_t *ident[LC_IDENTTYPE_MAX]; /* base of Identifier payload. */

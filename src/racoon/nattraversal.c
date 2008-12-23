@@ -332,7 +332,7 @@ natt_keepalive_send (struct sched *param)
   for (ka = TAILQ_FIRST(&ka_tree); ka; ka = next) {
     next = TAILQ_NEXT(ka, chain);
     
-    s = getsockmyaddr(ka->src);
+    s = myaddr_getfd(ka->src);
     if (s == -1) {
       TAILQ_REMOVE (&ka_tree, ka, chain);
       racoon_free (ka);

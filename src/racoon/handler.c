@@ -1003,7 +1003,7 @@ check_recvdpkt(remote, local, rbuf)
 	}
 
 	/* select the socket to be sent */
-	s = getsockmyaddr(r->local);
+	s = myaddr_getfd(r->local);
 	if (s == -1)
 		return -1;
 

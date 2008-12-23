@@ -96,8 +96,10 @@ static struct sockaddr_un sunaddr;
 static int admin_process __P((int, char *));
 static int admin_reply __P((int, struct admin_com *, int, vchar_t *));
 
-int
-admin_handler()
+static int
+admin_handler(ctx, fd)
+	void *ctx;
+	int fd;
 {
 	int so2;
 	struct sockaddr_storage from;
@@ -449,7 +451,7 @@ admin_process(so2, combuf)
 			if ((local = dupsaddr(src)) == NULL)
 				goto out1;
 
-			port = getmyaddrsport(local);
+			port = myaddr_getsport(local);
 			if (set_port(local, port) == NULL)
 				goto out1;
 
@@ -736,8 +738,10 @@ admin_init()
 		(void)close(lcconf->sock_admin);
 		return -1;
 	}
+
+	monitor_fd(lcconf->sock_admin, FALSE, admin_handler, NULL);
 	plog(LLV_DEBUG, LOCATION, NULL,
-		"open %s as racoon management.\n", sunaddr.sun_path);
+	     "open %s as racoon management.\n", sunaddr.sun_path);
 
 	return 0;
 }
@@ -745,8 +749,9 @@ admin_init()
 int
 admin_close()
 {
+	unmonitor_fd(lcconf->sock_admin);
 	close(lcconf->sock_admin);
 	return 0;
 }
-#endif
 
+#endif

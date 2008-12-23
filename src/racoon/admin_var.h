@@ -34,7 +34,6 @@
 #ifndef _ADMIN_VAR_H
 #define _ADMIN_VAR_H
 
-extern int admin_handler __P((void));
 extern int admin_init __P((void));
 extern int admin_close __P((void));
 
