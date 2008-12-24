@@ -576,13 +576,11 @@ kernel_handle_message(msg)
 
 	switch (rtm->rtm_type) {
 	case RTM_NEWADDR:
-		/* XXX: The code below is a no-op */
 		parse_addresses(ifa + 1, msg + ifa->ifam_msglen,
 				ifa->ifam_addrs, &addr);
 		myaddr_open_all_configured((struct sockaddr *) &addr);
 		break;
 	case RTM_DELADDR:
-		/* XXX: The code below is a no-op */
 		parse_addresses(ifa + 1, msg + ifa->ifam_msglen,
 				ifa->ifam_addrs, &addr);
 		myaddr_close_all_open((struct sockaddr *) &addr);
