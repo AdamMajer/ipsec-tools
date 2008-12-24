@@ -392,14 +392,12 @@ netlink_process(struct nlmsghdr *h)
 	switch (ifa->ifa_family) {
 	case AF_INET:
 		sin = (struct sockaddr_in *) &addr;
-		sin.sin_len = sizeof(*sin);
 		memcpy(&sin->sin_addr, RTA_DATA(rta[IFA_LOCAL]),
 			sizeof(sin->sin_addr));
 		break;
 #ifdef INET6
 	case AF_INET6:
 		sin6 = (struct sockaddr_in6 *) &addr;
-		sin6.sin6_len = sizeof(*sin6);
 		memcpy(&sin6->sin6_addr, RTA_DATA(rta[IFA_LOCAL]),
 			sizeof(sin6->sin6_addr));
 		if (IN6_IS_ADDR_LINKLOCAL(&sin6->sin6_addr))
