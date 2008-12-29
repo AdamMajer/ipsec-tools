@@ -565,10 +565,11 @@ spdadd_command
 			last_msg_type = SADB_X_SPDADD;
 #endif
 
-			/* fixed port fields if ulp is icmpv6 */
+			/* fixed port fields if ulp is icmp */
 			if ($10.buf != NULL) {
-				if ( ($9 != IPPROTO_ICMPV6) &&
-					 ($9 != IPPROTO_MH))
+				if (($9 != IPPROTO_ICMPV6) &&
+					($9 != IPPROTO_ICMP) &&
+					($9 != IPPROTO_MH))
 					return -1;
 				free($5.buf);
 				free($8.buf);
@@ -613,9 +614,10 @@ spddelete_command
 			int status;
 			struct addrinfo *src, *dst;
 
-			/* fixed port fields if ulp is icmpv6 */
+			/* fixed port fields if ulp is icmp */
 			if ($10.buf != NULL) {
 				if (($9 != IPPROTO_ICMPV6) &&
+					($9 != IPPROTO_ICMP) &&
 					($9 != IPPROTO_MH))
 					return -1;
 				free($5.buf);
