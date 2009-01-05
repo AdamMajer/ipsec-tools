@@ -381,16 +381,7 @@ logging_statement
 	:	LOGGING log_level EOS
 	;
 log_level
-	:	HEXSTRING
-		{
-			/*
-			 * XXX ignore it because this specification
-			 * will be obsoleted.
-			 */
-			yywarn("see racoon.conf(5), such a log specification will be obsoleted.");
-			vfree($1);
-		}
-	|	LOGLEV
+	:	LOGLEV
 		{
 			/*
 			 * set the loglevel to the value specified
@@ -441,11 +432,6 @@ listen_stmt
 #endif
 		}
 		EOS
-	|	X_ADMIN
-		{
-			yyerror("admin directive is obsoleted.");
-		}
-		PORT EOS
 	|	ADMINSOCK QUOTEDSTRING QUOTEDSTRING QUOTEDSTRING NUMBER 
 		{
 #ifdef ENABLE_ADMINPORT
@@ -2138,11 +2124,7 @@ isakmpproposal_specs
 	|	isakmpproposal_specs isakmpproposal_spec
 	;
 isakmpproposal_spec
-	:	STRENGTH
-		{
-			yyerror("strength directive is obsoleted.");
-		} STRENGTHTYPE EOS
-	|	LIFETIME LIFETYPE_TIME NUMBER unittype_time
+	:	LIFETIME LIFETYPE_TIME NUMBER unittype_time
 		{
 			cur_rmconf->prhead->spspec->lifetime = $3 * $4;
 		}
