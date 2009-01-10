@@ -494,9 +494,9 @@ to match any value (e.g. "C=XX, O=MyOrg, OU=*, CN=Mine").
 The format of the
 specification should correspond to RFC 2253; in particular, commas and certain
 other characters -
-.Ic ,=+<>#;
-- may be included in a name by preceeding them with a backslash "\\", and
-arbitrary characters may be inserted in a name with the "\\nn" escape, where
+.Ic ,=+\*[Lt]\*[Gt]#;
+- may be included in a name by preceeding them with a backslash "\e", and
+arbitrary characters may be inserted in a name with the "\enn" escape, where
 nn is the hex representation of the ascii value of the desired character.
 Alternative acceptable peer identifiers may be specified by repeating the
 .Ic peers_identifier
