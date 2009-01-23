@@ -134,6 +134,7 @@ struct ph1handle {
 	u_int8_t flags;			/* Flags */
 	u_int32_t msgid;		/* message id */
 
+	u_int32_t vendorid_mask;	/* bitmask of received supported vendor ids*/
 #ifdef ENABLE_NATT
 	struct ph1natt_options *natt_options;	/* Selected NAT-T IKE version */
 	u_int32_t natt_flags;		/* NAT-T related flags */
