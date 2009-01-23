@@ -2496,6 +2496,8 @@ get_proposal_r(iph2)
 	}
 #endif /* HAVE_SECCTX */
 
+	iph2->spid = sp_in->id;
+
 	return 0;
 }
 
