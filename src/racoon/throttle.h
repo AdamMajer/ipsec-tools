@@ -34,8 +34,10 @@
 #ifndef _THROTTLE_H
 #define _THROTTLE_H
 
+#include "schedule.h"
+
 struct throttle_entry {
-	int penalty;
+	struct timeval penalty_ends;
 	TAILQ_ENTRY(throttle_entry) next;
 	struct sockaddr_storage host;
 };

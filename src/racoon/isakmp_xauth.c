@@ -312,7 +312,7 @@ xauth_attr_reply(iph1, attr, id)
 		 * On failure, throttle the connexion for the remote host
 		 * in order to make password attacks more difficult.
 		 */
-		throttle_delay = throttle_host(iph1->remote, res) - time(NULL);
+		throttle_delay = throttle_host(iph1->remote, res);
 		if (throttle_delay > 0) {
 			char *str;
 

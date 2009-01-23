@@ -1556,10 +1556,6 @@ isakmp_info_recv_r_u_ack (iph1, ru, msgid)
 	}
 
 	iph1->dpd_fails = 0;
-
-	/* Useless ??? */
-	iph1->dpd_lastack = time(NULL);
-
 	sched_cancel(&iph1->dpd_r_u);
 	isakmp_sched_r_u(iph1, 0);
 
