@@ -446,8 +446,8 @@ isakmp_cfg_reply(iph1, attrpl)
 	
 	if ((iph1->status == PHASE1ST_ESTABLISHED) && 
 	    iph1->rmconf->mode_cfg) {
-		switch (AUTHMETHOD(iph1)) {
-		case FICTIVE_AUTH_METHOD_XAUTH_PSKEY_I:
+		switch (iph1->approval->authmethod) {
+		case OAKLEY_ATTR_AUTH_METHOD_XAUTH_PSKEY_I:
 		case OAKLEY_ATTR_AUTH_METHOD_HYBRID_RSA_I:
 		/* Unimplemented */
 		case OAKLEY_ATTR_AUTH_METHOD_HYBRID_DSS_I: 
@@ -628,7 +628,7 @@ isakmp_cfg_request(iph1, attrpl)
 	    ISAKMP_NPTYPE_ATTR, ISAKMP_FLAG_E, 0);
 
 	if (iph1->status == PHASE1ST_ESTABLISHED) {
-		switch (AUTHMETHOD(iph1)) {
+		switch (iph1->approval->authmethod) {
 		case OAKLEY_ATTR_AUTH_METHOD_XAUTH_PSKEY_R:
 		case OAKLEY_ATTR_AUTH_METHOD_HYBRID_RSA_R:
 		/* Unimplemented */

@@ -1332,7 +1332,7 @@ xauth_check(iph1)
 	 * status. It does it if the chose authmethod is using Xauth.
 	 * On the client side (roadwarrior), we don't check anything.
 	 */
-	switch (AUTHMETHOD(iph1)) {
+	switch (iph1->approval->authmethod) {
 	case OAKLEY_ATTR_AUTH_METHOD_HYBRID_RSA_R:
 	case OAKLEY_ATTR_AUTH_METHOD_XAUTH_RSASIG_R:
 	case OAKLEY_ATTR_AUTH_METHOD_XAUTH_PSKEY_R:
@@ -1625,9 +1625,9 @@ isakmp_xauth_set(iph1, attr)
 		 * when running as a client (initiator).
 		 */
 		xst = &iph1->mode_cfg->xauth;
-		switch(AUTHMETHOD(iph1)) {
+		switch (iph1->approval->authmethod) {
 		case OAKLEY_ATTR_AUTH_METHOD_HYBRID_RSA_I:
-		case FICTIVE_AUTH_METHOD_XAUTH_PSKEY_I:
+		case OAKLEY_ATTR_AUTH_METHOD_XAUTH_PSKEY_I:
 		case OAKLEY_ATTR_AUTH_METHOD_XAUTH_RSASIG_I:
 		/* Not implemented ... */
 		case OAKLEY_ATTR_AUTH_METHOD_HYBRID_DSS_I:

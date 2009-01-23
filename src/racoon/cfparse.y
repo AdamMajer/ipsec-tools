@@ -2510,11 +2510,7 @@ expand_isakmpspec(prop_no, trns_no, types,
 			}
 			memcpy(new->gssid->v, gssid, new->gssid->l);
 			racoon_free(gssid);
-#ifdef ENABLE_HYBRID
-		} else if (rmconf->xauth == NULL) {
-#else
 		} else {
-#endif
 			/*
 			 * Allocate the default ID so that it gets put
 			 * into a GSS ID attribute during the Phase 1
