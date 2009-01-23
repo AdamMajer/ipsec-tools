@@ -373,7 +373,7 @@ evt_subscribe(list, fd)
 
 	LIST_INSERT_HEAD(list, l, ll_chain);
 	l->fd = fd;
-	monitor_fd(l->fd, FALSE, evt_unsubscribe_cb, l);
+	monitor_fd(l->fd, evt_unsubscribe_cb, l);
 
 	plog(LLV_DEBUG, LOCATION, NULL,
 	     "[%d] admin connection is polling events\n", fd);

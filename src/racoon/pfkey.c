@@ -480,7 +480,7 @@ pfkey_init()
 		return -1;
 	}
 #endif
-	monitor_fd(lcconf->sock_pfkey, TRUE, pfkey_handler, NULL);
+	monitor_fd(lcconf->sock_pfkey, pfkey_handler, NULL);
 	return 0;
 }
 
