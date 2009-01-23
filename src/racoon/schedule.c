@@ -122,7 +122,6 @@ schedular()
 	if (p == NULL)
 		return NULL;
 
-	sched_get_monotonic_time(&now);
 	timersub(&p->xtime, &now, &timeout);
 
 	return &timeout;
