@@ -104,6 +104,9 @@ extern caddr_t val2str(const char *, size_t);
  * Enumerate the Phase 1 tree.
  * If enum_func() internally return a non-zero value,  this specific
  * error value is returned. 0 is returned if everything went right.
+ *
+ * Note that it is ok for enum_func() to call insph1(). Those inserted
+ * Phase 1 will not interfere with current enumeration process.
  */
 int
 enumph1(sel, enum_func, enum_arg)
