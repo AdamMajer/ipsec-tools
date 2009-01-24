@@ -40,7 +40,7 @@
 .Sh SYNOPSIS
 .Nm racoon
 .Bk -words
-.Op Fl 46BdFLvV
+.Op Fl 46BdFLVv
 .Ek
 .Bk -words
 .Op Fl f Ar configfile
@@ -115,11 +115,11 @@ The default is 4500.
 Listen to the ISAKMP key exchange on port
 .Ar isakmp-port
 instead of the default port number, 500.
+.It Fl V
+Print racoon version and compilation options and exit.
 .It Fl v
 This flag causes the packet dump be more verbose, with higher
 debugging level.
-.It Fl V
-Print racoon version and compilation options and exit.
 .El
 .Pp
 .Nm
