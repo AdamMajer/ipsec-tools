@@ -270,6 +270,7 @@ main(ac, av)
 {
 	int error;
 
+	initlcconf();
 	parse(ac, av);
 
 	if (geteuid() != 0) {
@@ -297,7 +298,6 @@ main(ac, av)
 	init_avc();
 #endif
 	eay_init();
-	initlcconf();
 	initrmconf();
 	oakley_dhinit();
 	compute_vendorids();
