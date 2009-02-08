@@ -50,7 +50,6 @@ extern int getfsize __P((char *));
 struct timeval;
 extern double timedelta __P((struct timeval *, struct timeval *));
 char *strdup __P((const char *));
-extern void close_on_exec __P((int fd));
 
 #if defined(__APPLE__) && defined(__MACH__)
 #define RACOON_TAILQ_FOREACH_REVERSE(var, head, headname ,field)	\

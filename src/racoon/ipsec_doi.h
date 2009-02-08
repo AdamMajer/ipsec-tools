@@ -197,12 +197,6 @@ struct ipsecdoi_pl_id {
 #define IPSECDOI_TYPE_PH1	0
 #define IPSECDOI_TYPE_PH2	1
 
-/*
- * Prefix that will make ipsecdoi_sockaddr2id() generate address type
- * identities without knowning the exact length of address.
- */
-#define IPSECDOI_PREFIX_HOST	0xff
-
 struct isakmpsa;
 struct ipsecdoi_pl_sa;
 struct saprop;
@@ -244,9 +238,6 @@ extern int ipsecdoi_t2satrns __P((struct isakmp_pl_t *,
 extern int ipsecdoi_authalg2trnsid __P((int));
 extern int idtype2doi __P((int));
 extern int doi2idtype __P((int));
-
-extern int ipsecdoi_parse_responder_lifetime __P((struct isakmp_pl_n *notify,
-	u_int32_t *lifetime_sec, u_int32_t *liftime_kb));
 
 
 #endif /* _IPSEC_DOI_H */

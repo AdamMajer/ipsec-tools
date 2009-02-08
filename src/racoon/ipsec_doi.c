@@ -158,6 +158,8 @@ static int setph1attr __P((struct isakmpsa *, caddr_t));
 static vchar_t *setph2proposal0 __P((const struct ph2handle *,
 	const struct saprop *, const struct saproto *));
 
+static vchar_t *getidval __P((int, vchar_t *));
+
 #ifdef HAVE_GSSAPI
 static struct isakmpsa *fixup_initiator_sa __P((struct isakmpsa *,
 	struct isakmpsa *));
@@ -314,7 +316,7 @@ saok:
 	}
 
 	newsa = get_sabyproppair(p, iph1);
-	if (newsa == NULL && iph1->approval != NULL){
+	if (newsa == NULL){
 		delisakmpsa(iph1->approval);
 		iph1->approval = NULL;
 	}
@@ -1822,96 +1824,6 @@ ipsecdoi_set_ld(buf)
 	return ld;
 }
 
-/*
- * parse responder-lifetime attributes from payload
- */
-int
-ipsecdoi_parse_responder_lifetime(notify, lifetime_sec, lifetime_kb)
-	struct isakmp_pl_n *notify;
-	u_int32_t *lifetime_sec;
-	u_int32_t *lifetime_kb;
-{
-	struct isakmp_data *d;
-	int flag, type, tlen, ld_type = -1;
-	u_int16_t lorv;
-	u_int32_t value;
-
-	tlen = ntohs(notify->h.len) - sizeof(*notify) - notify->spi_size;
-        d = (struct isakmp_data *)((char *)(notify + 1) +
-		notify->spi_size);
-
-	while (tlen >= sizeof(struct isakmp_data)) {
-		type = ntohs(d->type) & ~ISAKMP_GEN_MASK;
-		flag = ntohs(d->type) & ISAKMP_GEN_MASK;
-		lorv = ntohs(d->lorv);
-
-		plog(LLV_DEBUG, LOCATION, NULL,
-			"type=%s, flag=0x%04x, lorv=%s\n",
-			s_ipsecdoi_attr(type), flag,
-			s_ipsecdoi_attr_v(type, lorv));
-
-		switch (type) {
-		case IPSECDOI_ATTR_SA_LD_TYPE:
-			if (! flag) {
-				plog(LLV_ERROR, LOCATION, NULL,
-					"must be TV when LD_TYPE.\n");
-				return -1;
-			}
-			ld_type = lorv;
-			break;
-		case IPSECDOI_ATTR_SA_LD:
-			if (flag)
-				value = lorv;
-			else if (lorv == 2)
-				value = ntohs(*(u_int16_t *)(d + 1));
-			else if (lorv == 4)
-				value = ntohl(*(u_int32_t *)(d + 1));
-			else {
-				plog(LLV_ERROR, LOCATION, NULL,
-					"payload length %d for lifetime "
-					"data length is unsupported.\n", lorv);
-				return -1;
-			}
-
-			switch (ld_type) {
-			case IPSECDOI_ATTR_SA_LD_TYPE_SEC:
-				if (lifetime_sec != NULL)
-					*lifetime_sec = value;
-				plog(LLV_INFO, LOCATION, NULL,
-					"received RESPONDER-LIFETIME: %d "
-					"seconds\n", value);
-				break;
-			case IPSECDOI_ATTR_SA_LD_TYPE_KB:
-				if (lifetime_kb != NULL)
-					*lifetime_kb = value;
-				plog(LLV_INFO, LOCATION, NULL,
-					"received RESPONDER-LIFETIME: %d "
-					"kbytes\n", value);
-				break;
-			default:
-				plog(LLV_ERROR, LOCATION, NULL,
-					"lifetime data received without "
-					"lifetime data type.\n");
-				return -1;
-			}
-			break;
-		}
-
-		if (flag) {
-			tlen -= sizeof(*d);
-			d = (struct isakmp_data *)((char *)d
-				+ sizeof(*d));
-		} else {
-			tlen -= (sizeof(*d) + lorv);
-			d = (struct isakmp_data *)((char *)d
-				+ sizeof(*d) + lorv);
-		}
-	}
-
-	return 0;
-}
-
-
 /*%%%*/
 /*
  * check DOI
@@ -3325,9 +3237,7 @@ ipsecdoi_transportmode(pp)
 
 	for (; pp; pp = pp->next) {
 		for (pr = pp->head; pr; pr = pr->next) {
-			if (pr->encmode != IPSECDOI_ATTR_ENC_MODE_TRNS &&
-			    pr->encmode != IPSECDOI_ATTR_ENC_MODE_UDPTRNS_RFC &&
-			    pr->encmode != IPSECDOI_ATTR_ENC_MODE_UDPTRNS_DRAFT)
+			if (pr->encmode != IPSECDOI_ATTR_ENC_MODE_TRNS)
 				return 0;
 		}
 	}
@@ -3760,6 +3670,7 @@ ipsecdoi_checkid1(iph1)
 
 	/* compare with the ID if specified. */
 	if (genlist_next(iph1->rmconf->idvl_p, 0)) {
+		vchar_t *ident0 = NULL;
 		vchar_t ident;
 		struct idspec *id;
 		struct genlist_entry *gpb;
@@ -3772,15 +3683,19 @@ ipsecdoi_checkid1(iph1)
 				goto matched;
 
 			/* compare defined ID with the ID sent by peer. */
+			if (ident0 != NULL)
+				vfree(ident0);
+			ident0 = getidval(id->idtype, id->id);
+
 			switch (id->idtype) {
 			case IDTYPE_ASN1DN:
 				ident.v = iph1->id_p->v + sizeof(*id_b);
 				ident.l = iph1->id_p->l - sizeof(*id_b);
-				if (eay_cmp_asn1dn(id->id, &ident) == 0)
+				if (eay_cmp_asn1dn(ident0, &ident) == 0)
 					goto matched;
 				break;
 			case IDTYPE_ADDRESS:
-				sa = (struct sockaddr *)id->id->v;
+				sa = (struct sockaddr *)ident0->v;
 				sa2 = (caddr_t)(id_b + 1);
 				switch (sa->sa_family) {
 				case AF_INET:
@@ -3804,17 +3719,23 @@ ipsecdoi_checkid1(iph1)
 				}
 				break;
 			default:
-				if (memcmp(id->id->v, id_b + 1, id->id->l) == 0)
+				if (memcmp(ident0->v, id_b + 1, ident0->l) == 0)
 					goto matched;
 				break;
 			}
 		}
+		if (ident0 != NULL) {
+			vfree(ident0);
+			ident0 = NULL;
+		}
 		plog(LLV_WARNING, LOCATION, NULL, "No ID match.\n");
 		if (iph1->rmconf->verify_identifier)
 			return ISAKMP_NTYPE_INVALID_ID_INFORMATION;
+matched: /* ID value match */
+		if (ident0 != NULL)
+			vfree(ident0);
 	}
 
-matched: /* ID value match */
 	return 0;
 }
 
@@ -3840,15 +3761,15 @@ ipsecdoi_setid1(iph1)
 	switch (iph1->rmconf->idvtype) {
 	case IDTYPE_FQDN:
 		id_b.type = IPSECDOI_ID_FQDN;
-		ident = vdup(iph1->rmconf->idv);
+		ident = getidval(iph1->rmconf->idvtype, iph1->rmconf->idv);
 		break;
 	case IDTYPE_USERFQDN:
 		id_b.type = IPSECDOI_ID_USER_FQDN;
-		ident = vdup(iph1->rmconf->idv);
+		ident = getidval(iph1->rmconf->idvtype, iph1->rmconf->idv);
 		break;
 	case IDTYPE_KEYID:
 		id_b.type = IPSECDOI_ID_KEY_ID;
-		ident = vdup(iph1->rmconf->idv);
+		ident = getidval(iph1->rmconf->idvtype, iph1->rmconf->idv);
 		break;
 	case IDTYPE_ASN1DN:
 		id_b.type = IPSECDOI_ID_DER_ASN1_DN;
@@ -3940,6 +3861,21 @@ err:
 		vfree(ident);
 	plog(LLV_ERROR, LOCATION, NULL, "failed get my ID\n");
 	return -1;
+}
+
+static vchar_t *
+getidval(type, val)
+	int type;
+	vchar_t *val;
+{
+	vchar_t *new = NULL;
+
+	if (val)
+		new = vdup(val);
+	else if (lcconf->ident[type])
+		new = vdup(lcconf->ident[type]);
+
+	return new;
 }
 
 /* it's only called by cfparse.y. */
@@ -4114,25 +4050,8 @@ ipsecdoi_setid2(iph2)
 		return -1;
 	}
 
-	if (!ipsecdoi_transportmode(iph2->proposal))
-		iph2->id = ipsecdoi_sockaddr2id((struct sockaddr *)&sp->spidx.src,
-				sp->spidx.prefs, sp->spidx.ul_proto);
-	else if (iph2->sa_src != NULL) {
-		/* He have a specific hint indicating that the transport
-		 * mode SA will be negotiated using addresses that differ
-		 * with the one from the SA. We need to indicate that to
-		 * our peer by setting the SA address as ID.
-		 * This is typically the case for the bootstrapping of the
-		 * transport mode SA protecting BU/BA for MIPv6 traffic
-		 *
-		 * --arno*/
-		iph2->id = ipsecdoi_sockaddr2id(iph2->sa_src,
-						IPSECDOI_PREFIX_HOST,
-						sp->spidx.ul_proto);
-	} else
-		iph2->id = ipsecdoi_sockaddr2id(iph2->src, IPSECDOI_PREFIX_HOST,
-						sp->spidx.ul_proto);
-
+	iph2->id = ipsecdoi_sockaddr2id((struct sockaddr *)&sp->spidx.src,
+					sp->spidx.prefs, sp->spidx.ul_proto);
 	if (iph2->id == NULL) {
 		plog(LLV_ERROR, LOCATION, NULL,
 			"failed to get ID for %s\n",
@@ -4143,18 +4062,8 @@ ipsecdoi_setid2(iph2)
 		s_ipsecdoi_ident(((struct ipsecdoi_id_b *)iph2->id->v)->type));
 
 	/* remote side */
-	if (!ipsecdoi_transportmode(iph2->proposal))
-		iph2->id_p = ipsecdoi_sockaddr2id((struct sockaddr *)&sp->spidx.dst,
+	iph2->id_p = ipsecdoi_sockaddr2id((struct sockaddr *)&sp->spidx.dst,
 				sp->spidx.prefd, sp->spidx.ul_proto);
-	else if (iph2->sa_dst != NULL) {
-		/* See comment above for local side. */
-		iph2->id_p = ipsecdoi_sockaddr2id(iph2->sa_dst,
-						  IPSECDOI_PREFIX_HOST,
-						  sp->spidx.ul_proto);
-	} else
-		iph2->id_p = ipsecdoi_sockaddr2id(iph2->dst, IPSECDOI_PREFIX_HOST,
-			sp->spidx.ul_proto);
-
 	if (iph2->id_p == NULL) {
 		plog(LLV_ERROR, LOCATION, NULL,
 			"failed to get ID for %s\n",
@@ -4191,7 +4100,7 @@ ipsecdoi_sockaddr2id(saddr, prefixlen, ul_proto)
 	switch (saddr->sa_family) {
 	case AF_INET:
 		len1 = sizeof(struct in_addr);
-		if (prefixlen >= (sizeof(struct in_addr) << 3)) {
+		if (prefixlen == (sizeof(struct in_addr) << 3)) {
 			type = IPSECDOI_ID_IPV4_ADDR;
 			len2 = 0;
 		} else {
@@ -4204,7 +4113,7 @@ ipsecdoi_sockaddr2id(saddr, prefixlen, ul_proto)
 #ifdef INET6
 	case AF_INET6:
 		len1 = sizeof(struct in6_addr);
-		if (prefixlen >= (sizeof(struct in6_addr) << 3)) {
+		if (prefixlen == (sizeof(struct in6_addr) << 3)) {
 			type = IPSECDOI_ID_IPV6_ADDR;
 			len2 = 0;
 		} else {

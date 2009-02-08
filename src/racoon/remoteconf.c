@@ -215,8 +215,6 @@ newrmconf()
 	new->dpd_retry = 5;
 	new->dpd_maxfails = 5;
 
-	new->rekey = REKEY_ON;
-
 	new->weak_phase1_check = 0;
 
 #ifdef ENABLE_HYBRID

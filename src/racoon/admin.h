@@ -46,19 +46,9 @@ extern mode_t adminsock_mode;
 struct admin_com {
 	u_int16_t ac_len;	/* total packet length including data */
 	u_int16_t ac_cmd;
-	union {
-		int16_t ac_un_errno;
-		uint16_t ac_un_version;
-	} u;
+	int16_t ac_errno;
 	u_int16_t ac_proto;
 };
-#define ac_errno u.ac_un_errno
-#define ac_version u.ac_un_version
-
-/*
- * Version field in request is valid.
- */
-#define ADMIN_FLAG_VERSION	0x8000
 
 /*
  * No data follows as the data.
@@ -81,8 +71,6 @@ struct admin_com {
 #define ADMIN_DELETE_SA		0x0201
 #define ADMIN_ESTABLISH_SA	0x0202
 #define ADMIN_DELETE_ALL_SA_DST	0x0204	/* All SA for a given peer */
-
-#define ADMIN_GET_SA_CERT	0x0206
 
 /*
  * The admin_com_indexes and admin_com_psk follow, see below.

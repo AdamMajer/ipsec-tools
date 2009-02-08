@@ -48,8 +48,7 @@ extern int isakmp_info_send_common __P((struct ph1handle *,
 extern vchar_t * isakmp_add_pl_n __P((vchar_t *, u_int8_t **, int,
 	struct saproto *, vchar_t *));
 
-extern int isakmp_log_notify __P((struct ph1handle *, struct isakmp_pl_n *, const char *exchange));
-extern int isakmp_info_recv_initialcontact __P((struct ph1handle *, struct ph2handle *));
+extern void isakmp_check_notify __P((struct isakmp_gen *, struct ph1handle *));
 
 #ifdef ENABLE_DPD
 extern int isakmp_sched_r_u __P((struct ph1handle *, int));

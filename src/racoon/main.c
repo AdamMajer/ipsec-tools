@@ -66,6 +66,12 @@
 
 #include "cfparse_proto.h"
 #include "isakmp_var.h"
+#ifdef ENABLE_HYBRID
+#include <resolv.h>
+#include "isakmp.h"
+#include "isakmp_xauth.h"
+#include "isakmp_cfg.h"
+#endif
 #include "remoteconf.h"
 #include "localconf.h"
 #include "session.h"
@@ -78,10 +84,10 @@
 
 #include "package_version.h"
 
-int dump_config = 0;	/* dump parsed config file. */
 int f_local = 0;	/* local test mode.  behave like a wall. */
 int vflag = 1;		/* for print-isakmp.c */
 static int loading_sa = 0;	/* install sa when racoon boots up. */
+static int dump_config = 0;	/* dump parsed config file. */
 
 #ifdef TOP_PACKAGE
 static char version[] = "@(#)" TOP_PACKAGE_STRING " (" TOP_PACKAGE_URL ")";
@@ -92,6 +98,9 @@ static char version[] = "@(#) racoon / IPsec-tools";
 int main __P((int, char **));
 static void usage __P((void));
 static void parse __P((int, char **));
+#if 0
+static void cleanup_pidfile __P((void));
+#endif
 
 void
 usage()
@@ -177,6 +186,42 @@ main(ac, av)
 	plog(LLV_INFO, LOCATION, NULL, "Reading configuration from \"%s\"\n", 
 	    lcconf->racoon_conf);
 
+	if (pfkey_init() < 0) {
+		errx(1, "something error happened "
+			"while pfkey initializing.");
+		/* NOTREACHED*/
+	}
+
+#ifdef ENABLE_HYBRID
+	if (isakmp_cfg_init(ISAKMP_CFG_INIT_COLD))
+		errx(1, "could not initialize ISAKMP mode config structures");
+#endif
+
+#ifdef HAVE_LIBLDAP
+	if (xauth_ldap_init() != 0)
+		errx(1, "could not initialize libldap");
+#endif
+
+	/*
+	 * in order to prefer the parameters by command line,
+	 * saving some parameters before parsing configuration file.
+	 */
+	save_params();
+	error = cfparse();
+	if (error != 0)
+		errx(1, "failed to parse configuration file.");
+	restore_params();
+
+	if (dump_config)
+		dumprmconf ();
+
+#ifdef HAVE_LIBRADIUS
+	if (xauth_radius_init() != 0) {
+		errx(1, "could not initialize libradius");
+		/* NOTREACHED*/
+	}
+#endif
+
 	/*
 	 * install SAs from the specified file.  If the file is not specified
 	 * by the configuration file, racoon will exit.
@@ -206,12 +251,35 @@ main(ac, av)
 			/* no big deal if it fails.. */
 		}
 #endif
+		if (!f_local) {
+#if 0
+			if (atexit(cleanup_pidfile) < 0) {
+				plog(LLV_ERROR, LOCATION, NULL,
+					"cannot register pidfile cleanup");
+			}
+#endif
+		}
 	}
 
 	session();
 
 	exit(0);
 }
+
+#if 0
+static void
+cleanup_pidfile()
+{
+	pid_t p = getpid();
+
+	/* if it's not child process, clean everything */
+	if (racoon_pid == p) {
+		const char *pid_file = _PATH_VARRUN "racoon.pid";
+
+		(void) unlink(pid_file);
+	}
+}
+#endif
 
 static void
 parse(ac, av)
@@ -256,6 +324,15 @@ parse(ac, av)
 		case 'P':
 			lcconf->port_isakmp_natt = atoi(optarg);
 			break;
+		case 'a':
+#ifdef ENABLE_ADMINPORT
+			lcconf->port_admin = atoi(optarg);
+			break;
+#else
+			fprintf(stderr, "%s: the option is disabled "
+			    "in the configuration\n", pname);
+			exit(1);
+#endif
 		case 'f':
 			lcconf->racoon_conf = optarg;
 			break;
