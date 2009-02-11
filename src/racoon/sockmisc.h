@@ -57,6 +57,7 @@ extern const int niflags;
 extern int cmpsaddrwop __P((const struct sockaddr *, const struct sockaddr *));
 extern int cmpsaddrwild __P((const struct sockaddr *, const struct sockaddr *));
 extern int cmpsaddrstrict __P((const struct sockaddr *, const struct sockaddr *));
+extern int cmpsaddrmagic __P((const struct sockaddr *, const struct sockaddr *));
 
 #ifdef ENABLE_NATT 
 #define CMPSADDR(saddr1, saddr2) cmpsaddrstrict((saddr1), (saddr2))
