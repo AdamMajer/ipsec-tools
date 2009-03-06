@@ -14,6 +14,9 @@ int yyparse __P((void));
 void yyfatal __P((const char *));
 void yyerror __P((const char *));
 
+u_int32_t *sendkeymsg_spigrep __P((unsigned int, struct addrinfo *,
+				   struct addrinfo *, int *));
+
 extern int f_rfcmode;
 extern int lineno;
 extern int last_msg_type;
