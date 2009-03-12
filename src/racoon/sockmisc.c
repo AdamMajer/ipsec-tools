@@ -107,6 +107,8 @@ cmpsaddrwop(addr1, addr2)
 #endif /* __linux__ */
 
 	switch (addr1->sa_family) {
+	case AF_UNSPEC:
+		break;
 	case AF_INET:
 		sa1 = (caddr_t)&((struct sockaddr_in *)addr1)->sin_addr;
 		sa2 = (caddr_t)&((struct sockaddr_in *)addr2)->sin_addr;
@@ -161,6 +163,8 @@ cmpsaddrwild(addr1, addr2)
 #endif /* __linux__ */
 
 	switch (addr1->sa_family) {
+	case AF_UNSPEC:
+		break;
 	case AF_INET:
 		sa1 = (caddr_t)&((struct sockaddr_in *)addr1)->sin_addr;
 		sa2 = (caddr_t)&((struct sockaddr_in *)addr2)->sin_addr;
@@ -227,6 +231,8 @@ cmpsaddrmagic(addr1, addr2)
 #endif /* __linux__ */
 
 	switch (addr1->sa_family) {
+	case AF_UNSPEC:
+		break;
 	case AF_INET:
 		sa1 = (caddr_t)&((struct sockaddr_in *)addr1)->sin_addr;
 		sa2 = (caddr_t)&((struct sockaddr_in *)addr2)->sin_addr;

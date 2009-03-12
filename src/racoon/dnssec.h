@@ -34,6 +34,6 @@
 #ifndef _DNSSEC_H
 #define _DNSSEC_H
 
-extern cert_t *dnssec_getcert __P((vchar_t *));
+extern vchar_t *dnssec_getcert __P((vchar_t *));
 
 #endif /* _DNSSEC_H */

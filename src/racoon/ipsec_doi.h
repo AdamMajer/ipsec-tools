@@ -34,6 +34,8 @@
 #ifndef _IPSEC_DOI_H
 #define _IPSEC_DOI_H
 
+#include "isakmp.h"
+
 /* refered to RFC2407 */
 
 #define IPSEC_DOI 1
@@ -215,7 +217,7 @@ extern int ipsecdoi_selectph2proposal __P((struct ph2handle *));
 extern int ipsecdoi_checkph2proposal __P((struct ph2handle *));
 
 extern struct prop_pair **get_proppair __P((vchar_t *, int));
-extern vchar_t *get_sabyproppair __P((struct prop_pair *, struct ph1handle *));
+extern vchar_t *get_sabyproppair __P((u_int32_t, u_int32_t, struct prop_pair *));
 extern int ipsecdoi_updatespi __P((struct ph2handle *iph2));
 extern vchar_t *get_sabysaprop __P((struct saprop *, vchar_t *));
 extern int ipsecdoi_chkcmpids( const vchar_t *, const vchar_t *, int );
@@ -231,7 +233,8 @@ extern char *ipsecdoi_id2str __P((const vchar_t *));
 extern vchar_t *ipsecdoi_sockrange2id __P((	struct sockaddr *,
 	struct sockaddr *, u_int));
 
-extern vchar_t *ipsecdoi_setph1proposal __P((struct isakmpsa *));
+extern vchar_t *ipsecdoi_setph1proposal __P((struct remoteconf *,
+					     struct isakmpsa *));
 extern int ipsecdoi_setph2proposal __P((struct ph2handle *));
 extern int ipsecdoi_transportmode __P((struct saprop *));
 extern int ipsecdoi_get_defaultlifetime __P((void));
