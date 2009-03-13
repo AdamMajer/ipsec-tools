@@ -43,6 +43,7 @@
 #include "isakmp_xauth.h"
 #endif
 
+struct ph1handle;
 struct secprotospec;
 
 struct etypes {
