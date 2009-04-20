@@ -106,8 +106,19 @@ extern caddr_t set_isakmp_header1 __P((vchar_t *, struct ph1handle *, int));
 extern caddr_t set_isakmp_header2 __P((vchar_t *, struct ph2handle *, int));
 extern caddr_t set_isakmp_payload __P((caddr_t, vchar_t *, int));
 
-extern struct payload_list *isakmp_plist_append __P((struct payload_list *plist, 
-	vchar_t *payload, int payload_type));
+extern struct payload_list *isakmp_plist_append_full __P((
+	struct payload_list *plist, vchar_t *payload,
+	u_int8_t payload_type, u_int8_t free));
+
+static inline struct payload_list *isakmp_plist_append(plist, payload, payload_type)
+	struct payload_list *plist;
+	vchar_t *payload;
+	u_int8_t payload_type;
+{
+	return isakmp_plist_append_full(plist, payload, payload_type, 0);
+}
+
+
 extern vchar_t *isakmp_plist_set_all __P((struct payload_list **plist,
 	struct ph1handle *iph1));
 

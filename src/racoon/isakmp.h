@@ -379,7 +379,8 @@ struct isakmp_pl_d {
 struct payload_list {
 	struct payload_list	*next, *prev;
 	vchar_t			*payload;
-	int			payload_type;
+	u_int8_t		payload_type;
+	u_int8_t		free_payload;
 };
 
 
