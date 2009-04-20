@@ -251,15 +251,18 @@ binsanitize(binstr, n)
 {
 	int p,q;
 	char* d;
+
+	d = racoon_malloc(n + 1);
 	for (p = 0, q = 0; p < n; p++) {
-                 if (isgraph((int)binstr[p])) {
-			binstr[q++] = binstr[p];
+		if (isgraph((int)binstr[p])) {
+			d[q++] = binstr[p];
 		} else {
-			if (q && binstr[q - 1] != ' ')
-				 binstr[q++] = ' ';
+			if (q && d[q - 1] != ' ')
+				d[q++] = ' ';
 		}
 	}
-	binstr[q++] = '\0';
-	return binstr;
+	d[q++] = '\0';
+
+	return d;
 }
 	
