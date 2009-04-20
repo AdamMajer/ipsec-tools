@@ -959,12 +959,14 @@ eay_check_x509sign(source, sig, cert)
 	evp = X509_get_pubkey(x509);
 	if (! evp) {
 		plog(LLV_ERROR, LOCATION, NULL, "X509_get_pubkey(): %s\n", eay_strerror());
+		X509_free(x509);
 		return -1;
 	}
 
 	res = eay_rsa_verify(source, sig, evp->pkey.rsa);
 
 	EVP_PKEY_free(evp);
+	X509_free(x509);
 
 	return res;
 }
