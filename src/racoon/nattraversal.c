@@ -325,6 +325,15 @@ natt_handle_vendorid (struct ph1handle *iph1, int vid_numeric)
       iph1->natt_flags |= NAT_ANNOUNCED;
 }
 
+static void
+natt_keepalive_delete (struct natt_ka_addrs *ka)
+{
+  TAILQ_REMOVE (&ka_tree, ka, chain);
+  racoon_free (ka->src);
+  racoon_free (ka->dst);
+  racoon_free (ka);
+}
+
 /* NAT keepalive functions */
 static void
 natt_keepalive_send (struct sched *param)
@@ -339,8 +348,7 @@ natt_keepalive_send (struct sched *param)
     
     s = myaddr_getfd(ka->src);
     if (s == -1) {
-      TAILQ_REMOVE (&ka_tree, ka, chain);
-      racoon_free (ka);
+      natt_keepalive_delete(ka);
       continue;
     }
     plog (LLV_DEBUG, LOCATION, NULL, "KA: %s\n", 
@@ -441,8 +449,7 @@ natt_keepalive_remove (struct sockaddr *src, struct sockaddr *dst)
 
       plog (LLV_DEBUG, LOCATION, NULL, "KA removing this one...\n");
 
-      TAILQ_REMOVE (&ka_tree, ka, chain);
-      racoon_free (ka);
+      natt_keepalive_delete (ka);
       /* Should we break here? Every pair of addresses should 
          be inserted only once, but who knows :-) Lets traverse 
 	 the whole list... */
