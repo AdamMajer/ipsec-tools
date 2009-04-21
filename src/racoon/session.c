@@ -193,6 +193,8 @@ session(void)
 		errx(1, "could not initialize radius config");
 #endif
 
+	myaddr_init_lists();
+
 	/*
 	 * in order to prefer the parameters by command line,
 	 * saving some parameters before parsing configuration file.

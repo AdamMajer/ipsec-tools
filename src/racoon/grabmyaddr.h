@@ -34,6 +34,7 @@
 #ifndef _GRABMYADDR_H
 #define _GRABMYADDR_H
 
+extern void myaddr_init_lists __P((void));
 extern int myaddr_init __P((void));
 extern void myaddr_close __P((void));
 

@@ -288,13 +288,17 @@ myaddr_getsport(addr)
 	return bestmatch_port;
 }
 
-int
-myaddr_init()
+void
+myaddr_init_lists()
 {
 	LIST_INIT(&configured);
 	LIST_INIT(&opened);
+}
 
-	if (!lcconf->strict_address) {
+int
+myaddr_init()
+{
+        if (!lcconf->strict_address) {
 		lcconf->rtsock = kernel_open_socket();
 		if (lcconf->rtsock < 0)
 			return -1;
