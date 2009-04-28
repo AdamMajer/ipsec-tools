@@ -736,6 +736,17 @@ initph2(iph2)
 		oakley_delivm(iph2->ivm);
 		iph2->ivm = NULL;
 	}
+
+#ifdef ENABLE_NATT
+	if (iph2->natoa_src) {
+		racoon_free(iph2->natoa_src);
+		iph2->natoa_src = NULL;
+	}
+	if (iph2->natoa_dst) {
+		racoon_free(iph2->natoa_dst);
+		iph2->natoa_dst = NULL;
+	}
+#endif
 }
 
 /*
