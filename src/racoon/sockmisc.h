@@ -43,12 +43,14 @@
 				   "Tom Lendacky" <toml@us.ibm.com> */
 #endif
 
+union sockaddr_any {
+	struct sockaddr sa;
+	struct sockaddr_in sin;
+	struct sockaddr_in6 sin6;
+};
+
 struct netaddr {
-	union {
-		struct sockaddr sa;
-		struct sockaddr_in sin;
-		struct sockaddr_in6 sin6;
-	} sa;
+	union sockaddr_any sa;
 	unsigned long prefix;
 };
 
