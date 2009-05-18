@@ -135,7 +135,6 @@ isakmp_info_recv(iph1, msg0)
 	struct isakmp_gen *nd;
 	u_int8_t np;
 	int encrypted;
-	int flag;
 
 	plog(LLV_DEBUG, LOCATION, NULL, "receive Information.\n");
 
@@ -315,11 +314,8 @@ isakmp_info_recv(iph1, msg0)
 				"received unexpected payload type %s.\n",
 				s_isakmp_nptype(gen->np));
 		}
-		if(error < 0) {
+		if (error < 0)
 			break;
-		} else {
-			flag |= error;
-		}
 	}
     end:
 	if (msg != NULL)
