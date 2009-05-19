@@ -4305,7 +4305,7 @@ ipsecdoi_id2str(id)
 	case IPSECDOI_ID_IPV4_ADDR_RANGE:
 
 #ifndef __linux__
-+		saddr.sa.sa_len = sizeof(struct sockaddr_in);
+		saddr.sa.sa_len = sizeof(struct sockaddr_in);
 #endif
 		saddr.sa.sa_family = AF_INET;
 		saddr.sin.sin_port = IPSEC_PORT_ANY;

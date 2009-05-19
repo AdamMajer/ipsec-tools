@@ -255,7 +255,7 @@ isakmp_handler(ctx, so_isakmp)
 			extralen += sizeof(x.lbuf.udp) + x.lbuf.ip.ihl;
 		}
 #else
-		if (ntohs(lbuf.udp.uh_dport) == 501) {
+		if (ntohs(x.lbuf.udp.uh_dport) == 501) {
 			extralen += sizeof(x.lbuf.udp) + x.lbuf.ip.ip_hl;
 		}
 #endif
