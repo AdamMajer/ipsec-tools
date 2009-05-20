@@ -133,7 +133,7 @@ struct isakmp {
 /* Exchange Type */
 #define ISAKMP_ETYPE_NONE	0	/* NONE */
 #define ISAKMP_ETYPE_BASE	1	/* Base */
-#define ISAKMP_ETYPE_IDENT	2	/* Identity Proteciton */
+#define ISAKMP_ETYPE_IDENT	2	/* Identity Protection */
 #define ISAKMP_ETYPE_AUTH	3	/* Authentication Only */
 #define ISAKMP_ETYPE_AGG	4	/* Aggressive */
 #define ISAKMP_ETYPE_INFO	5	/* Informational */
