@@ -56,16 +56,11 @@ struct netaddr {
 
 extern const int niflags;
 
-extern int cmpsaddrwop __P((const struct sockaddr *, const struct sockaddr *));
-extern int cmpsaddrwild __P((const struct sockaddr *, const struct sockaddr *));
-extern int cmpsaddrstrict __P((const struct sockaddr *, const struct sockaddr *));
-extern int cmpsaddrmagic __P((const struct sockaddr *, const struct sockaddr *));
+#define CMPSADDR_MATCH		0
+#define CMPSADDR_WOP_MATCH	1
+#define CMPSADDR_MISMATCH	2
 
-#ifdef ENABLE_NATT 
-#define CMPSADDR(saddr1, saddr2) cmpsaddrstrict((saddr1), (saddr2))
-#else 
-#define CMPSADDR(saddr1, saddr2) cmpsaddrwop((saddr1), (saddr2))
-#endif
+extern int cmpsaddr __P((const struct sockaddr *, const struct sockaddr *));
 
 extern struct sockaddr *getlocaladdr __P((struct sockaddr *));
 

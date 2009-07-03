@@ -467,7 +467,6 @@ extern int enumph1 __P((struct ph1selector *ph1sel,
 			void *enum_arg));
 
 #define GETPH1_F_ESTABLISHED		0x0001
-#define GETPH1_F_WITHOUT_PORTS		0x0002
 
 extern struct ph1handle *getph1 __P((struct remoteconf *rmconf,
 				     struct sockaddr *local,
@@ -476,10 +475,8 @@ extern struct ph1handle *getph1 __P((struct remoteconf *rmconf,
 
 #define getph1byaddr(local, remote, est) \
 	getph1(NULL, local, remote, est ? GETPH1_F_ESTABLISHED : 0)
-#define getph1byaddrwop(local, remote) \
-	getph1(NULL, local, remote, GETPH1_F_WITHOUT_PORTS)
-#define getph1bydstaddrwop(remote) \
-	getph1(NULL, NULL, remote, GETPH1_F_WITHOUT_PORTS)
+#define getph1bydstaddr(remote) \
+	getph1(NULL, NULL, remote, 0)
 
 #ifdef ENABLE_HYBRID
 struct ph1handle *getph1bylogin __P((char *));
