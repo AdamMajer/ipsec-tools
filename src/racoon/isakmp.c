@@ -3317,6 +3317,17 @@ purge_remote(iph1)
 		src = PFKEY_ADDR_SADDR(mhp[SADB_EXT_ADDRESS_SRC]);
 		dst = PFKEY_ADDR_SADDR(mhp[SADB_EXT_ADDRESS_DST]);
 
+#ifdef SADB_X_NAT_T_NEW_MAPPING
+		if (PFKEY_ADDR_X_NATTYPE(mhp[SADB_X_EXT_NAT_T_TYPE])) {
+			/* NAT-T is enabled for this SADB entry; copy
+			 * the ports from NAT-T extensions */
+			if(mhp[SADB_X_EXT_NAT_T_SPORT] != NULL)
+				set_port(src, PFKEY_ADDR_X_PORT(mhp[SADB_X_EXT_NAT_T_SPORT]));
+			if(mhp[SADB_X_EXT_NAT_T_DPORT] != NULL)
+				set_port(dst, PFKEY_ADDR_X_PORT(mhp[SADB_X_EXT_NAT_T_DPORT]));
+		}
+#endif
+
 		if (sa->sadb_sa_state != SADB_SASTATE_LARVAL &&
 		    sa->sadb_sa_state != SADB_SASTATE_MATURE &&
 		    sa->sadb_sa_state != SADB_SASTATE_DYING) {
