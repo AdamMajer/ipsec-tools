@@ -91,7 +91,8 @@ cmpsaddr(addr1, addr2)
 	const struct sockaddr *addr2;
 {
 	caddr_t sa1, sa2;
-	u_short port1, port2;
+	u_short port1 = IPSEC_PORT_ANY;
+	u_short port2 = IPSEC_PORT_ANY;
 
 	if (addr1 == NULL && addr2 == NULL)
 		return CMPSADDR_MATCH;
