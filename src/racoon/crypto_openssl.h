@@ -34,8 +34,6 @@
 #ifndef _CRYPTO_OPENSSL_H
 #define _CRYPTO_OPENSSL_H
 
-#include "crypto_openssl.h"
-
 #include <openssl/x509v3.h>
 #include <openssl/rsa.h>
 
