@@ -35,6 +35,8 @@
 #ifndef _SCHEDULE_H
 #define _SCHEDULE_H
 
+#include <stddef.h>
+
 #include <sys/queue.h>
 #if TIME_WITH_SYS_TIME
 # include <sys/time.h>
