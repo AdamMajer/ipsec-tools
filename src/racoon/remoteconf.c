@@ -209,7 +209,7 @@ rmconf_match_type(rmsel, rmconf)
 	/* Check address */
 	if (rmsel->remote != NULL) {
 		if (rmconf->remote->sa_family != AF_UNSPEC) {
-			if (cmpsaddr(rmsel->remote, rmconf->remote) != 0)
+			if (cmpsaddr(rmsel->remote, rmconf->remote) == CMPSADDR_MISMATCH)
 				return MATCH_NONE;
 
 			/* Address matched */
