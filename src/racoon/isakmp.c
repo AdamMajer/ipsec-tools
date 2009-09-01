@@ -3140,6 +3140,16 @@ script_hook(iph1, script)
 		}
 	}
 
+	/* Peer identity. */
+	if (iph1->id_p != NULL) {
+		if (script_env_append(&envp, &envc, "REMOTE_ID",
+				      ipsecdoi_id2str(iph1->id_p)) != 0) {
+			plog(LLV_ERROR, LOCATION, NULL,
+			     "Cannot set REMOTE_ID\n");
+			goto out;
+		}
+	}
+
 	if (privsep_script_exec(iph1->rmconf->script[script]->v, 
 	    script, envp) != 0) 
 		plog(LLV_ERROR, LOCATION, NULL, 
