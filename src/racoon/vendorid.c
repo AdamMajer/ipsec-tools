@@ -260,8 +260,7 @@ handle_vendorid(struct ph1handle *iph1, struct isakmp_gen *gen)
 	iph1->vendorid_mask |= BIT(vid_numeric);
 
 #ifdef ENABLE_NATT
-	if ((iph1->rmconf == NULL || iph1->rmconf->nat_traversal) &&
-	    natt_vendorid(vid_numeric))
+	if (natt_vendorid(vid_numeric))
 		natt_handle_vendorid(iph1, vid_numeric);
 #endif
 #ifdef ENABLE_HYBRID
