@@ -59,6 +59,8 @@
 #include "y.tab.h"
 #endif
 
+#define YY_NO_UNPUT
+
 #include "extern.h"
 
 /* make the code compile on *BSD-current */
