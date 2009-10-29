@@ -59,8 +59,6 @@
 #include "y.tab.h"
 #endif
 
-#define YY_NO_UNPUT
-
 #include "extern.h"
 
 /* make the code compile on *BSD-current */
@@ -113,7 +111,9 @@ hostname	{name}(({dot}{name})+{dot}?)?
 
 %s S_PL S_AUTHALG S_ENCALG
 
+%option noinput nounput
 %%
+
 
 add		{ return(ADD); }
 delete		{ return(DELETE); }
