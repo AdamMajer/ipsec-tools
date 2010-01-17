@@ -115,6 +115,7 @@ getsainfo(loc, rmt, peer, client, remoteid)
                 racoon_free(dloc);
                 racoon_free(drmt);
                 racoon_free(dpeer);
+                racoon_free(dclient);
 	}
 
 	LIST_FOREACH(s, &sitree, chain) {
