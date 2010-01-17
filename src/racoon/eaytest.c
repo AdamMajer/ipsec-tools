@@ -572,6 +572,7 @@ getcerts(path)
 
 		n++;
 	}
+	closedir(dirp);
 
 	p = (char **)realloc(certs, (n + 1) * sizeof(certs));
 	if (p == NULL)
