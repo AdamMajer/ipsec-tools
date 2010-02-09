@@ -3554,7 +3554,7 @@ pk_recvmigrate(mhp)
 #endif
 
 /*
- * send error against acquire message to kenrel.
+ * send error against acquire message to kernel.
  */
 int
 pk_sendeacquire(iph2)

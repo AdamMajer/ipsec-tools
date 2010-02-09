@@ -88,7 +88,7 @@ struct saproto {
 	int reqid_out;			/* request id (outbound) */
 	int reqid_in;			/* request id (inbound) */
 
-	int ok;				/* if 1, success to set SA in kenrel */
+	int ok;				/* if 1, success to set SA in kernel */
 
 	struct satrns *head;		/* header of transform */
 	struct saproto *next;		/* next protocol */
