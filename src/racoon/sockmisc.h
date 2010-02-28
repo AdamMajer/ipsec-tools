@@ -88,7 +88,7 @@ extern char *naddrwop2str_fromto __P((const char *format, const struct netaddr *
 				      const struct netaddr *daddr));
 extern int naddr_score(const struct netaddr *naddr, const struct sockaddr *saddr);
 
-/* Some usefull functions for sockaddr port manipulations. */
+/* Some useful functions for sockaddr port manipulations. */
 extern u_int16_t extract_port __P((const struct sockaddr *addr));
 extern u_int16_t *set_port __P((struct sockaddr *addr, u_int16_t new_port));
 extern u_int16_t *get_port_ptr __P((struct sockaddr *addr));

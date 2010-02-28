@@ -940,7 +940,7 @@ naddr_score(const struct netaddr *naddr, const struct sockaddr *saddr)
 	return -1;
 }
 
-/* Some usefull functions for sockaddr port manipulations. */
+/* Some useful functions for sockaddr port manipulations. */
 u_int16_t
 extract_port (const struct sockaddr *addr)
 {
