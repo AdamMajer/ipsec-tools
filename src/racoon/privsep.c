@@ -1465,7 +1465,7 @@ safety_check(msg, index)
 }
 
 /*
- * Filter unsafe environement variables
+ * Filter unsafe environment variables
  */
 static int
 unsafe_env(envp)
@@ -1486,7 +1486,7 @@ unsafe_env(envp)
 	return 0;
 found:
 	plog(LLV_ERROR, LOCATION, NULL, 
-	    "privsep_script_exec: unsafe environement variable\n");
+	    "privsep_script_exec: unsafe environment variable\n");
 	return -1;
 }
 
