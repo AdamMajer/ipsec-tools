@@ -573,7 +573,7 @@ getph2bymsgid(iph1, msgid)
 {
 	struct ph2handle *p;
 
-	LIST_FOREACH(p, &iph1->ph2tree, chain) {
+	LIST_FOREACH(p, &iph1->ph2tree, ph1bind) {
 		if (p->msgid == msgid && p->ph1 == iph1)
 			return p;
 	}
