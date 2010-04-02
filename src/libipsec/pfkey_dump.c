@@ -774,8 +774,10 @@ str_time(t)
 		for (;i < 20;) buf[i++] = ' ';
 	} else {
 		char *t0;
-		t0 = ctime(&t);
-		memcpy(buf, t0 + 4, 20);
+		if ((t0 = ctime(&t)) == NULL)
+			memset(buf, '?', 20);
+		else
+			memcpy(buf, t0 + 4, 20);
 	}
 
 	buf[20] = '\0';
