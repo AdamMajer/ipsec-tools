@@ -1506,6 +1506,7 @@ isakmp_info_send_r_u(sc)
 			"DPD: remote (ISAKMP-SA spi=%s) seems to be dead.\n",
 			isakmp_pindex(&iph1->index, 0));
 
+		script_hook(iph1, SCRIPT_PHASE1_DEAD);
 		evt_phase1(iph1, EVT_PHASE1_DPD_TIMEOUT, NULL);
 		purge_remote(iph1);
 

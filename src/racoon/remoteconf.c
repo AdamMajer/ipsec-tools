@@ -84,7 +84,8 @@ static TAILQ_HEAD(_rmtree, remoteconf) rmtree, rmtree_save, rmtree_tmp;
 /*
  * Script hook names and script hook paths
  */
-char *script_names[SCRIPT_MAX + 1] = { "phase1_up", "phase1_down" };
+char *script_names[SCRIPT_MAX + 1] = {
+	"phase1_up", "phase1_down", "phase1_dead" };
 
 /*%%%*/
 

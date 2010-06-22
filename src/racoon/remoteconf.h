@@ -80,7 +80,8 @@ struct rmconf_cert {
 /* Script hooks */
 #define SCRIPT_PHASE1_UP	0
 #define SCRIPT_PHASE1_DOWN	1
-#define SCRIPT_MAX		1
+#define SCRIPT_PHASE1_DEAD	2
+#define SCRIPT_MAX		2
 extern char *script_names[SCRIPT_MAX + 1];
 
 struct remoteconf {

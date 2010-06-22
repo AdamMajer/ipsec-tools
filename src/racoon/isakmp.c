@@ -1839,6 +1839,8 @@ isakmp_ph1resend(iph1)
 		plog(LLV_ERROR, LOCATION, NULL,
 			"phase1 negotiation failed due to time up. %s\n",
 			isakmp_pindex(&iph1->index, iph1->msgid));
+		/* XXX is the peer really "dead" here ??? */
+		script_hook(iph1, SCRIPT_PHASE1_DEAD);
 		evt_phase1(iph1, EVT_PHASE1_NO_RESPONSE, NULL);
 
 		return -1;
