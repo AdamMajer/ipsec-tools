@@ -555,6 +555,24 @@ duprmconf (rmconf)
 	new->idvl_p = genlist_init();
 	genlist_foreach(rmconf->idvl_p, dupidvl, new->idvl_p);
 
+        /* duplicate strings */ 
+	if (new->mycertfile != NULL) { 
+		new->mycertfile = racoon_strdup(new->mycertfile); 
+		STRDUP_FATAL(new->mycertfile); 
+	} 
+	if (new->myprivfile != NULL) { 
+		new->myprivfile = racoon_strdup(new->myprivfile); 
+		STRDUP_FATAL(new->myprivfile); 
+	} 
+	if (new->peerscertfile != NULL) { 
+		new->peerscertfile = racoon_strdup(new->peerscertfile); 
+		STRDUP_FATAL(new->peerscertfile); 
+	} 
+	if (new->cacertfile != NULL) { 
+                new->cacertfile = racoon_strdup(new->cacertfile); 
+		STRDUP_FATAL(new->cacertfile); 
+	} 
+
 	return new;
 }
 
