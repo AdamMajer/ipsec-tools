@@ -42,12 +42,12 @@
 #define	NAT_KA_QUEUED		(1L<<4)
 #define	NAT_ADD_NON_ESP_MARKER	(1L<<5)
 
-#define	NATT_AVAILABLE(ph1)	((iph1)->natt_flags & NAT_ANNOUNCED)
+#define	NATT_AVAILABLE(_ph1)	((_ph1)->natt_flags & NAT_ANNOUNCED)
 
 #define	NAT_DETECTED	(NAT_DETECTED_ME | NAT_DETECTED_PEER)
 
 #define	NON_ESP_MARKER_LEN	sizeof(u_int32_t)
-#define	NON_ESP_MARKER_USE(iph1)	((iph1)->natt_flags & NAT_ADD_NON_ESP_MARKER)
+#define	NON_ESP_MARKER_USE(_ph1)	((_ph1)->natt_flags & NAT_ADD_NON_ESP_MARKER)
 
 /* These are the values from parsing "remote {}" 
    block of the config file. */
