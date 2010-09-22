@@ -329,7 +329,7 @@ admin_process(so2, combuf)
 	case ADMIN_LOGOUT_USER: {
 		struct ph1handle *iph1;
 		char user[LOGINLEN+1];
-		int found = 0, len = com->ac_len - sizeof(com);
+		int found = 0, len = com->ac_len - sizeof(*com);
 
 		if (len > LOGINLEN) {
 			plog(LLV_ERROR, LOCATION, NULL,
