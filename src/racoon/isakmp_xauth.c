@@ -507,7 +507,7 @@ xauth_radius_init(void)
 		if (!auth_added) {
 			if (rad_config(radius_auth_state, NULL) != 0) {
 				plog(LLV_ERROR, LOCATION, NULL, 
-				    "Cannot open librarius config file: %s\n", 
+				    "Cannot open libradius config file: %s\n", 
 				    rad_strerror(radius_auth_state));
 				rad_close(radius_auth_state);
 				radius_auth_state = NULL;
@@ -547,7 +547,7 @@ xauth_radius_init(void)
 		if (!acct_added) {
 			if (rad_config(radius_acct_state, NULL) != 0) {
 				plog(LLV_ERROR, LOCATION, NULL, 
-				    "Cannot open librarius config file: %s\n", 
+				    "Cannot open libradius config file: %s\n", 
 				    rad_strerror(radius_acct_state));
 				rad_close(radius_acct_state);
 				radius_acct_state = NULL;
