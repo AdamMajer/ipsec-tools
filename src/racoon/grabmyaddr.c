@@ -187,8 +187,9 @@ myaddr_close_all_open(addr)
 	for (my = LIST_FIRST(&opened); my; my = next) {
 		next = LIST_NEXT(my, chain);
 
-		if (!cmpsaddr((struct sockaddr *) &addr,
-			      (struct sockaddr *) &my->addr))
+		if (cmpsaddr((struct sockaddr *) addr,
+			     (struct sockaddr *) &my->addr)
+		    <= CMPSADDR_WOP_MATCH)
 			myaddr_delete(my);
 	}
 }
