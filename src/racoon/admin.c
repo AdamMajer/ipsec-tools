@@ -734,7 +734,7 @@ admin_init()
 		return -1;
 	}
 
-	monitor_fd(lcconf->sock_admin, admin_handler, NULL);
+	monitor_fd(lcconf->sock_admin, admin_handler, NULL, 0);
 	plog(LLV_DEBUG, LOCATION, NULL,
 	     "open %s as racoon management.\n", sunaddr.sun_path);
 

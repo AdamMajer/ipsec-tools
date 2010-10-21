@@ -1727,7 +1727,7 @@ isakmp_open(struct sockaddr *addr, int udp_encap)
 	     "%s used as isakmp port (fd=%d)\n",
 	     saddr2str(addr), fd);
 
-	monitor_fd(fd, isakmp_handler, NULL);
+	monitor_fd(fd, isakmp_handler, NULL, 1);
 	return fd;
 
 err:
