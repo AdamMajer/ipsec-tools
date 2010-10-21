@@ -299,9 +299,8 @@ admin_process(so2, combuf)
 		break;
 
 	case ADMIN_DELETE_SA: {
-		struct ph1handle *iph1;
-		struct ph1selector sel;
 		char *loc, *rem;
+		struct ph1selector sel;
 
 		memset(&sel, 0, sizeof(sel));
 		sel.local = (struct sockaddr *)
@@ -319,6 +318,7 @@ admin_process(so2, combuf)
 		plog(LLV_INFO, LOCATION, NULL,
 		     "admin delete-sa %s %s\n", loc, rem);
 		enumph1(&sel, admin_ph1_delete_sa, NULL);
+		remcontacted(sel.remote);
 
 		racoon_free(loc);
 		racoon_free(rem);

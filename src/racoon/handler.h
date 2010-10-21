@@ -518,6 +518,7 @@ extern void unbindph12 __P((struct ph2handle *));
 
 extern struct contacted *getcontacted __P((struct sockaddr *));
 extern int inscontacted __P((struct sockaddr *));
+extern void remcontacted __P((struct sockaddr *));
 extern void initctdtree __P((void));
 
 extern int check_recvdpkt __P((struct sockaddr *,

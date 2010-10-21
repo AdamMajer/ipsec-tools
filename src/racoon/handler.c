@@ -966,6 +966,22 @@ inscontacted(remote)
 }
 
 void
+remcontacted(remote)
+	struct sockaddr *remote;
+{
+	struct contacted *p;
+
+	LIST_FOREACH(p, &ctdtree, chain) {
+		if (cmpsaddr(remote, p->remote) == 0) {
+			LIST_REMOVE(p, chain);
+			racoon_free(p->remote);
+			racoon_free(p);
+			break;
+		}
+	}	
+}
+
+void
 initctdtree()
 {
 	LIST_INIT(&ctdtree);
