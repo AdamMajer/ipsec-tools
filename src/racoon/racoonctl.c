@@ -1426,10 +1426,14 @@ handle_recv(combuf)
         int len;
 
 	com = (struct admin_com *)combuf->v;
-	len = com->ac_len - sizeof(*com);
+	if (com->ac_cmd & ADMIN_FLAG_LONG_REPLY)
+		len = ((u_int32_t)com->ac_len) + (((u_int32_t)com->ac_len_high) << 16);
+	else
+		len = com->ac_len;
+	len -= sizeof(*com);
 	buf = combuf->v + sizeof(*com);
 
-	switch (com->ac_cmd) {
+	switch (com->ac_cmd & ~ADMIN_FLAG_LONG_REPLY) {
 	case ADMIN_SHOW_SCHED:
 		print_schedule(buf, len);
 		break;

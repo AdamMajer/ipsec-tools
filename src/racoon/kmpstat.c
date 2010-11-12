@@ -138,7 +138,7 @@ com_recv(combufp)
 {
 	struct admin_com h, *com;
 	caddr_t buf;
-	int len;
+	int len, rlen;
 	int l = 0;
 	caddr_t p;
 
@@ -153,19 +153,25 @@ com_recv(combufp)
 	if (len < sizeof(h))
 		goto bad1;
 
-	if (h.ac_errno) {
+	if (h.ac_errno && !(h.ac_cmd & ADMIN_FLAG_LONG_REPLY)) {
 		errno = h.ac_errno;
 		goto bad1;
 	}
 
+	/* real length */
+	if (h.ac_cmd & ADMIN_FLAG_LONG_REPLY)
+		rlen = ((u_int32_t)h.ac_len) + (((u_int32_t)h.ac_len_high) << 16);
+	else
+		rlen = h.ac_len;
+
 	/* allocate buffer */
-	if ((*combufp = vmalloc(h.ac_len)) == NULL)
+	if ((*combufp = vmalloc(rlen)) == NULL)
 		goto bad1;
 
 	/* read real message */
 	p = (*combufp)->v;
-	while (l < len) {
-		if ((len = recv(so, p, h.ac_len, 0)) < 0) {
+	while (l < rlen) {
+		if ((len = recv(so, p, rlen - l, 0)) < 0) {
 			perror("recv");
 			goto bad2;
 		}
