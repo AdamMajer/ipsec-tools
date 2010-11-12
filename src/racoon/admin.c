@@ -577,7 +577,7 @@ admin_process(so2, combuf)
 			}
 
 			insph2(iph2);
-			if (isakmp_post_acquire(iph2, NULL) < 0) {
+			if (isakmp_post_acquire(iph2, NULL, FALSE) < 0) {
 				remph2(iph2);
 				delph2(iph2);
 				break;

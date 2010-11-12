@@ -87,7 +87,7 @@ extern void isakmp_ph2delete_stub __P((struct sched *));
 extern void isakmp_ph2delete __P((struct ph2handle *));
 
 extern int isakmp_get_sainfo __P((struct ph2handle *, struct secpolicy *, struct secpolicy *));
-extern int isakmp_post_acquire __P((struct ph2handle *, struct ph1handle *));
+extern int isakmp_post_acquire __P((struct ph2handle *, struct ph1handle *, int));
 extern int isakmp_post_getspi __P((struct ph2handle *));
 extern void isakmp_chkph1there_stub __P((struct sched *));
 extern void isakmp_chkph1there __P((struct ph2handle *));
