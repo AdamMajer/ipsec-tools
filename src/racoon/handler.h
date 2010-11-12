@@ -202,7 +202,8 @@ struct ph1handle {
 
 #ifdef ENABLE_DPD
 	int		dpd_support;	/* Does remote supports DPD ? */
-	u_int16_t	dpd_seq;		/* DPD seq number to receive */
+	u_int32_t	dpd_last_ack;
+	u_int32_t	dpd_seq;		/* DPD seq number to receive */
 	u_int8_t	dpd_fails;		/* number of failures */
 	struct sched	dpd_r_u;
 #endif
