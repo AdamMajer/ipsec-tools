@@ -514,6 +514,22 @@ initph1tree()
 	LIST_INIT(&ph1tree);
 }
 
+int
+ph1_rekey_enabled(iph1)
+	struct ph1handle *iph1;
+{
+	if (iph1->rmconf == NULL)
+		return 0;
+	if (iph1->rmconf->rekey == REKEY_FORCE)
+		return 1;
+#ifdef ENABLE_DPD
+	if (iph1->rmconf->rekey == REKEY_ON && iph1->dpd_support &&
+	    iph1->rmconf->dpd_interval)
+		return 1;
+#endif
+	return 0;
+}
+
 /* %%% management phase 2 handler */
 
 int

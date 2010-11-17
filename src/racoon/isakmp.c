@@ -766,20 +766,6 @@ isakmp_main(msg, remote, local)
 	return 0;
 }
 
-static int
-ph1_rekey_enabled(iph1)
-	struct ph1handle *iph1;
-{
-	if (iph1->rmconf->rekey == REKEY_FORCE)
-		return 1;
-#ifdef ENABLE_DPD
-	if (iph1->rmconf->rekey == REKEY_ON && iph1->dpd_support &&
-	    iph1->rmconf->dpd_interval)
-		return 1;
-#endif
-	return 0;
-}
-
 /*
  * main function of phase 1.
  */
@@ -2081,11 +2067,9 @@ isakmp_ph1delete(iph1)
 		src, dst, isakmp_pindex(&iph1->index, 0));
 
 	evt_phase1(iph1, EVT_PHASE1_DOWN, NULL);
-
-	if (new_iph1 == NULL && ph1_rekey_enabled(iph1)) {
-		purge_remote(iph1);
+	if (new_iph1 == NULL && ph1_rekey_enabled(iph1))
 		script_hook(iph1, SCRIPT_PHASE1_DEAD);
-	}
+
 	racoon_free(src);
 	racoon_free(dst);
 
@@ -3521,7 +3505,7 @@ delete_spd(iph2, created)
 		}
 	}
 
-	/* make source address in spidx */
+		/* make source address in spidx */
 	if (iph2->id_p != NULL
 		&& (_XIDT(iph2->id_p) == IPSECDOI_ID_IPV4_ADDR
 			|| _XIDT(iph2->id_p) == IPSECDOI_ID_IPV6_ADDR

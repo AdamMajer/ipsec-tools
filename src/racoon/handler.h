@@ -493,6 +493,7 @@ extern void remph1 __P((struct ph1handle *));
 extern int resolveph1rmconf __P((struct ph1handle *));
 extern void flushph1 __P((void));
 extern void initph1tree __P((void));
+extern int ph1_rekey_enabled __P((struct ph1handle *));
 
 extern int enumph2 __P((struct ph2selector *ph2sel,
 			int (* enum_func)(struct ph2handle *iph2, void *arg),
