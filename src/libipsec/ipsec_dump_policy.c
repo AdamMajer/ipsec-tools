@@ -53,7 +53,10 @@
 #include "libpfkey.h"
 
 static const char *ipsp_dir_strs[] = {
-	"any", "in", "out", "fwd"
+	"any", "in", "out", "fwd",
+#ifdef __linux__
+	"in(socket)", "out(socket)"
+#endif
 };
 
 static const char *ipsp_policy_strs[] = {
@@ -165,6 +168,8 @@ ipsec_dump_policy1(policy, delimiter, withports)
 	case IPSEC_DIR_OUTBOUND:
 #ifdef HAVE_POLICY_FWD
 	case IPSEC_DIR_FWD:
+	case IPSEC_DIR_FWD + 1:
+	case IPSEC_DIR_FWD + 2:
 #endif
 		break;
 	default:
