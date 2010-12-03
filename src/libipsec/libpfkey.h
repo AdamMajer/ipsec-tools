@@ -210,6 +210,10 @@ int pfkey_send_add_nat __P((int, u_int, u_int, struct sockaddr *,
 #define IPPROTO_IPCOMP IPPROTO_COMP
 #endif
 
+#ifndef IPPROTO_MH
+#define IPPROTO_MH		135
+#endif
+
 static __inline u_int8_t
 sysdep_sa_len (const struct sockaddr *sa)
 {
