@@ -2383,9 +2383,9 @@ get_proposal_r(iph2)
 			}
 		} else {
 			plog(LLV_DEBUG, LOCATION, NULL,
-			     "Either family (%d - %d), types (%d - %d) of ID"
-			     "from initiator differ or matching sainfo has"
-			     "has no id_i defined for the peer. Not filling"
+			     "Either family (%d - %d), types (%d - %d) of ID "
+			     "from initiator differ or matching sainfo "
+			     "has no id_i defined for the peer. Not filling "
 			     "iph2->sa_src and iph2->sa_dst.\n",
 			     spidx.src.ss_family, spidx.dst.ss_family,
 			     _XIDT(iph2->id_p),idi2type);
@@ -2416,7 +2416,7 @@ get_proposal_r(iph2)
 #undef _XIDT
 
 	plog(LLV_DEBUG, LOCATION, NULL,
-		"get a src address from ID payload "
+		"get src address from ID payload "
 		"%s prefixlen=%u ul_proto=%u\n",
 		saddr2str((struct sockaddr *)&spidx.src),
 		spidx.prefs, spidx.ul_proto);
