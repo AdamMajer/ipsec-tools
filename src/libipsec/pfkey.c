@@ -2282,7 +2282,7 @@ pfkey_setsadbaddr(caddr_t buf, caddr_t lim, u_int exttype,
  * `buf' must has been allocated sufficiently.
  */
 static caddr_t
-pfkey_setsadbkmaddr(caddr_t buf, caddr_T lim, struct sockaddr *local,
+pfkey_setsadbkmaddr(caddr_t buf, caddr_t lim, struct sockaddr *local,
     struct sockaddr *remote)
 {
 	struct sadb_x_kmaddress *p;
