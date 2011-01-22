@@ -1502,6 +1502,15 @@ isakmp_info_send_r_u(sc)
 
 	plog(LLV_DEBUG, LOCATION, iph1->remote, "DPD monitoring....\n");
 
+	if (iph1->status == PHASE1ST_EXPIRED) {
+		/* This can happen after removing tunnels from the
+		 * config file and then reloading.
+		 * Such iph1 have rmconf=NULL, so return before the if
+		 * block below.
+		 */
+		return;
+	}
+
 	if (iph1->dpd_fails >= iph1->rmconf->dpd_maxfails) {
 
 		plog(LLV_INFO, LOCATION, iph1->remote,
