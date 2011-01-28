@@ -387,7 +387,7 @@ static void reload_conf(){
 	}
 #endif
 
-	save_sainfotree();
+	sainfo_start_reload();
 
 	/* TODO: save / restore / flush old lcconf (?) / rmtree
 	 */
@@ -429,7 +429,7 @@ static void reload_conf(){
 	/* Update ctdtree ?
 	 */
 
-	save_sainfotree_flush();
+	sainfo_finish_reload();
 	rmconf_finish_reload();
 }
 

@@ -85,8 +85,8 @@ extern void delsainfoalg __P((struct sainfoalg *));
 extern void inssainfoalg __P((struct sainfoalg **, struct sainfoalg *));
 extern const char * sainfo2str __P((const struct sainfo *));
 
-extern void save_sainfotree __P((void));
-extern void save_sainfotree_flush __P((void));
+extern void sainfo_start_reload __P((void));
+extern void sainfo_finish_reload __P((void));
 extern void save_sainfotree_restore __P((void));
 
 #endif /* _SAINFO_H */
