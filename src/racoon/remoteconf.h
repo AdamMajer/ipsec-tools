@@ -209,8 +209,8 @@ extern void insrmconf __P((struct remoteconf *));
 extern void remrmconf __P((struct remoteconf *));
 extern void flushrmconf __P((void));
 extern void initrmconf __P((void));
-extern void save_rmconf __P((void));
-extern void save_rmconf_flush __P((void));
+extern void rmconf_start_reload __P((void));
+extern void rmconf_finish_reload __P((void));
 
 extern int check_etypeok __P((struct remoteconf *, void *));
 

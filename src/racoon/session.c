@@ -391,8 +391,7 @@ static void reload_conf(){
 
 	/* TODO: save / restore / flush old lcconf (?) / rmtree
 	 */
-	save_rmconf();
-	initrmconf();
+	rmconf_start_reload();
 
 #ifdef HAVE_LIBRADIUS
 	/* free and init radius configuration */
@@ -431,7 +430,7 @@ static void reload_conf(){
 	 */
 
 	save_sainfotree_flush();
-	save_rmconf_flush();
+	rmconf_finish_reload();
 }
 
 static void

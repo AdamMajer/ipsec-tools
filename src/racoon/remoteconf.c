@@ -79,7 +79,8 @@
 #include "handler.h"
 #include "genlist.h"
 
-static TAILQ_HEAD(_rmtree, remoteconf) rmtree, rmtree_save, rmtree_tmp;
+typedef TAILQ_HEAD(_rmtree, remoteconf) remoteconf_tailq_head_t;
+static remoteconf_tailq_head_t rmtree, rmtree_save;
 
 /*
  * Script hook names and script hook paths
@@ -744,15 +745,17 @@ initrmconf()
 }
 
 void
-save_rmconf()
+rmconf_start_reload()
 {
 	rmtree_save=rmtree;
 	initrmconf();
 }
 
 void
-save_rmconf_flush()
+rmconf_finish_reload()
 {
+	remoteconf_tailq_head_t rmtree_tmp;
+
 	rmtree_tmp=rmtree;
 	rmtree=rmtree_save;
 	flushrmconf();
