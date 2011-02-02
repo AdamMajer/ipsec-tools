@@ -141,7 +141,7 @@ struct remoteconf {
 #define REKEY_ON		TRUE
 #define REKEY_FORCE		2
 
-	int ph1id; /* ph1id to be matched with sainfo sections */
+	uint32_t ph1id; /* ph1id to be matched with sainfo sections */
 
 	int weak_phase1_check;		/* act on unencrypted deletions ? */
 

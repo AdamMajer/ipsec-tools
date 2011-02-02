@@ -580,7 +580,7 @@ no		{ YYD; yylval.num = FALSE; return(BOOLEAN); }
 			char *bp;
 
 			YYD;
-			yylval.num = strtol(yytext, &bp, 10);
+			yylval.num = strtoul(yytext, &bp, 10);
 			return(NUMBER);
 		}
 

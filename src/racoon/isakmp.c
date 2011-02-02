@@ -2246,7 +2246,7 @@ isakmp_get_sainfo(iph2, sp_out, sp_in)
 	struct secpolicy *sp_out, *sp_in;
 {
 	struct remoteconf *conf;
-	int remoteid = 0;
+	uint32_t remoteid = 0;
 
 	plog(LLV_DEBUG, LOCATION, NULL,
 		"new acquire %s\n", spidx2str(&sp_out->spidx));

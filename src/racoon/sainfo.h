@@ -60,7 +60,7 @@ struct sainfo {
 	vchar_t *id_i;		/* identifier of the authorized initiator */
 	struct sainfoalg *algs[MAXALGCLASS];
 
-	int remoteid;
+	uint32_t remoteid;
 
 	LIST_ENTRY(sainfo) chain;
 };
@@ -73,7 +73,7 @@ struct sainfoalg {
 };
 
 extern struct sainfo *getsainfo __P((const vchar_t *,
-	const vchar_t *, const vchar_t *, const vchar_t *, int));
+	const vchar_t *, const vchar_t *, const vchar_t *, uint32_t));
 extern struct sainfo *newsainfo __P((void));
 extern void delsainfo __P((struct sainfo *));
 extern void inssainfo __P((struct sainfo *));
