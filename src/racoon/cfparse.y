@@ -2617,6 +2617,7 @@ cfparse()
 {
 	int error;
 
+	yyerrorcount = 0;
 	yycf_init_buffer();
 
 	if (yycf_switch_buffer(lcconf->racoon_conf) != 0) {
