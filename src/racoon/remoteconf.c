@@ -652,6 +652,8 @@ delrmconf(rmconf)
 		racoon_free(rmconf->cacertfile);
 	if (rmconf->name)
 		racoon_free(rmconf->name);
+	if (rmconf->remote)
+		racoon_free(rmconf->remote);
 	racoon_free(rmconf);
 }
 
