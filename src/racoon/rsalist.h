@@ -53,6 +53,7 @@ struct rsa_key {
 };
 
 int rsa_key_insert(struct genlist *list, struct netaddr *src, struct netaddr *dst, RSA *rsa);
+void rsa_key_free(void *data);
 void rsa_key_dump(struct genlist *list);
 
 struct genlist *rsa_lookup_keys(struct ph1handle *iph1, int my);
