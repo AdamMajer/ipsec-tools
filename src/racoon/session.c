@@ -344,6 +344,7 @@ close_session()
 	flushph2();
 	flushph1();
 	flushrmconf();
+	flushsainfo();
 	close_sockets();
 	backupsa_clean();
 
