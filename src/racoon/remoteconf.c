@@ -654,6 +654,7 @@ delrmconf(rmconf)
 		racoon_free(rmconf->name);
 	if (rmconf->remote)
 		racoon_free(rmconf->remote);
+	flushspspec(rmconf);
 	racoon_free(rmconf);
 }
 
