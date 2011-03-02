@@ -423,13 +423,16 @@ listen_stmt
 	:	X_ISAKMP ike_addrinfo_port
 		{
 			myaddr_listen($2, FALSE);
+			racoon_free($2);
 		}
 		EOS
 	|	X_ISAKMP_NATT ike_addrinfo_port
 		{
 #ifdef ENABLE_NATT
 			myaddr_listen($2, TRUE);
+			racoon_free($2);
 #else
+			racoon_free($2);
 			yyerror("NAT-T support not compiled in.");
 #endif
 		}

@@ -211,6 +211,7 @@ rsa_statement:
 			YYABORT;
 		}
 		$$ = base64_pubkey2rsa($2);
+		free($2);
 	}
 	| TAG_PUB HEX
 	{
@@ -256,6 +257,7 @@ addr4:
 		}
 		memcpy(sap, res->ai_addr, res->ai_addrlen);
 		freeaddrinfo(res);
+		free($1);
 	}
 	;
 
@@ -284,6 +286,7 @@ addr6:
 		}
 		memcpy(sap, res->ai_addr, res->ai_addrlen);
 		freeaddrinfo(res);
+		free($1);
 	}
 	;
 
