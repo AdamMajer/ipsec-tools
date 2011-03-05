@@ -208,6 +208,7 @@ extern struct etypes * dupetypes __P((struct etypes *));
 extern void insrmconf __P((struct remoteconf *));
 extern void remrmconf __P((struct remoteconf *));
 extern void flushrmconf __P((void));
+extern void flushspspec __P((struct remoteconf *));
 extern void initrmconf __P((void));
 extern void rmconf_start_reload __P((void));
 extern void rmconf_finish_reload __P((void));

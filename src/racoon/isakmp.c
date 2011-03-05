@@ -3422,7 +3422,7 @@ delete_spd(iph2, created)
 	dst = iph2->dst;
 
 	plog(LLV_INFO, LOCATION, NULL,
-		 "generated policy, deleting it.\n");
+		 "deleting a generated policy.\n");
 
 	memset(&spidx, 0, sizeof(spidx));
 	iph2->spidx_gen = (caddr_t )&spidx;

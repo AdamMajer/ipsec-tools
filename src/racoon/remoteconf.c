@@ -78,6 +78,7 @@
 #include "isakmp_frag.h"
 #include "handler.h"
 #include "genlist.h"
+#include "rsalist.h"
 
 typedef TAILQ_HEAD(_rmtree, remoteconf) remoteconf_tailq_head_t;
 static remoteconf_tailq_head_t rmtree, rmtree_save;
@@ -650,8 +651,15 @@ delrmconf(rmconf)
 		vfree(rmconf->cacert);
 	if (rmconf->cacertfile)
 		racoon_free(rmconf->cacertfile);
+	if (rmconf->rsa_private)
+		genlist_free(rmconf->rsa_private, rsa_key_free);
+	if (rmconf->rsa_public)
+		genlist_free(rmconf->rsa_public, rsa_key_free);
 	if (rmconf->name)
 		racoon_free(rmconf->name);
+	if (rmconf->remote)
+		racoon_free(rmconf->remote);
+	flushspspec(rmconf);
 	racoon_free(rmconf);
 }
 

@@ -88,6 +88,23 @@ rsa_key_insert(struct genlist *list, struct netaddr *src,
 	return 0;
 }
 
+void
+rsa_key_free(void *data)
+{
+	struct rsa_key *rsa_key;
+
+	
+	rsa_key = (struct rsa_key *)data;
+	if (rsa_key->src)
+		free(rsa_key->src);
+	if (rsa_key->dst)
+		free(rsa_key->dst);
+	if (rsa_key->rsa)
+		RSA_free(rsa_key->rsa);
+
+	free(rsa_key);
+}
+
 static void *
 rsa_key_dump_one(void *entry, void *arg)
 {

@@ -343,6 +343,8 @@ close_session()
 	pfkey_send_flush(lcconf->sock_pfkey, SADB_SATYPE_UNSPEC);
 	flushph2();
 	flushph1();
+	flushrmconf();
+	flushsainfo();
 	close_sockets();
 	backupsa_clean();
 
