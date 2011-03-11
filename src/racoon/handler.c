@@ -1447,6 +1447,7 @@ remove_ph2(struct ph2handle *iph2)
 		 * - delete SPIs in kernel
 		 * - delete generated SPD
 		 * - unbind / rem / del ph2
+		 * - XXX shoudld also send a delete-sa !?
 		 */
 		purge_ipsec_spi(iph2->dst, iph2->approval->head->proto_id,
 						spis, 2);
@@ -1474,7 +1475,11 @@ static void remove_ph1(struct ph1handle *iph1){
 		isakmp_info_send_d1(iph1);
 	}
 	iph1->status = PHASE1ST_EXPIRED;
-	sched_schedule(&iph1->sce, 1, isakmp_ph1delete_stub);
+	/* directly call isakmp_ph1delete to avoid as possible a race
+	 * condition where we'll try to access iph1->rmconf after it has
+	 * freed
+	 */
+	isakmp_ph1delete(iph1);
 }
 
 

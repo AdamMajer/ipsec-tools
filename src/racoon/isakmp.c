@@ -2048,6 +2048,9 @@ isakmp_ph1delete(iph1)
 		next = LIST_NEXT(p, ph1bind);
 		if (p->status >= PHASE2ST_ESTABLISHED)
 			unbindph12(p);
+		/* Should we also remove non established ph2
+		 * handles, as we just invalidated ph1handle ?
+		 */
 	}
 
 	if (LIST_FIRST(&iph1->ph2tree) != NULL) {
