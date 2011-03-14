@@ -100,7 +100,7 @@ myaddr_configured(addr)
 		return TRUE;
 
 	LIST_FOREACH(cfg, &configured, chain) {
-		if (cmpsaddr(addr, (struct sockaddr *) &cfg->addr) == 0)
+		if (cmpsaddr(addr, (struct sockaddr *) &cfg->addr) <= CMPSADDR_WILDPORT_MATCH)
 			return TRUE;
 	}
 
@@ -116,7 +116,7 @@ myaddr_open(addr, udp_encap)
 
 	/* Already open? */
 	LIST_FOREACH(my, &opened, chain) {
-		if (cmpsaddr(addr, (struct sockaddr *) &my->addr) == 0)
+		if (cmpsaddr(addr, (struct sockaddr *) &my->addr) <= CMPSADDR_WILDPORT_MATCH)
 			return TRUE;
 	}
 
@@ -156,7 +156,7 @@ myaddr_open_all_configured(addr)
 
 	LIST_FOREACH(cfg, &configured, chain) {
 		if (addr != NULL &&
-		    cmpsaddr(addr, (struct sockaddr *) &cfg->addr) != 0)
+		    cmpsaddr(addr, (struct sockaddr *) &cfg->addr) > CMPSADDR_WILDPORT_MATCH)
 			continue;
 		if (!myaddr_open((struct sockaddr *) &cfg->addr, cfg->udp_encap))
 			return FALSE;
@@ -262,7 +262,7 @@ myaddr_getfd(addr)
 	struct myaddr *my;
 
 	LIST_FOREACH(my, &opened, chain) {
-		if (cmpsaddr((struct sockaddr *) &my->addr, addr) == 0)
+		if (cmpsaddr((struct sockaddr *) &my->addr, addr) <= CMPSADDR_WILDPORT_MATCH)
 			return my->fd;
 	}
 
@@ -276,7 +276,7 @@ myaddr_getsport(addr)
 	struct myaddr *my;
 
 	LIST_FOREACH(my, &opened, chain) {
-		if (cmpsaddr((struct sockaddr *) &my->addr, addr) == 0)
+		if (cmpsaddr((struct sockaddr *) &my->addr, addr) <= CMPSADDR_WILDPORT_MATCH)
 			return extract_port((struct sockaddr *) &my->addr);
 	}
 

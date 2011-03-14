@@ -132,10 +132,12 @@ cmpsaddr(addr1, addr2)
 		return CMPSADDR_MISMATCH;
 	}
 
-	if (port1 == port2 ||
-	    port1 == IPSEC_PORT_ANY ||
-	    port2 == IPSEC_PORT_ANY)
+	if (port1 == port2)
 		return CMPSADDR_MATCH;
+
+	if (port1 == IPSEC_PORT_ANY ||
+	    port2 == IPSEC_PORT_ANY)
+		return CMPSADDR_WILDPORT_MATCH;
 
 	return CMPSADDR_WOP_MATCH;
 }
@@ -934,7 +936,7 @@ naddr_score(const struct netaddr *naddr, const struct sockaddr *saddr)
 		free(a2);
 		free(a3);
 	}
-	if (cmpsaddr(&sa, &naddr->sa.sa) == 0)
+	if (cmpsaddr(&sa, &naddr->sa.sa) <= CMPSADDR_WOP_MATCH)
 		return naddr->prefix + port_score;
 
 	return -1;

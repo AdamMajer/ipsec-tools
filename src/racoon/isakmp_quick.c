@@ -629,7 +629,7 @@ quick_i2recv(iph2, msg0)
 #endif
 
 		if (cmpsaddr((struct sockaddr *) &proposed_addr,
-			     (struct sockaddr *) &got_addr) == 0) {
+			     (struct sockaddr *) &got_addr) == CMPSADDR_MATCH) {
 			plog(LLV_DEBUG, LOCATION, NULL,
 				"IDci matches proposal.\n");
 #ifdef ENABLE_NATT
@@ -677,13 +677,13 @@ quick_i2recv(iph2, msg0)
 #endif
 
 		if (cmpsaddr((struct sockaddr *) &proposed_addr,
-			     (struct sockaddr *) &got_addr) == 0) {
+			     (struct sockaddr *) &got_addr) == CMPSADDR_MATCH) {
 			plog(LLV_DEBUG, LOCATION, NULL,
 				"IDcr matches proposal.\n");
 #ifdef ENABLE_NATT
 		} else if (iph2->natoa_dst != NULL
 			&& cmpsaddr(iph2->natoa_dst,
-				    (struct sockaddr *) &got_addr) == 0) {
+				    (struct sockaddr *) &got_addr) == CMPSADDR_MATCH) {
 			plog(LLV_DEBUG, LOCATION, NULL,
 				"IDcr matches NAT-OAr.\n");
 #endif

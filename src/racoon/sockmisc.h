@@ -57,8 +57,9 @@ struct netaddr {
 extern const int niflags;
 
 #define CMPSADDR_MATCH		0
-#define CMPSADDR_WOP_MATCH	1
-#define CMPSADDR_MISMATCH	2
+#define CMPSADDR_WILDPORT_MATCH	1
+#define CMPSADDR_WOP_MATCH	2
+#define CMPSADDR_MISMATCH	3
 
 extern int cmpsaddr __P((const struct sockaddr *, const struct sockaddr *));
 

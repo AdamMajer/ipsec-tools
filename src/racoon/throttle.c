@@ -104,7 +104,7 @@ restart:
 			goto restart;
 		}
 
-		if (cmpsaddr(addr, (struct sockaddr *) &te->host) == 0) {
+		if (cmpsaddr(addr, (struct sockaddr *) &te->host) <= CMPSADDR_WOP_MATCH) {
 			found = 1;
 			break;
 		}
