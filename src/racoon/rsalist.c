@@ -88,6 +88,48 @@ rsa_key_insert(struct genlist *list, struct netaddr *src,
 	return 0;
 }
 
+struct rsa_key *
+rsa_key_dup(struct rsa_key *key)
+{
+	struct rsa_key *new;
+
+	new = calloc(sizeof(struct rsa_key), 1);
+	if (new == NULL)
+		return NULL;
+
+	if (key->rsa) {
+		new->rsa = key->rsa->d != NULL ? RSAPrivateKey_dup(key->rsa) : RSAPublicKey_dup(key->rsa);
+		if (new->rsa == NULL)
+			goto dup_error;
+	}
+
+	if (key->src) {
+		new->src = malloc(sizeof(*new->src));
+		if (new->src == NULL)
+			goto dup_error;
+		memcpy(new->src, key->src, sizeof(*new->src));
+	}	
+	if (key->dst) {
+		new->dst = malloc(sizeof(*new->dst));
+		if (new->dst == NULL)
+			goto dup_error;
+		memcpy(new->dst, key->dst, sizeof(*new->dst));
+	}
+
+	return new;
+
+dup_error:
+	if (new->rsa != NULL)
+		RSA_free(new->rsa);
+	if (new->dst != NULL)
+		free(new->dst);
+	if (new->src != NULL)
+		free(new->src);
+
+	free(new);
+	return NULL;
+}
+
 void
 rsa_key_free(void *data)
 {

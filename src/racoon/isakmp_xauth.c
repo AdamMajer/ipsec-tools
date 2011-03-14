@@ -1764,3 +1764,42 @@ xauth_rmconf_delete(xauth_rmconf)
 
 	return;
 }
+
+struct xauth_rmconf *
+xauth_rmconf_dup(xauth_rmconf)
+	struct xauth_rmconf *xauth_rmconf;
+{
+	struct xauth_rmconf *new;
+
+	if (xauth_rmconf != NULL) {
+		new = racoon_malloc(sizeof(*new));
+		if (new == NULL) {
+			plog(LLV_ERROR, LOCATION, NULL, 
+			    "xauth_rmconf_dup: malloc failed\n");
+			return NULL;
+		}
+
+		memcpy(new, xauth_rmconf, sizeof(*new));
+
+		if (xauth_rmconf->login != NULL) {
+			new->login = vdup(xauth_rmconf->login);
+			if (new->login == NULL) {
+				plog(LLV_ERROR, LOCATION, NULL, 
+				    "xauth_rmconf_dup: malloc failed (login)\n");
+				return NULL;
+			}
+		}
+		if (xauth_rmconf->pass != NULL) {
+			new->pass = vdup(xauth_rmconf->pass);
+			if (new->pass == NULL) {
+				plog(LLV_ERROR, LOCATION, NULL, 
+				    "xauth_rmconf_dup: malloc failed (password)\n");
+				return NULL;
+			}
+		}
+
+		return new;
+	}
+
+	return NULL;
+}
