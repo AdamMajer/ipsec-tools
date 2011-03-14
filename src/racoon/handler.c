@@ -1447,7 +1447,6 @@ remove_ph2(struct ph2handle *iph2)
 		 * - delete SPIs in kernel
 		 * - delete generated SPD
 		 * - unbind / rem / del ph2
-		 * - XXX shoudld also send a delete-sa !?
 		 */
 		purge_ipsec_spi(iph2->dst, iph2->approval->head->proto_id,
 						spis, 2);
