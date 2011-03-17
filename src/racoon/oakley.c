@@ -1862,10 +1862,11 @@ oakley_check_certid(iph1)
 		hints.ai_socktype = SOCK_RAW;
 		hints.ai_flags = AI_NUMERICHOST;
 		error = getaddrinfo(altname, NULL, &hints, &res);
+		racoon_free(altname);
+		altname = NULL;
 		if (error != 0) {
 			plog(LLV_ERROR, LOCATION, NULL,
 				"no proper subjectAltName.\n");
-			racoon_free(altname);
 			return ISAKMP_NTYPE_INVALID_CERTIFICATE;
 		}
 		switch (res->ai_family) {
@@ -1880,7 +1881,6 @@ oakley_check_certid(iph1)
 		default:
 			plog(LLV_ERROR, LOCATION, NULL,
 				"family not supported: %d.\n", res->ai_family);
-			racoon_free(altname);
 			freeaddrinfo(res);
 			return ISAKMP_NTYPE_INVALID_CERTIFICATE;
 		}
