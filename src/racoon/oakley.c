@@ -2288,7 +2288,7 @@ oakley_append_rmconf_cr(rmconf, ctx)
 	     s_isakmp_certtype(buf->v[0]));
 	plogdump(LLV_DEBUG, buf->v, buf->l);
 
-	actx->plist = isakmp_plist_append(actx->plist, buf, ISAKMP_NPTYPE_CR);
+	actx->plist = isakmp_plist_append_full(actx->plist, buf, ISAKMP_NPTYPE_CR, 1);
 
 err:
 	vfree(asn1dn);
