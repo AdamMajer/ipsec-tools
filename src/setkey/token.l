@@ -223,6 +223,16 @@ tcp		{
 	yylval.num = SADB_X_EALG_CAMELLIACBC; BEGIN INITIAL; return(ALG_ENC); 
 #endif
 }
+<S_ENCALG>aes-gcm-16	{
+#ifdef SADB_X_EALG_AESGCM16
+	yylval.num = SADB_X_EALG_AESGCM16; BEGIN INITIAL; return(ALG_ENC);
+#endif
+}
+<S_ENCALG>aes-gmac	{
+#ifdef SADB_X_EALG_AESGMAC
+	yylval.num = SADB_X_EALG_AESGMAC; BEGIN INITIAL; return(ALG_ENC);
+#endif
+}
 
 	/* compression algorithms */
 {hyphen}C	{ return(F_COMP); }
