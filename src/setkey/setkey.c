@@ -753,12 +753,6 @@ postproc(msg, len)
 			else
 				pfkey_sadump(msg);
 		}
-		msg = (struct sadb_msg *)((caddr_t)msg +
-				     PFKEY_UNUNIT64(msg->sadb_msg_len));
-		if (f_verbose) {
-			kdebug_sadb((struct sadb_msg *)msg);
-			printf("\n");
-		}
 		break;
 
 	case SADB_X_SPDGET:
@@ -773,13 +767,6 @@ postproc(msg, len)
 			pfkey_spdump_withports(msg);
 		else
 			pfkey_spdump(msg);
-		if (msg->sadb_msg_seq == 0) break;
-		msg = (struct sadb_msg *)((caddr_t)msg +
-				     PFKEY_UNUNIT64(msg->sadb_msg_len));
-		if (f_verbose) {
-			kdebug_sadb((struct sadb_msg *)msg);
-			printf("\n");
-		}
 		break;
 #ifdef HAVE_PFKEY_POLICY_PRIORITY
 	case SADB_X_SPDADD:
@@ -867,6 +854,10 @@ fileproc(filename)
 	while (p < ep) {
 		msg = (struct sadb_msg *)p;
 		len = PFKEY_UNUNIT64(msg->sadb_msg_len);
+		if (f_verbose) {
+			kdebug_sadb((struct sadb_msg *)msg);
+			printf("\n");
+		}
 		postproc(msg, len);
 		p += len;
 	}
