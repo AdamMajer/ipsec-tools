@@ -67,6 +67,7 @@
 #include "admin.h"
 #include "sockmisc.h"
 #include "privsep.h"
+#include "session.h"
 
 static int privsep_sock[2] = { -1, -1 };
 
@@ -193,6 +194,13 @@ privsep_recv(sock, bufp, lenp)
 	return 0;
 }
 
+static int
+privsep_do_exit(void *ctx, int fd)
+{
+	kill(getpid(), SIGTERM);
+	return 0;
+}
+
 int
 privsep_init(void)
 {
@@ -273,6 +281,7 @@ privsep_init(void)
 			    strerror(errno));
 			return -1;
 		}
+		monitor_fd(privsep_sock[1], privsep_do_exit, NULL, 0);
 
 		return 0;
 		break;
