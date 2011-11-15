@@ -226,6 +226,7 @@ hexstring	0x{hexdigit}+
 <S_LDAP>version		{ YYD; return(LDAP_PVER); }
 <S_LDAP>host		{ YYD; return(LDAP_HOST); }
 <S_LDAP>port		{ YYD; return(LDAP_PORT); }
+<S_LDAP>tls		{ YYD; return(LDAP_TLS); }
 <S_LDAP>base		{ YYD; return(LDAP_BASE); }
 <S_LDAP>subtree		{ YYD; return(LDAP_SUBTREE); }
 <S_LDAP>bind_dn		{ YYD; return(LDAP_BIND_DN); }

@@ -160,6 +160,7 @@ struct xauth_ldap_config {
 	int		pver;
 	vchar_t 	*host;
 	int		port;
+	int		tls;
 	vchar_t		*base;
 	int		subtree;
 	vchar_t		*bind_dn;
