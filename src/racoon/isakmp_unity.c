@@ -387,8 +387,9 @@ char * splitnet_list_2str(list, splitnet_ipaddr)
 		netentry = netentry->next;
 	}
 
-	/* allocate network list string */
-	str = racoon_malloc(len);
+	/* allocate network list string; we need the extra byte temporarily
+	 * as sprintf() will write trailing 0-byte after the space. */
+	str = racoon_malloc(len + 1);
 	if (str == NULL)
 		return NULL;
 
@@ -414,6 +415,7 @@ char * splitnet_list_2str(list, splitnet_ipaddr)
 		netentry = netentry->next;
 	}
 
+	/* trim the string to not have trailing spaces */
 	str[len-1]=0;
 
 	return str;
