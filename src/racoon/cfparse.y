@@ -1267,7 +1267,7 @@ authgroup
 			groupname = racoon_malloc($1->l+1);
 			if (groupname == NULL) {
 				yyerror("unable to allocate auth group name");
-				ABORT_AND_VFREE, $1);
+				ABORT_AND_VFREE($1);
 			}
 
 			memcpy(groupname,$1->v,$1->l);
