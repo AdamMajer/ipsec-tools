@@ -213,7 +213,7 @@ getph1(ph1hint, local, remote, flags)
 			    (ph1hint->id->l != p->id->l ||
 			     memcmp(ph1hint->id->v, p->id->v, p->id->l) != 0)) {
 				plog(LLV_DEBUG2, LOCATION, NULL,
-				     "local identity does match hint\n");
+				     "local identity does not match hint\n");
 				continue;
 			}
 			if (ph1hint->id_p && ph1hint->id_p->l &&
@@ -221,7 +221,7 @@ getph1(ph1hint, local, remote, flags)
 			    (ph1hint->id_p->l != p->id_p->l ||
 			     memcmp(ph1hint->id_p->v, p->id_p->v, p->id_p->l) != 0)) {
 				plog(LLV_DEBUG2, LOCATION, NULL,
-				     "remote identity does match hint\n");
+				     "remote identity does not match hint\n");
 				continue;
 			}
 		}

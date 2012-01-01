@@ -604,6 +604,11 @@ duprmconf_shallow (rmconf)
 
 	new->proposal = NULL; /* will be filled by set_isakmp_proposal() */
 
+	/* Better to set remote to NULL to avoid that the destination
+	 * rmconf uses the same allocated memory as the source rmconf.
+	 */
+	new->remote = NULL;
+
 	return new;
 }
 
