@@ -280,7 +280,7 @@ myaddr_getsport(addr)
 			return extract_port((struct sockaddr *) &my->addr);
 	}
 
-	return PORT_ISAKMP;
+	return -1;
 }
 
 void
