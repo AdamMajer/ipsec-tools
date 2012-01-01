@@ -106,7 +106,7 @@ static int incstackp = 0;
 static int yy_first_time = 1;
 %}
 
-/* common seciton */
+/* common section */
 nl		\n
 ws		[ \t]+
 digit		[0-9]
@@ -676,7 +676,7 @@ no		{ YYD; yylval.num = FALSE; return(BOOLEAN); }
 %%
 
 void
-yyerror(char *s, ...)
+yyerror(const char *s, ...)
 {
 	char fmt[512];
 
@@ -696,7 +696,7 @@ yyerror(char *s, ...)
 }
 
 void
-yywarn(char *s, ...)
+yywarn(const char *s, ...)
 {
 	char fmt[512];
 

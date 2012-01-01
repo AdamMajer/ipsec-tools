@@ -724,6 +724,9 @@ delrmconf(rmconf)
 {
 	int i;
 
+	if (rmconf == NULL)
+		return;
+
 #ifdef ENABLE_HYBRID
 	if (rmconf->xauth)
 		xauth_rmconf_delete(&rmconf->xauth);
@@ -1091,7 +1094,7 @@ newidspec()
 	if (new == NULL)
 		return NULL;
 	new->idtype = IDTYPE_ADDRESS;
-
+	new->id = NULL;
 	return new;
 }
 

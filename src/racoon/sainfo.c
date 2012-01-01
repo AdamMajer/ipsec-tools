@@ -206,6 +206,9 @@ delsainfo(si)
 {
 	int i;
 
+	if (si == NULL)
+		return;
+
 	for (i = 0; i < MAXALGCLASS; i++)
 		delsainfoalg(si->algs[i]);
 

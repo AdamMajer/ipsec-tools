@@ -3768,7 +3768,8 @@ err:
 /* it's only called by cfparse.y. */
 int
 set_identifier(vpp, type, value)
-	vchar_t **vpp, *value;
+	vchar_t **vpp;
+	const vchar_t * const value;
 	int type;
 {
 	return set_identifier_qual(vpp, type, value, IDQUAL_UNSPEC);
@@ -3776,7 +3777,8 @@ set_identifier(vpp, type, value)
 
 int
 set_identifier_qual(vpp, type, value, qual)
-	vchar_t **vpp, *value;
+	vchar_t **vpp;
+	const vchar_t * const value;
 	int type;
 	int qual;
 {
