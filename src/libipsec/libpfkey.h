@@ -59,7 +59,11 @@ struct sadb_alg;
 
 #ifndef HAVE_IPSEC_POLICY_T
 typedef caddr_t ipsec_policy_t;
+#ifdef __NetBSD__
+#define __ipsec_const const
+#else
 #define __ipsec_const
+#endif
 #else
 #define __ipsec_const const
 #endif

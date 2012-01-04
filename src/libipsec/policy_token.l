@@ -64,6 +64,7 @@ int yylex __P((void));
 
 %option noyywrap
 %option nounput
+%option noinput
 
 /* common section */
 nl		\n
