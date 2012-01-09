@@ -257,6 +257,7 @@ nocyclic-seq	{ return(NOCYCLICSEQ); }
 {hyphen}bh	{ return(F_LIFEBYTE_HARD); }
 {hyphen}bs	{ return(F_LIFEBYTE_SOFT); }
 {hyphen}ctx	{ return(SECURITY_CTX); }
+{hyphen}esp_frag { return(F_ESPFRAG); }
 
 	/* ... */
 any		{ return(ANY); }

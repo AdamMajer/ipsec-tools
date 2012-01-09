@@ -85,6 +85,9 @@ static void kdebug_sockaddr __P((struct sockaddr *addr));
 #ifdef SADB_X_EXT_NAT_T_TYPE
 static void kdebug_sadb_x_nat_t_type __P((struct sadb_ext *ext));
 static void kdebug_sadb_x_nat_t_port __P((struct sadb_ext *ext));
+#ifdef SADB_X_EXT_NAT_T_FRAG
+static void kdebug_sadb_x_nat_t_frag __P((struct sadb_ext *ext));
+#endif
 #endif
 
 #ifdef SADB_X_EXT_PACKET
@@ -192,6 +195,11 @@ kdebug_sadb(base)
 		case SADB_X_EXT_NAT_T_OA:
 			kdebug_sadb_address(ext);
 			break;
+#ifdef SADB_X_EXT_NAT_T_FRAG
+		case SADB_X_EXT_NAT_T_FRAG:
+			kdebug_sadb_x_nat_t_frag(ext);
+			break;
+#endif
 #endif
 #ifdef SADB_X_EXT_PACKET
 		case SADB_X_EXT_PACKET:
@@ -543,6 +551,20 @@ kdebug_sadb_x_nat_t_port(struct sadb_ext *ext)
 
 	return;
 }
+#ifdef SADB_X_EXT_NAT_T_FRAG
+static void kdebug_sadb_x_nat_t_frag (struct sadb_ext *ext)
+{
+	struct sadb_x_nat_t_frag *esp_frag = (void *)ext;
+
+	/* sanity check */
+	if (ext == NULL)
+		panic("kdebug_sadb_x_nat_t_frag: NULL pointer was passed.\n");
+
+	printf("sadb_x_nat_t_frag{ esp_frag=%u }\n", esp_frag->sadb_x_nat_t_frag_fraglen);
+
+	return;
+}
+#endif
 #endif
 
 #ifdef SADB_X_EXT_PACKET

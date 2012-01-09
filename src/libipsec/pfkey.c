@@ -2034,6 +2034,9 @@ pfkey_align(struct sadb_msg *msg, caddr_t *mhp)
 		case SADB_X_EXT_NAT_T_TYPE:
 		case SADB_X_EXT_NAT_T_SPORT:
 		case SADB_X_EXT_NAT_T_DPORT:
+#ifdef SADB_X_EXT_NAT_T_FRAG
+		case SADB_X_EXT_NAT_T_FRAG:
+#endif
 		case SADB_X_EXT_NAT_T_OA:
 #endif
 #ifdef SADB_X_EXT_TAG
