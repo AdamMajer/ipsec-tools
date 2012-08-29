@@ -307,6 +307,7 @@ hexstring	0x{hexdigit}+
 <S_INI>remote		{ BEGIN S_RMT; YYDB; return(REMOTE); }
 <S_RMT>anonymous	{ YYD; return(ANONYMOUS); }
 <S_RMT>inherit		{ YYD; return(INHERIT); }
+<S_RMT>{semi}		{ BEGIN S_INI; YYDB; return(EOS); }
 	/* remote spec */
 <S_RMT>{bcl}		{ BEGIN S_RMTS; return(BOC); }
 <S_RMTS>{ecl}		{ BEGIN S_INI; return(EOC); }
