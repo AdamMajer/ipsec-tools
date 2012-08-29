@@ -2943,7 +2943,7 @@ copy_ph1addresses(iph1, rmconf, remote, local)
 		port = myaddr_getsport(iph1->local);
 		if (port == 0)
 			port = PORT_ISAKMP;
-		set_port(iph1->local, PORT_ISAKMP);
+		set_port(iph1->local, port);
 	}
 
 #ifdef ENABLE_NATT
