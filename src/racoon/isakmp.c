@@ -2186,7 +2186,7 @@ isakmp_post_acquire(iph2, iph1hint, nopassive)
 			"because of passive mode, "
 			"ignore the acquire message for %s.\n",
 			saddrwop2str(iph2->dst));
-		return 0;
+		return -1;
 	}
 
 	/*
