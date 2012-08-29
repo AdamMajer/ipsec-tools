@@ -1434,7 +1434,7 @@ oakley_validate_auth(iph1)
 			}
 
 			if (error != 0) {
-				plog(LLV_ERROR, LOCATION, NULL,
+				plog(LLV_ERROR, LOCATION, iph1->remote,
 				     "the peer's certificate is not verified.\n");
 				return ISAKMP_NTYPE_INVALID_CERT_AUTHORITY;
 			}
