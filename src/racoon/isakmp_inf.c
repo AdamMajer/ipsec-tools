@@ -1465,8 +1465,11 @@ isakmp_info_recv_r_u_ack (iph1, ru, msgid)
 		return 0;
 	}
 
-	if (memcmp(ru->i_ck, iph1->index.i_ck, sizeof(cookie_t)) ||
-	    memcmp(ru->r_ck, iph1->index.r_ck, sizeof(cookie_t))) {
+	/* accept cookies in original or reversed order */
+	if ((memcmp(ru->i_ck, iph1->index.i_ck, sizeof(cookie_t)) ||
+	     memcmp(ru->r_ck, iph1->index.r_ck, sizeof(cookie_t))) &&
+	    (memcmp(ru->r_ck, iph1->index.i_ck, sizeof(cookie_t)) ||
+	     memcmp(ru->i_ck, iph1->index.r_ck, sizeof(cookie_t)))) {
 		plog(LLV_ERROR, LOCATION, iph1->remote,
 			 "Cookie mismatch in DPD ACK!.\n");
 		return 0;
@@ -1477,7 +1480,7 @@ isakmp_info_recv_r_u_ack (iph1, ru, msgid)
 	sched_cancel(&iph1->dpd_r_u);
 	isakmp_sched_r_u(iph1, 0);
 
-	plog(LLV_DEBUG, LOCATION, NULL, "received an R-U-THERE-ACK\n");
+	plog(LLV_DEBUG, LOCATION, iph1->remote, "received an R-U-THERE-ACK\n");
 
 	return 0;
 }

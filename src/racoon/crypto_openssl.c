@@ -2501,7 +2501,7 @@ eay_bn2v(var, bn)
 	vchar_t **var;
 	BIGNUM *bn;
 {
-	*var = vmalloc(bn->top * BN_BYTES);
+	*var = vmalloc(BN_num_bytes(bn));
 	if (*var == NULL)
 		return(-1);
 
