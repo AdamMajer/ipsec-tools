@@ -453,6 +453,7 @@ rc4 		{ YYD; yylval.num = algtype_rc4;	return(ALGORITHMTYPE); }
 null_enc	{ YYD; yylval.num = algtype_null_enc;	return(ALGORITHMTYPE); }
 null		{ YYD; yylval.num = algtype_null_enc;	return(ALGORITHMTYPE); }
 aes		{ YYD; yylval.num = algtype_aes;	return(ALGORITHMTYPE); }
+aes_gcm_16		{ YYD; yylval.num = algtype_aesgcm16;	return(ALGORITHMTYPE); }
 rijndael	{ YYD; yylval.num = algtype_aes;	return(ALGORITHMTYPE); }
 twofish		{ YYD; yylval.num = algtype_twofish;	return(ALGORITHMTYPE); }
 camellia	{ YYD; yylval.num = algtype_camellia;	return(ALGORITHMTYPE); }

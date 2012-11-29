@@ -75,6 +75,7 @@
 #define   IPSECDOI_ESP_RC4				10
 #define   IPSECDOI_ESP_NULL				11
 #define   IPSECDOI_ESP_AES				12
+#define   IPSECDOI_ESP_AESGCM16				20
 #define   IPSECDOI_ESP_CAMELLIA				22
 #if 1
   /* draft-ietf-ipsec-ciph-aes-cbc-00.txt */

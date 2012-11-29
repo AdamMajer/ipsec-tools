@@ -1700,6 +1700,39 @@ eay_aes_keylen(len)
 	return len;
 }
 
+int
+eay_aesgcm_keylen(len)
+	int len;
+{
+	/* RFC 4106:
+	 * The size of the KEYMAT for the AES-GCM-ESP MUST be four octets longer
+	 * than is needed for the associated AES key.  The keying material is
+	 * used as follows:
+	 *
+	 * AES-GCM-ESP with a 128 bit key
+	 * The KEYMAT requested for each AES-GCM key is 20 octets.  The first
+	 * 16 octets are the 128-bit AES key, and the remaining four octets
+	 * are used as the salt value in the nonce.
+	 *
+	 * AES-GCM-ESP with a 192 bit key
+	 * The KEYMAT requested for each AES-GCM key is 28 octets.  The first
+	 * 24 octets are the 192-bit AES key, and the remaining four octets
+	 * are used as the salt value in the nonce.
+	 *
+	 * AES-GCM-ESP with a 256 bit key
+	 * The KEYMAT requested for each AES GCM key is 36 octets.  The first
+	 * 32 octets are the 256-bit AES key, and the remaining four octets
+	 * are used as the salt value in the nonce.
+	 */
+	if (len == 0)
+		len = 128;
+
+	if (len != 128 && len != 192 && len != 256)
+		return -1;
+
+	return len + 32;
+}
+
 #if defined(HAVE_OPENSSL_CAMELLIA_H)
 /*
  * CAMELLIA-CBC

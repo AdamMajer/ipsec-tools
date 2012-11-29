@@ -587,6 +587,10 @@ ipsecdoi2pfkey_ealg(t_id)
 	case IPSECDOI_ESP_AES:
 		return SADB_X_EALG_AESCBC;
 #endif
+#ifdef SADB_X_EALG_AESGCM16
+	case IPSECDOI_ESP_AESGCM16:
+		return SADB_X_EALG_AESGCM16;
+#endif
 #ifdef SADB_X_EALG_TWOFISHCBC
 	case IPSECDOI_ESP_TWOFISH:
 		return SADB_X_EALG_TWOFISHCBC;

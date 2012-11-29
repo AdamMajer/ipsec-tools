@@ -69,6 +69,7 @@ enum algtype {
 	algtype_rc4,
 	algtype_null_enc,
 	algtype_aes,
+	algtype_aesgcm16,
 	algtype_twofish,
 	algtype_camellia,
 
