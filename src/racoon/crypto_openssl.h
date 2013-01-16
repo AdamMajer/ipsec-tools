@@ -124,6 +124,9 @@ extern vchar_t *eay_aes_decrypt __P((vchar_t *, vchar_t *, vchar_t *));
 extern int eay_aes_weakkey __P((vchar_t *));
 extern int eay_aes_keylen __P((int));
 
+/* AES GCM 16*/
+extern int eay_aesgcm_keylen __P((int));
+
 #if defined(HAVE_OPENSSL_CAMELLIA_H)
 /* Camellia */
 extern vchar_t *eay_camellia_encrypt __P((vchar_t *, vchar_t *, vchar_t *));
