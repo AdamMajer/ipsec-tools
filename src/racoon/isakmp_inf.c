@@ -492,7 +492,7 @@ isakmp_info_recv_d(iph1, delete, msgid, encrypted)
 		"delete payload for protocol %s\n",
 		s_ipsecdoi_proto(delete->proto_id));
 
-	if(!iph1->rmconf->weak_phase1_check && !encrypted) {
+	if((iph1 == NULL || !iph1->rmconf->weak_phase1_check) && !encrypted) {
 		plog(LLV_WARNING, LOCATION, iph1->remote,
 			"Ignoring unencrypted delete payload "
 			"(check the weak_phase1_check option)\n");
