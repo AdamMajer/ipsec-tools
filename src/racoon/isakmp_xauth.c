@@ -461,10 +461,14 @@ xauth_radius_init_conf(int free)
 			vfree(xauth_rad_config.acct_server_list[i].host);
 			vfree(xauth_rad_config.acct_server_list[i].secret);
 		}
-		if (radius_auth_state != NULL)
+		if (radius_auth_state != NULL) {
 			rad_close(radius_auth_state);
-		if (radius_acct_state != NULL)
+			radius_auth_state = NULL;
+		}
+		if (radius_acct_state != NULL) {
 			rad_close(radius_acct_state);
+			radius_acct_state = NULL;
+		}
 	}
 
 	/* initialize radius config */
