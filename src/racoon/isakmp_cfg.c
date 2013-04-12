@@ -1000,6 +1000,9 @@ isakmp_cfg_varlen(iph1, attr, string, len)
 	struct isakmp_data *new;
 	char *data;
 
+	if (!len)
+		return NULL;
+
 	if ((buffer = vmalloc(sizeof(*attr) + len)) == NULL) {
 		plog(LLV_ERROR, LOCATION, NULL, "Cannot allocate memory\n");
 		return NULL;
