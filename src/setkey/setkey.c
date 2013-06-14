@@ -165,8 +165,10 @@ main(argc, argv)
 			break;
 		case 'f':
 			f_mode = MODE_SCRIPT;
-			if ((fp = fopen(optarg, "r")) == NULL) {
-				err(1, "fopen");
+			if (strcmp(optarg, "-") == 0)
+				fp = stdin;
+			else if ((fp = fopen(optarg, "r")) == NULL) {
+				err(1, "Can't open `%s'", optarg);
 				/*NOTREACHED*/
 			}
 			break;
