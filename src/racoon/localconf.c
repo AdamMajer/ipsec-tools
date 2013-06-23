@@ -247,7 +247,11 @@ getpsk(str, len)
 		if (*p == '\0')
 			continue;	/* no 2nd parameter */
 		p--;
-		if (strncmp(buf, str, len) == 0 && buf[len] == '\0') {
+		if (
+#ifdef ENABLE_WILDCARD_MATCH
+		    strncmp(buf, "*", 2) == 0 ||
+#endif
+		    (strncmp(buf, str, len) == 0 && buf[len] == '\0')) {
 			p++;
 			keylen = 0;
 			for (q = p; *q != '\0' && *q != '\n'; q++)

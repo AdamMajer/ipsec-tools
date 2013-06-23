@@ -1183,7 +1183,6 @@ get_proppair_and_doi_sit(sa, mode, doitype, sittype)
 			"failed to get buffer.\n");
 		goto bad;
 	}
-	memset(pair, 0, sizeof(pair));
 
 	bp = (caddr_t)(sab + 1);
 	tlen = sa->l - sizeof(*sab);
