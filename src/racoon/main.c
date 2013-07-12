@@ -290,6 +290,8 @@ main(ac, av)
 		/* NOTREACHED*/
 	}
 
+	ploginit();
+
 #ifdef DEBUG_RECORD_MALLOCATION
 	DRM_init();
 #endif
@@ -301,8 +303,6 @@ main(ac, av)
 	initrmconf();
 	oakley_dhinit();
 	compute_vendorids();
-
-	ploginit();
 
 	plog(LLV_INFO, LOCATION, NULL, "%s\n", version);
 	plog(LLV_INFO, LOCATION, NULL, "@(#)"
