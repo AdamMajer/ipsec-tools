@@ -766,6 +766,12 @@ kernel_handle_message(msg)
 	case RTM_CHANGE:
 	case RTM_GET:
 	case RTM_MISS:
+#ifdef RTM_LOSING
+	case RTM_LOSING:
+#endif
+#ifdef RTM_REDIRECT
+	case RTM_REDIRECT:
+#endif
 	case RTM_IFINFO:
 #ifdef RTM_OIFINFO
 	case RTM_OIFINFO:
