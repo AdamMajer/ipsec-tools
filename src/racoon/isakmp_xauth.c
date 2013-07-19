@@ -592,6 +592,10 @@ xauth_login_radius(iph1, usr, pwd)
 		return -1;
 	}
 
+	if (rad_put_string(radius_auth_state, RAD_CALLING_STATION_ID,
+			   saddr2str(iph1->remote)) != 0)
+		return -1;
+
 	if (isakmp_cfg_radius_common(radius_auth_state, iph1->mode_cfg->port) != 0)
 		return -1;
 
