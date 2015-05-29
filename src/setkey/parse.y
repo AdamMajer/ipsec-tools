@@ -955,6 +955,7 @@ setkeymsg_spdaddr(type, upper, policy, srcs, splen, dsts, dplen)
 	struct sockaddr *sa;
 	int salen;
 #ifdef HAVE_POLICY_FWD
+	struct sadb_x_policy *sp;
 	struct sadb_x_ipsecrequest *ps = NULL;
 	int saved_level, saved_id = 0;
 #endif
@@ -968,6 +969,9 @@ setkeymsg_spdaddr(type, upper, policy, srcs, splen, dsts, dplen)
 	setkeymsg0(msg, type, SADB_SATYPE_UNSPEC, 0);
 	l = sizeof(struct sadb_msg);
 
+#ifdef HAVE_POLICY_FWD
+	sp = (struct sadb_x_policy*) (buf + l);
+#endif
 	memcpy(buf + l, policy->buf, policy->len);
 	l += policy->len;
 
