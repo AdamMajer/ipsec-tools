@@ -74,14 +74,15 @@ case "$host_os" in
 	    [ KERNEL_INCLUDE="/lib/modules/`uname -r`/build/include" ])
 
     AC_CHECK_HEADER($KERNEL_INCLUDE/linux/pfkeyv2.h, ,
-	[ AC_CHECK_HEADER(/usr/src/linux/include/linux/pfkeyv2.h,
-	  KERNEL_INCLUDE=/usr/src/linux/include ,
-	  [ AC_MSG_ERROR([Unable to find linux-2.6 kernel headers. Aborting.]) ] ) ] )
+	[ AC_CHECK_HEADER(/usr/include/linux/pfkeyv2.h, ,
+	  [ AC_MSG_ERROR([Unable to find Linux headers. Aborting.]) ] ) ] )
     AC_SUBST(KERNEL_INCLUDE)
     # We need the configure script to run with correct kernel headers.
     # However we don't want to point to kernel source tree in compile time,
     # i.e. this will be removed from CPPFLAGS at the end of configure.
-    CPPFLAGS="-I$KERNEL_INCLUDE $CPPFLAGS"
+    if test "x$KERNEL_INCLUDE" != "x"; then
+       CPPFLAGS="-I$KERNEL_INCLUDE $CPPFLAGS"
+    fi
 
     AC_CHECK_MEMBER(struct sadb_x_policy.sadb_x_policy_priority, 
     	[AC_DEFINE(HAVE_PFKEY_POLICY_PRIORITY, [],
