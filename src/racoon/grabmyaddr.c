@@ -287,7 +287,7 @@ myaddr_getsport(addr)
 			break;
 		}
 	}
-
+	
 	if (port == 0)
 		port = PORT_ISAKMP;
 
