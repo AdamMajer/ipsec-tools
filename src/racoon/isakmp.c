@@ -3373,7 +3373,7 @@ purge_remote(iph1)
 
 		/* delete a relative phase 2 handle. */
 		if (iph2 != NULL) {
-			delete_spd(iph2, 0);
+			delete_spd(iph2, iph1->created);
 			remph2(iph2);
 			delph2(iph2);
 		}

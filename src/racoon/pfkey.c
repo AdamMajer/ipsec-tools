@@ -2307,7 +2307,7 @@ pk_recvspdupdate(mhp)
 	saddr = (struct sadb_address *)mhp[SADB_EXT_ADDRESS_SRC];
 	daddr = (struct sadb_address *)mhp[SADB_EXT_ADDRESS_DST];
 	xpl = (struct sadb_x_policy *)mhp[SADB_X_EXT_POLICY];
-	lt = (struct sadb_lifetime*)mhp[SADB_EXT_LIFETIME_HARD];
+	lt = (struct sadb_lifetime*)mhp[SADB_EXT_LIFETIME_CURRENT];
 	if(lt != NULL)
 		created = lt->sadb_lifetime_addtime;
 	else
@@ -2445,7 +2445,7 @@ pk_recvspdadd(mhp)
 	saddr = (struct sadb_address *)mhp[SADB_EXT_ADDRESS_SRC];
 	daddr = (struct sadb_address *)mhp[SADB_EXT_ADDRESS_DST];
 	xpl = (struct sadb_x_policy *)mhp[SADB_X_EXT_POLICY];
-	lt = (struct sadb_lifetime*)mhp[SADB_EXT_LIFETIME_HARD];
+	lt = (struct sadb_lifetime*)mhp[SADB_EXT_LIFETIME_CURRENT];
 	if(lt != NULL)
 		created = lt->sadb_lifetime_addtime;
 	else
@@ -2577,7 +2577,7 @@ pk_recvspddelete(mhp)
 	saddr = (struct sadb_address *)mhp[SADB_EXT_ADDRESS_SRC];
 	daddr = (struct sadb_address *)mhp[SADB_EXT_ADDRESS_DST];
 	xpl = (struct sadb_x_policy *)mhp[SADB_X_EXT_POLICY];
-	lt = (struct sadb_lifetime*)mhp[SADB_EXT_LIFETIME_HARD];
+	lt = (struct sadb_lifetime*)mhp[SADB_EXT_LIFETIME_CURRENT];
 	if(lt != NULL)
 		created = lt->sadb_lifetime_addtime;
 	else
@@ -2653,7 +2653,7 @@ pk_recvspdexpire(mhp)
 	saddr = (struct sadb_address *)mhp[SADB_EXT_ADDRESS_SRC];
 	daddr = (struct sadb_address *)mhp[SADB_EXT_ADDRESS_DST];
 	xpl = (struct sadb_x_policy *)mhp[SADB_X_EXT_POLICY];
-	lt = (struct sadb_lifetime*)mhp[SADB_EXT_LIFETIME_HARD];
+	lt = (struct sadb_lifetime*)mhp[SADB_EXT_LIFETIME_CURRENT];
 	if(lt != NULL)
 		created = lt->sadb_lifetime_addtime;
 	else
@@ -2744,7 +2744,7 @@ pk_recvspddump(mhp)
 	saddr = (struct sadb_address *)mhp[SADB_EXT_ADDRESS_SRC];
 	daddr = (struct sadb_address *)mhp[SADB_EXT_ADDRESS_DST];
 	xpl = (struct sadb_x_policy *)mhp[SADB_X_EXT_POLICY];
-	lt = (struct sadb_lifetime*)mhp[SADB_EXT_LIFETIME_HARD];
+	lt = (struct sadb_lifetime*)mhp[SADB_EXT_LIFETIME_CURRENT];
 	if(lt != NULL)
 		created = lt->sadb_lifetime_addtime;
 	else
@@ -3390,7 +3390,7 @@ pk_recvmigrate(mhp)
 	saddr = (struct sadb_address *)mhp[SADB_EXT_ADDRESS_SRC];
 	daddr = (struct sadb_address *)mhp[SADB_EXT_ADDRESS_DST];
 	xpl = (struct sadb_x_policy *)mhp[SADB_X_EXT_POLICY];
-	lt = (struct sadb_lifetime*)mhp[SADB_EXT_LIFETIME_HARD];
+	lt = (struct sadb_lifetime*)mhp[SADB_EXT_LIFETIME_CURRENT];
 	if (lt != NULL)
 		created = lt->sadb_lifetime_addtime;
 	else
@@ -3735,12 +3735,7 @@ addnewsp(mhp, local, remote)
 	saddr = (struct sadb_address *)mhp[SADB_EXT_ADDRESS_SRC];
 	daddr = (struct sadb_address *)mhp[SADB_EXT_ADDRESS_DST];
 	xpl = (struct sadb_x_policy *)mhp[SADB_X_EXT_POLICY];
-	lt = (struct sadb_lifetime*)mhp[SADB_EXT_LIFETIME_HARD];
-	if(lt != NULL)
-		created = lt->sadb_lifetime_addtime;
-	else
-		created = 0;
-	lt = (struct sadb_lifetime*)mhp[SADB_EXT_LIFETIME_HARD];
+	lt = (struct sadb_lifetime*)mhp[SADB_EXT_LIFETIME_CURRENT];
 	if(lt != NULL)
 		created = lt->sadb_lifetime_addtime;
 	else
